@@ -123,6 +123,7 @@ public class Sheet411PersonalCollector {
         String[] sysNames = parseSysNames(strSysNames);
         Float[] usages = parseUsages(strUsages);
         if(sysNames.length != usages.length){
+            HostConnector.disconnect();
             throw new Exception("Unexpected result of parsing df -h");
         }
 
@@ -133,6 +134,8 @@ public class Sheet411PersonalCollector {
                 webLogicUsage.add(usages[i]);
             }
         }
+
+        HostConnector.disconnect();
     }
 
     private static String[] parseSysNames(String strSysNames){

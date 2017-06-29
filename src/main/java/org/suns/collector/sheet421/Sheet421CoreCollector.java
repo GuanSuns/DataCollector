@@ -143,6 +143,7 @@ public class Sheet421CoreCollector {
         String[] sysNames = parseSysNames(strSysNames);
         Float[] usages = parseUsages(strUsages);
         if(sysNames.length != usages.length){
+            HostConnector.disconnect();
             throw new Exception("Unexpected result of parsing df -h");
         }
 
@@ -153,6 +154,8 @@ public class Sheet421CoreCollector {
                 u01Usage.add(usages[i]);
             }
         }
+
+        HostConnector.disconnect();
     }
 
     private static void inspectAllDirectory(String host
