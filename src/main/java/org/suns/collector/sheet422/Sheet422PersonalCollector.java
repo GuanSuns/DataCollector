@@ -29,8 +29,9 @@ public class Sheet422PersonalCollector {
         final String[] inspectedHosts = Sheet422PersonalConfig.getInspectedHosts();
 
         for(String host : inspectedHosts){
-            inspectHost2(host, Sheet422PersonalConfig.getUser()
+            inspectHost2(Sheet422PersonalConfig.getUser()
                     , Sheet422PersonalConfig.getPassword()
+                    , host
                     , Sheet422PersonalConfig.getPort()
                     , Sheet422PersonalConfig.getSid()
                     , sheet422Models);
@@ -66,6 +67,5 @@ public class Sheet422PersonalCollector {
         }
 
         OracleConnector.closeConnection();
-
     }
 }

@@ -13,7 +13,7 @@ public class Sheet422PersonalConfig {
     */
 
     private static int port = 1521;
-    private static String user = "dev_1";
+    private static String user = "dev_01";
     private static String password = "a";
     private static String sid = "ggjs";
 
@@ -40,7 +40,7 @@ public class Sheet422PersonalConfig {
             "   AND NOT\n" +
             "        (d.extent_management LIKE 'LOCAL' AND d.contents LIKE 'TEMPORARY')\n" +
             "   and nvl((a.bytes - nvl(f.bytes, 0)) / a.bytes * 100, 0) >= 85\n" +
-            " order by 4;\n";
+            " order by 4\n";
 
     public static String[] getFieldNames() {
         return fieldNames;
