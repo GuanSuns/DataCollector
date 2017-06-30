@@ -18,7 +18,10 @@ public class Sheet429CoreCollector {
 
     public static void inspect() throws Exception{
         Sheet429CoreModel sheet429Model = new Sheet429CoreModel();
+
+        inspect1(sheet429Model);
         inspect2(sheet429Model);
+        inspect3(sheet429Model);
 
         sheet429Model.setInspectTime(new Timestamp(new Date().getTime()));
 

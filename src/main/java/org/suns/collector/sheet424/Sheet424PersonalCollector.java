@@ -20,7 +20,7 @@ public class Sheet424PersonalCollector {
 
     public static void inspect() throws Exception{
         Sheet424PersonalModel sheet424Model = new Sheet424PersonalModel();
-        inspect(sheet424Model);
+        doInspect(sheet424Model);
         sheet424Model.setDate((new Timestamp(new Date().getTime())));
 
         if(!Sheet424Controller.addPersonal(sheet424Model)){
@@ -29,7 +29,7 @@ public class Sheet424PersonalCollector {
 
     }
 
-    private static void inspect(Sheet424PersonalModel sheet424Model) throws Exception{
+    private static void doInspect(Sheet424PersonalModel sheet424Model) throws Exception{
         final String[] inspectedHosts = Sheet424PersonalConfig.getInspectedHosts();
 
         for(String host : inspectedHosts){
