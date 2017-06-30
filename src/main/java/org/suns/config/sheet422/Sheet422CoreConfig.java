@@ -13,13 +13,13 @@ public class Sheet422CoreConfig {
 
 
     /*
-    private static String[] inspectedHosts2 = {"150.12.201.20"
-            , "150.12.201.22"};
+    private static String[] inspectedHosts2 = {"150.12.201.20"};
+    //Alternative host "150.12.201.22"
 
     private static String[] inspectedHosts3 = {"150.12.201.28"};
 
-    private static String[] inspectedHosts4 = {"150.12.201.30"
-            , "150.12.201.32"};
+    private static String[] inspectedHosts4 = {"150.12.201.30"};
+    //Alternative host: "150.12.201.32"
 
     */
 

@@ -8,8 +8,9 @@ public class Sheet422PersonalConfig {
     private static String[] inspectedHosts = {"192.168.14.82"};
 
     /*
-    private static String[] inspectedHosts = {"150.12.201.40"
-            , "150.12.201.42"};
+    private static String[] inspectedHosts = {"150.12.201.40"};
+    //Alternative host: "150.12.201.42"
+
     */
 
     private static int port = 1521;

@@ -9,13 +9,13 @@ public class Sheet423CoreConfig {
     private static String[] inspectedHosts4 = {"192.168.14.82"};
 
 /*
-    private static String[] inspectedHosts2 = {"150.12.201.20"
-            , "150.12.201.22"};
+    private static String[] inspectedHosts2 = {"150.12.201.20"};
+    //Alternative Host "150.12.201.22"
 
     private static String[] inspectedHosts3 = {"150.12.201.28"};
 
-    private static String[] inspectedHosts4 = {"150.12.201.30"
-            , "150.12.201.32"};
+    private static String[] inspectedHosts4 = {"150.12.201.30"};
+    //Alternative Host "150.12.201.32"
 */
 
     private static int port = 1521;

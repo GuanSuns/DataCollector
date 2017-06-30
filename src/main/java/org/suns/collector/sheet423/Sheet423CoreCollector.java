@@ -67,10 +67,11 @@ public class Sheet423CoreCollector {
             to.setRemainSpace2(DBConfig.getDefaultNumericNullValue());
             to.setUsage2((float)DBConfig.getDefaultNumericNullValue());
         }else{
-            to.setAsmName2(from.get(index).getAsmName2());
-            to.setTotalSpace2(from.get(index).getTotalSpace2());
-            to.setRemainSpace2(from.get(index).getRemainSpace2());
-            to.setUsage2(from.get(index).getUsage2());
+            Sheet423CoreModel fromModel = from.get(index);
+            to.setAsmName2(fromModel.getAsmName2());
+            to.setTotalSpace2(fromModel.getTotalSpace2());
+            to.setRemainSpace2(fromModel.getRemainSpace2());
+            to.setUsage2(fromModel.getUsage2());
         }
     }
 
@@ -82,10 +83,11 @@ public class Sheet423CoreCollector {
             to.setRemainSpace3(DBConfig.getDefaultNumericNullValue());
             to.setUsage3((float)DBConfig.getDefaultNumericNullValue());
         }else{
-            to.setAsmName3(from.get(index).getAsmName3());
-            to.setTotalSpace3(from.get(index).getTotalSpace3());
-            to.setRemainSpace3(from.get(index).getRemainSpace3());
-            to.setUsage3(from.get(index).getUsage3());
+            Sheet423CoreModel fromModel = from.get(index);
+            to.setAsmName3(fromModel.getAsmName3());
+            to.setTotalSpace3(fromModel.getTotalSpace3());
+            to.setRemainSpace3(fromModel.getRemainSpace3());
+            to.setUsage3(fromModel.getUsage3());
         }
     }
 
@@ -97,10 +99,11 @@ public class Sheet423CoreCollector {
             to.setRemainSpace4(DBConfig.getDefaultNumericNullValue());
             to.setUsage4((float)DBConfig.getDefaultNumericNullValue());
         }else{
-            to.setAsmName4(from.get(index).getAsmName4());
-            to.setTotalSpace4(from.get(index).getTotalSpace4());
-            to.setRemainSpace4(from.get(index).getRemainSpace4());
-            to.setUsage4(from.get(index).getUsage4());
+            Sheet423CoreModel fromModel = from.get(index);
+            to.setAsmName4(fromModel.getAsmName4());
+            to.setTotalSpace4(fromModel.getTotalSpace4());
+            to.setRemainSpace4(fromModel.getRemainSpace4());
+            to.setUsage4(fromModel.getUsage4());
         }
     }
 

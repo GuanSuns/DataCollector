@@ -51,56 +51,59 @@ public class Sheet422CoreCollector {
             Sheet422CoreModel sheet422CoreModel = new Sheet422CoreModel();
             sheet422CoreModel.setDate(new Timestamp(new Date().getTime()));
 
-            setModel2(size2, i, result2.get(i), sheet422CoreModel);
-            setModel3(size3, i, result3.get(i), sheet422CoreModel);
-            setModel4(size4, i, result4.get(i), sheet422CoreModel);
+            setModel2(size2, i, result2, sheet422CoreModel);
+            setModel3(size3, i, result3, sheet422CoreModel);
+            setModel4(size4, i, result4, sheet422CoreModel);
 
             totalResult.add(sheet422CoreModel);
         }
     }
     
     private static void setModel2(int size, int index
-            , Sheet422CoreModel from, Sheet422CoreModel to){
+            , ArrayList<Sheet422CoreModel> from, Sheet422CoreModel to){
         if(index >= size){
             to.setTsName2("");
             to.setTsTotalSpace2((float)DBConfig.getDefaultNumericNullValue());
             to.setTsUsage2((float)DBConfig.getDefaultNumericNullValue());
             to.setTsUsedSpace2((float)DBConfig.getDefaultNumericNullValue());
         }else{
-            to.setTsName2(from.getTsName2());
-            to.setTsTotalSpace2(from.getTsTotalSpace2());
-            to.setTsUsage2(from.getTsUsage2());
-            to.setTsUsedSpace2(from.getTsUsedSpace2());
+            Sheet422CoreModel fromModel = from.get(index);
+            to.setTsName2(fromModel.getTsName2());
+            to.setTsTotalSpace2(fromModel.getTsTotalSpace2());
+            to.setTsUsage2(fromModel.getTsUsage2());
+            to.setTsUsedSpace2(fromModel.getTsUsedSpace2());
         }
     }
 
     private static void setModel3(int size, int index
-            , Sheet422CoreModel from, Sheet422CoreModel to){
+            , ArrayList<Sheet422CoreModel> from, Sheet422CoreModel to){
         if(index >= size){
             to.setTsName3("");
             to.setTsTotalSpace3((float)DBConfig.getDefaultNumericNullValue());
             to.setTsUsage3((float)DBConfig.getDefaultNumericNullValue());
             to.setTsUsedSpace3((float)DBConfig.getDefaultNumericNullValue());
         }else{
-            to.setTsName3(from.getTsName3());
-            to.setTsTotalSpace3(from.getTsTotalSpace3());
-            to.setTsUsage3(from.getTsUsage3());
-            to.setTsUsedSpace3(from.getTsUsedSpace3());
+            Sheet422CoreModel fromModel = from.get(index);
+            to.setTsName3(fromModel.getTsName3());
+            to.setTsTotalSpace3(fromModel.getTsTotalSpace3());
+            to.setTsUsage3(fromModel.getTsUsage3());
+            to.setTsUsedSpace3(fromModel.getTsUsedSpace3());
         }
     }
 
     private static void setModel4(int size, int index
-            , Sheet422CoreModel from, Sheet422CoreModel to){
+            , ArrayList<Sheet422CoreModel> from, Sheet422CoreModel to){
         if(index >= size){
             to.setTsName4("");
             to.setTsTotalSpace4((float)DBConfig.getDefaultNumericNullValue());
             to.setTsUsage4((float)DBConfig.getDefaultNumericNullValue());
             to.setTsUsedSpace4((float)DBConfig.getDefaultNumericNullValue());
         }else{
-            to.setTsName4(from.getTsName4());
-            to.setTsTotalSpace4(from.getTsTotalSpace4());
-            to.setTsUsage4(from.getTsUsage4());
-            to.setTsUsedSpace4(from.getTsUsedSpace4());
+            Sheet422CoreModel fromModel = from.get(index);
+            to.setTsName4(fromModel.getTsName4());
+            to.setTsTotalSpace4(fromModel.getTsTotalSpace4());
+            to.setTsUsage4(fromModel.getTsUsage4());
+            to.setTsUsedSpace4(fromModel.getTsUsedSpace4());
         }
     }
 
