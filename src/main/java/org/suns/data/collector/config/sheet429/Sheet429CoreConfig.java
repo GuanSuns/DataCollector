@@ -27,19 +27,35 @@ public class Sheet429CoreConfig {
             , "INTSIZE", "metricName", "val", "MINVAL", "MAXVAL"
             , "avg", "std", "sumSquare"};
 
-    private static String inspectSQL = "select INSTANCE_NUMBER "
+    private static String inspectSQL = "select \"INSTANCE_NUMBER\" "
             + fieldNames[0] +
-            ",BEGIN_TIME " + fieldNames[1] +
+            ",\"BEGIN_TIME\" " + fieldNames[1] +
             "," + fieldNames[2] +
-            ",METRIC_NAME " + fieldNames[3] +
-            ",NUM_INTERVAL "+ fieldNames[4] +
+            ",\"METRIC_NAME\" " + fieldNames[3] +
+            ",\"NUM_INTERVAL\" "+ fieldNames[4] +
             "," + fieldNames[5] +"," + fieldNames[6] + ",\n" +
-            "   AVERAGE " + fieldNames[7] +
-            ",STANDARD_DEVIATION " + fieldNames[8] +
-            ",SUM_SQUARES " + fieldNames[9] + "\n" +
-            "    from dba_hist_sysmetric_summary\n" +
+            "   \"AVERAGE\" " + fieldNames[7] +
+            ",\"STANDARD_DEVIATION\" " + fieldNames[8] +
+            " \n" +
+            "    from dba_hist_sysmetric_summary \n" +
             "    where METRIC_NAME in('Network Traffic Volume Per Sec','I/O Megabytes per Second')\n" +
             "     and rownum < 11 order by std desc\n";
+
+    /*
+    private static String inspectSQL = "select \"INSTANCE_NUMBER\" "
+            + fieldNames[0] +
+            ",\"BEGIN_TIME\" " + fieldNames[1] +
+            "," + fieldNames[2] +
+            ",\"METRIC_NAME\" " + fieldNames[3] +
+            ",\"NUM_INTERVAL\" "+ fieldNames[4] +
+            "," + fieldNames[5] +"," + fieldNames[6] + ",\n" +
+            "   \"AVERAGE\" " + fieldNames[7] +
+            ",\"STANDARD_DEVIATION\" " + fieldNames[8] +
+            ",\"SUM_SQUARES\" " + fieldNames[9] + " \n" +
+            "    from dba_hist_sysmetric_summary \n" +
+            "    where METRIC_NAME in('Network Traffic Volume Per Sec','I/O Megabytes per Second')\n" +
+            "     and rownum < 11 order by std desc\n";
+    */
 
     public static String[] getInspectedHosts1() {
         return inspectedHosts1;

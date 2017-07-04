@@ -94,12 +94,12 @@ public class Sheet429CoreCollector {
             String maxVal = resultSet.getString(fieldNames[6]);
             String avg = resultSet.getString(fieldNames[7]);
             String std = resultSet.getString(fieldNames[8]);
-            String sumSquare = resultSet.getString(fieldNames[9]);
+            String sumSquare = "No Sum Square Temporarily";//resultSet.getString(fieldNames[9]);
 
-            strResult = strResult + instID + btime
-                    + intSize + metricName + val
-                    + minVal + maxVal + avg
-                    + std +sumSquare + "\n";
+            strResult = strResult + " " + instID + " " + btime
+                    + " " + intSize + " " + metricName + " " + val
+                    + " " + minVal + " " + maxVal + " " + avg
+                    + " " + std + " " +sumSquare + "\n";
         }
 
         OracleConnector.closeConnection();
