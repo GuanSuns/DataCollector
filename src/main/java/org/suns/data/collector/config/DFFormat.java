@@ -39,4 +39,5 @@ public class DFFormat {
     public static String getUsageCmd(){
         return "df -h | awk '{print $" + usageColumn + "}'";
     }
+
 }
