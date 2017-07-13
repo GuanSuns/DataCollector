@@ -35,11 +35,16 @@ public class Sheet411CoreCollector {
     //核心前端 2
     private static void inspect2(Sheet411CoreModel sheet411Model) throws Exception{
         final String[] inspectedHosts = Sheet411CoreConfig.getInspectedHosts2();
+        final String[] users = Sheet411CoreConfig.getUsers2();
+        final String[] passwords = Sheet411CoreConfig.getPasswords2();
+        final int[] ports = Sheet411CoreConfig.getPorts2();
+
         PriorityQueue<Float> rootUsage = new PriorityQueue<>(comparator);
         PriorityQueue<Float> webLogicUsage = new PriorityQueue<>(comparator);
 
-        for(String host : inspectedHosts){
-            inspectHost(host, rootUsage, webLogicUsage);
+        for(int i=0; i<inspectedHosts.length; i++){
+            inspectHost(inspectedHosts[i], rootUsage, webLogicUsage
+                    , users[i], passwords[i], ports[i]);
         }
 
         if(!rootUsage.isEmpty()){
@@ -60,11 +65,16 @@ public class Sheet411CoreCollector {
     //核心后端 3
     private static void inspect3(Sheet411CoreModel sheet411Model) throws Exception{
         final String[] inspectedHosts = Sheet411CoreConfig.getInspectedHosts3();
+        final String[] users = Sheet411CoreConfig.getUsers3();
+        final String[] passwords = Sheet411CoreConfig.getPasswords3();
+        final int[] ports = Sheet411CoreConfig.getPorts3();
+
         PriorityQueue<Float> rootUsage = new PriorityQueue<>(comparator);
         PriorityQueue<Float> webLogicUsage = new PriorityQueue<>(comparator);
 
-        for(String host : inspectedHosts){
-            inspectHost(host, rootUsage, webLogicUsage);
+        for(int i=0; i<inspectedHosts.length; i++){
+            inspectHost(inspectedHosts[i], rootUsage, webLogicUsage
+                    , users[i], passwords[i], ports[i]);
         }
 
         if(!rootUsage.isEmpty()){
@@ -85,11 +95,16 @@ public class Sheet411CoreCollector {
     //通用查询 4
     private static void inspect4(Sheet411CoreModel sheet411Model) throws Exception{
         final String[] inspectedHosts = Sheet411CoreConfig.getInspectedHosts4();
+        final String[] users = Sheet411CoreConfig.getUsers4();
+        final String[] passwords = Sheet411CoreConfig.getPasswords4();
+        final int[] ports = Sheet411CoreConfig.getPorts4();
+
         PriorityQueue<Float> rootUsage = new PriorityQueue<>(comparator);
         PriorityQueue<Float> webLogicUsage = new PriorityQueue<>(comparator);
 
-        for(String host : inspectedHosts){
-            inspectHost(host, rootUsage, webLogicUsage);
+        for(int i=0; i<inspectedHosts.length; i++){
+            inspectHost(inspectedHosts[i], rootUsage, webLogicUsage
+                    , users[i], passwords[i], ports[i]);
         }
 
         if(!rootUsage.isEmpty()){
@@ -110,11 +125,16 @@ public class Sheet411CoreCollector {
     //web门户 5
     private static void inspect5(Sheet411CoreModel sheet411Model) throws Exception{
         final String[] inspectedHosts = Sheet411CoreConfig.getInspectedHosts5();
+        final String[] users = Sheet411CoreConfig.getUsers5();
+        final String[] passwords = Sheet411CoreConfig.getPasswords5();
+        final int[] ports = Sheet411CoreConfig.getPorts5();
+
         PriorityQueue<Float> rootUsage = new PriorityQueue<>(comparator);
         PriorityQueue<Float> webLogicUsage = new PriorityQueue<>(comparator);
 
-        for(String host : inspectedHosts){
-            inspectHost(host, rootUsage, webLogicUsage);
+        for(int i=0; i<inspectedHosts.length; i++){
+            inspectHost(inspectedHosts[i], rootUsage, webLogicUsage
+                    , users[i], passwords[i], ports[i]);
         }
 
         if(!rootUsage.isEmpty()){
@@ -135,11 +155,16 @@ public class Sheet411CoreCollector {
     //核心工作 6
     private static void inspect6(Sheet411CoreModel sheet411Model) throws Exception{
         final String[] inspectedHosts = Sheet411CoreConfig.getInspectedHosts6();
+        final String[] users = Sheet411CoreConfig.getUsers6();
+        final String[] passwords = Sheet411CoreConfig.getPasswords6();
+        final int[] ports = Sheet411CoreConfig.getPorts6();
+
         PriorityQueue<Float> rootUsage = new PriorityQueue<>(comparator);
         PriorityQueue<Float> webLogicUsage = new PriorityQueue<>(comparator);
 
-        for(String host : inspectedHosts){
-            inspectHost(host, rootUsage, webLogicUsage);
+        for(int i=0; i<inspectedHosts.length; i++){
+            inspectHost(inspectedHosts[i], rootUsage, webLogicUsage
+                    , users[i], passwords[i], ports[i]);
         }
 
         if(!rootUsage.isEmpty()){
@@ -160,11 +185,16 @@ public class Sheet411CoreCollector {
     //跨层平台 8
     private static void inspect8(Sheet411CoreModel sheet411Model) throws Exception{
         final String[] inspectedHosts = Sheet411CoreConfig.getInspectedHosts8();
+        final String[] users = Sheet411CoreConfig.getUsers8();
+        final String[] passwords = Sheet411CoreConfig.getPasswords8();
+        final int[] ports = Sheet411CoreConfig.getPorts8();
+
         PriorityQueue<Float> rootUsage = new PriorityQueue<>(comparator);
         PriorityQueue<Float> webLogicUsage = new PriorityQueue<>(comparator);
 
-        for(String host : inspectedHosts){
-            inspectHost(host, rootUsage, webLogicUsage);
+        for(int i=0; i<inspectedHosts.length; i++){
+            inspectHost(inspectedHosts[i], rootUsage, webLogicUsage
+                    , users[i], passwords[i], ports[i]);
         }
 
         if(!rootUsage.isEmpty()){
@@ -183,11 +213,10 @@ public class Sheet411CoreCollector {
     }
 
     private static void inspectHost(String host, PriorityQueue<Float> rootUsage
-            , PriorityQueue<Float> webLogicUsage) throws Exception{
+            , PriorityQueue<Float> webLogicUsage, String user
+            , String password, int port) throws Exception{
 
-        HostConnector.connect(Sheet411CoreConfig.getUser()
-                , Sheet411CoreConfig.getPassword()
-                , host, Sheet411CoreConfig.getPort());
+        HostConnector.connect(user, password, host, port);
 
         String mountedSysCmd = DFFormat.getMountedSysCmd();
         String usageCmd = DFFormat.getUsageCmd();

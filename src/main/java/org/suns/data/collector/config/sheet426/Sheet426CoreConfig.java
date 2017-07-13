@@ -5,49 +5,62 @@ package org.suns.data.collector.config.sheet426;
  */
 public class Sheet426CoreConfig {
     private static String[] inspectedHosts2 = {"119.29.201.188", "119.29.201.188"};
-
     private static String[] logPath2 = {
             "/software/oracle/trace/test.log"
             , "/software/oracle/trace/test2.log"
     };
+    private static int[] ports2 = {22, 22};
+    private static String[] users2 = {"root", "root"};
+    private static String[] passwords2 = {"whiteglcap25"
+            , "whiteglcap25"};
 
     private static String[] inspectedHosts3 = {"119.29.201.188"};
-
     private static String[] logPath3 = {
             "/software/oracle/trace/test.log"
     };
+    private static int[] ports3 = {22};
+    private static String[] users3 = {"root"};
+    private static String[] passwords3 = {"whiteglcap25"};
 
     private static String[] inspectedHosts4 = {"119.29.201.188", "119.29.201.188"};
-
     private static String[] logPath4 = {
             "/software/oracle/trace/test.log"
             , "/software/oracle/trace/test2.log"
     };
+    private static int[] ports4 = {22, 22};
+    private static String[] users4 = {"root", "root"};
+    private static String[] passwords4 = {"whiteglcap25"
+            , "whiteglcap25"};
+
 /*
     private static String[] inspectedHost2 = {"150.12.201.20", "150.12.201.22"};
-
     private static String[] logPath2 = {
             "/software/oracle/diag/rdbms/gdlthxzg/gdlthxzg1/trace/alert_gdlthxzg1.log"
             , "/software/oracle/diag/rdbms/gdlthxzg/gdlthxzg2/trace/alert_gdlthxzg2.log"
     };
+    private static int[] ports2 = {22, 22};
+    private static String[] users2 = {"root", "root"};
+    private static String[] passwords2 = {"whiteglcap25"
+            , "whiteglcap25"};
 
     private static String[] inspectedHost3 = {"150.12.201.28"};
-
     private static String[] logPath3 = {
             "/software/oracle/diag/rdbms/gdltcxff/gdltgcxff/trace/alert_gdltcxff.log"
     };
+    private static int[] ports3 = {22};
+    private static String[] users3 = {"root"};
+    private static String[] passwords3 = {"whiteglcap25"};
 
     private static String[] inspectedHost4 = {"150.12.201.30", "150.12.201.32"};
-
     private static String[] logPath4 = {
             "/software/oracle/diag/rdbms/gdltjcpt/gdltjcpt1/trace/alert_gdltjcpt1.log"
             , "/software/oracle/diag/rdbms/gdltjcpt/gdltjcpt2/trace/alert_gdltjcpt2.log"
     };
+    private static int[] ports4 = {22, 22};
+    private static String[] users4 = {"root", "root"};
+    private static String[] passwords4 = {"whiteglcap25"
+            , "whiteglcap25"};
 */
-
-    private static int port = 22;
-    private static String user = "root";
-    private static String password = "whiteglcap25";
 
     public static String[] getInspectedHosts2() {
         return inspectedHosts2;
@@ -97,35 +110,83 @@ public class Sheet426CoreConfig {
         Sheet426CoreConfig.logPath4 = logPath4;
     }
 
-    public static int getPort() {
-        return port;
-    }
-
-    public static void setPort(int port) {
-        Sheet426CoreConfig.port = port;
-    }
-
-    public static String getUser() {
-        return user;
-    }
-
-    public static void setUser(String user) {
-        Sheet426CoreConfig.user = user;
-    }
-
-    public static String getPassword() {
-        return password;
-    }
-
-    public static void setPassword(String password) {
-        Sheet426CoreConfig.password = password;
-    }
-
     public static String getORADetectionCmd(String logPath){
         return "tail -300 " + logPath + " | grep ORA- | wc -l";
     }
 
     public static String getLogCmd(String logPath){
         return "tail -300 " + logPath;
+    }
+
+    public static int[] getPorts2() {
+        return ports2;
+    }
+
+    public static void setPorts2(int[] ports2) {
+        Sheet426CoreConfig.ports2 = ports2;
+    }
+
+    public static String[] getUsers2() {
+        return users2;
+    }
+
+    public static void setUsers2(String[] users2) {
+        Sheet426CoreConfig.users2 = users2;
+    }
+
+    public static String[] getPasswords2() {
+        return passwords2;
+    }
+
+    public static void setPasswords2(String[] passwords2) {
+        Sheet426CoreConfig.passwords2 = passwords2;
+    }
+
+    public static int[] getPorts3() {
+        return ports3;
+    }
+
+    public static void setPorts3(int[] ports3) {
+        Sheet426CoreConfig.ports3 = ports3;
+    }
+
+    public static String[] getUsers3() {
+        return users3;
+    }
+
+    public static void setUsers3(String[] users3) {
+        Sheet426CoreConfig.users3 = users3;
+    }
+
+    public static String[] getPasswords3() {
+        return passwords3;
+    }
+
+    public static void setPasswords3(String[] passwords3) {
+        Sheet426CoreConfig.passwords3 = passwords3;
+    }
+
+    public static int[] getPorts4() {
+        return ports4;
+    }
+
+    public static void setPorts4(int[] ports4) {
+        Sheet426CoreConfig.ports4 = ports4;
+    }
+
+    public static String[] getUsers4() {
+        return users4;
+    }
+
+    public static void setUsers4(String[] users4) {
+        Sheet426CoreConfig.users4 = users4;
+    }
+
+    public static String[] getPasswords4() {
+        return passwords4;
+    }
+
+    public static void setPasswords4(String[] passwords4) {
+        Sheet426CoreConfig.passwords4 = passwords4;
     }
 }

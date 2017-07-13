@@ -5,23 +5,44 @@ package org.suns.data.collector.config.sheet429;
  */
 public class Sheet429CoreConfig {
     private static String[] inspectedHosts1 = {"192.168.14.82"};
+    private static int[] ports1 = {1521};
+    private static String[] users1 = {"dev_01"};
+    private static String[] passwords1 = {"a"};
+    private static String[] sid1 = {"ggjs"};
+
     private static String[] inspectedHosts2 = {"192.168.14.82"};
+    private static int[] ports2 = {1521};
+    private static String[] users2 = {"dev_01"};
+    private static String[] passwords2 = {"a"};
+    private static String[] sid2 = {"ggjs"};
+
     private static String[] inspectedHosts3 = {"192.168.14.82"};
+    private static int[] ports3 = {1521};
+    private static String[] users3 = {"dev_01"};
+    private static String[] passwords3 = {"a"};
+    private static String[] sid3 = {"ggjs"};
 
 /*
-    private static String[] inspectedHosts2 = {"150.12.201.20"};
+    private static String[] inspectedHosts1 = {"150.12.201.20"};
     //Alternative Host "150.12.201.22"
+    private static int[] ports1 = {1521};
+    private static String[] users1 = {"dev_01"};
+    private static String[] passwords1 = {"a"};
+    private static String[] sid1 = {"ggjs"};
 
-    private static String[] inspectedHosts3 = {"150.12.201.30"};
+    private static String[] inspectedHosts2 = {"150.12.201.30"};
     //Alternative Host "150.12.201.32"
+    private static int[] ports2 = {1521};
+    private static String[] users2 = {"dev_01"};
+    private static String[] passwords2 = {"a"};
+    private static String[] sid2 = {"ggjs"};
 
-    private static String[] inspectedHosts4 = {"150.12.201.28"};
+    private static String[] inspectedHosts3 = {"150.12.201.28"};
+    private static int[] ports3 = {1521};
+    private static String[] users3 = {"dev_01"};
+    private static String[] passwords3 = {"a"};
+    private static String[] sid3 = {"ggjs"};
 */
-
-    private static int port = 1521;
-    private static String user = "dev_01";
-    private static String password = "a";
-    private static String sid = "ggjs";
 
     private static String[] fieldNames = {"instID", "btime"
             , "INTSIZE", "metricName", "val", "MINVAL", "MAXVAL"
@@ -81,38 +102,6 @@ public class Sheet429CoreConfig {
         Sheet429CoreConfig.inspectedHosts3 = inspectedHosts3;
     }
 
-    public static int getPort() {
-        return port;
-    }
-
-    public static void setPort(int port) {
-        Sheet429CoreConfig.port = port;
-    }
-
-    public static String getUser() {
-        return user;
-    }
-
-    public static void setUser(String user) {
-        Sheet429CoreConfig.user = user;
-    }
-
-    public static String getPassword() {
-        return password;
-    }
-
-    public static void setPassword(String password) {
-        Sheet429CoreConfig.password = password;
-    }
-
-    public static String getSid() {
-        return sid;
-    }
-
-    public static void setSid(String sid) {
-        Sheet429CoreConfig.sid = sid;
-    }
-
     public static String[] getFieldNames() {
         return fieldNames;
     }
@@ -127,5 +116,101 @@ public class Sheet429CoreConfig {
 
     public static void setInspectSQL(String inspectSQL) {
         Sheet429CoreConfig.inspectSQL = inspectSQL;
+    }
+
+    public static int[] getPorts1() {
+        return ports1;
+    }
+
+    public static void setPorts1(int[] ports1) {
+        Sheet429CoreConfig.ports1 = ports1;
+    }
+
+    public static String[] getUsers1() {
+        return users1;
+    }
+
+    public static void setUsers1(String[] users1) {
+        Sheet429CoreConfig.users1 = users1;
+    }
+
+    public static String[] getPasswords1() {
+        return passwords1;
+    }
+
+    public static void setPasswords1(String[] passwords1) {
+        Sheet429CoreConfig.passwords1 = passwords1;
+    }
+
+    public static String[] getSid1() {
+        return sid1;
+    }
+
+    public static void setSid1(String[] sid1) {
+        Sheet429CoreConfig.sid1 = sid1;
+    }
+
+    public static int[] getPorts2() {
+        return ports2;
+    }
+
+    public static void setPorts2(int[] ports2) {
+        Sheet429CoreConfig.ports2 = ports2;
+    }
+
+    public static String[] getUsers2() {
+        return users2;
+    }
+
+    public static void setUsers2(String[] users2) {
+        Sheet429CoreConfig.users2 = users2;
+    }
+
+    public static String[] getPasswords2() {
+        return passwords2;
+    }
+
+    public static void setPasswords2(String[] passwords2) {
+        Sheet429CoreConfig.passwords2 = passwords2;
+    }
+
+    public static String[] getSid2() {
+        return sid2;
+    }
+
+    public static void setSid2(String[] sid2) {
+        Sheet429CoreConfig.sid2 = sid2;
+    }
+
+    public static int[] getPorts3() {
+        return ports3;
+    }
+
+    public static void setPorts3(int[] ports3) {
+        Sheet429CoreConfig.ports3 = ports3;
+    }
+
+    public static String[] getUsers3() {
+        return users3;
+    }
+
+    public static void setUsers3(String[] users3) {
+        Sheet429CoreConfig.users3 = users3;
+    }
+
+    public static String[] getPasswords3() {
+        return passwords3;
+    }
+
+    public static void setPasswords3(String[] passwords3) {
+        Sheet429CoreConfig.passwords3 = passwords3;
+    }
+
+    public static String[] getSid3() {
+        return sid3;
+    }
+
+    public static void setSid3(String[] sid3) {
+        Sheet429CoreConfig.sid3 = sid3;
     }
 }

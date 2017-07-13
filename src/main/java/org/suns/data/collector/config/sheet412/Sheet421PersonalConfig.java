@@ -6,29 +6,40 @@ package org.suns.data.collector.config.sheet412;
 public class Sheet421PersonalConfig {
 
     private static String[] inspectedHosts2 = {"119.29.201.188"};
+    private static int[] ports2 = {22};
+    private static String[] users2 = {"root"};
+    private static String[] passwords2 = {"whiteglcap25"};
+
     private static String[] inspectedHosts3 = {"119.29.201.188"};
+    private static int[] ports3 = {22};
+    private static String[] users3 = {"root"};
+    private static String[] passwords3 = {"whiteglcap25"};
 
     private static String rootDirectory = "/";
     private static String softwareDirectory = "/run";
     private static String softwareGgsDirectory = "/dev/shm";
-    /*
+/*
     private static String rootDirectory = "/";
     private static String softwareDirectory = "/software";
     private static String softwareGgsDirectory = "/software/ggs";
-
 
     private static String[] inspectedHosts2 = {"150.12.73.40"
             , "150.12.73.42"
             , "150.12.201.40"
             , "150.12.201.42"};
+    private static int[] ports2 = {22, 22, 22, 22};
+    private static String[] users2 = {"root", "root", "root", "root"};
+    private static String[] passwords2 = {"whiteglcap25"
+            , "whiteglcap25", "whiteglcap25", "whiteglcap25"};
 
     private static String[] inspectedHosts3 = {"150.12.73.28"
             , "150.12.201.28"};
-    */
+    private static int[] ports3 = {22, 22};
+    private static String[] users3 = {"root", "root"};
+    private static String[] passwords3 = {"whiteglcap25"
+            , "whiteglcap25"};
 
-    private static int port = 22;
-    private static String user = "root";
-    private static String password = "whiteglcap25";
+    */
 
     public static String[] getInspectedHosts2() {
         return inspectedHosts2;
@@ -38,12 +49,60 @@ public class Sheet421PersonalConfig {
         Sheet421PersonalConfig.inspectedHosts2 = inspectedHosts2;
     }
 
+    public static int[] getPorts2() {
+        return ports2;
+    }
+
+    public static void setPorts2(int[] ports2) {
+        Sheet421PersonalConfig.ports2 = ports2;
+    }
+
+    public static String[] getUsers2() {
+        return users2;
+    }
+
+    public static void setUsers2(String[] users2) {
+        Sheet421PersonalConfig.users2 = users2;
+    }
+
+    public static String[] getPasswords2() {
+        return passwords2;
+    }
+
+    public static void setPasswords2(String[] passwords2) {
+        Sheet421PersonalConfig.passwords2 = passwords2;
+    }
+
     public static String[] getInspectedHosts3() {
         return inspectedHosts3;
     }
 
     public static void setInspectedHosts3(String[] inspectedHosts3) {
         Sheet421PersonalConfig.inspectedHosts3 = inspectedHosts3;
+    }
+
+    public static int[] getPorts3() {
+        return ports3;
+    }
+
+    public static void setPorts3(int[] ports3) {
+        Sheet421PersonalConfig.ports3 = ports3;
+    }
+
+    public static String[] getUsers3() {
+        return users3;
+    }
+
+    public static void setUsers3(String[] users3) {
+        Sheet421PersonalConfig.users3 = users3;
+    }
+
+    public static String[] getPasswords3() {
+        return passwords3;
+    }
+
+    public static void setPasswords3(String[] passwords3) {
+        Sheet421PersonalConfig.passwords3 = passwords3;
     }
 
     public static String getRootDirectory() {
@@ -68,29 +127,5 @@ public class Sheet421PersonalConfig {
 
     public static void setSoftwareGgsDirectory(String softwareGgsDirectory) {
         Sheet421PersonalConfig.softwareGgsDirectory = softwareGgsDirectory;
-    }
-
-    public static int getPort() {
-        return port;
-    }
-
-    public static void setPort(int port) {
-        Sheet421PersonalConfig.port = port;
-    }
-
-    public static String getUser() {
-        return user;
-    }
-
-    public static void setUser(String user) {
-        Sheet421PersonalConfig.user = user;
-    }
-
-    public static String getPassword() {
-        return password;
-    }
-
-    public static void setPassword(String password) {
-        Sheet421PersonalConfig.password = password;
     }
 }

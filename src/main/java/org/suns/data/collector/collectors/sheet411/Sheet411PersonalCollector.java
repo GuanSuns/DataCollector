@@ -30,11 +30,16 @@ public class Sheet411PersonalCollector {
     //个税大厅 2
     private static void inspect2(Sheet411PersonalModel sheet411Model) throws Exception{
         final String[] inspectedHosts = Sheet411PersonalConfig.getInspectedHosts2();
+        final String[] users = Sheet411PersonalConfig.getUsers2();
+        final String[] passwords = Sheet411PersonalConfig.getPasswords2();
+        final int[] ports = Sheet411PersonalConfig.getPorts2();
+
         PriorityQueue<Float> rootUsage = new PriorityQueue<>(comparator);
         PriorityQueue<Float> webLogicUsage = new PriorityQueue<>(comparator);
 
-        for(String host : inspectedHosts){
-            inspectHost(host, rootUsage, webLogicUsage);
+        for(int i=0; i<inspectedHosts.length; i++){
+            inspectHost(inspectedHosts[i], rootUsage, webLogicUsage
+                    , users[i], passwords[i], ports[i]);
         }
 
         if(!rootUsage.isEmpty()){
@@ -55,11 +60,16 @@ public class Sheet411PersonalCollector {
     //个税核心 3
     private static void inspect3(Sheet411PersonalModel sheet411Model) throws Exception{
         final String[] inspectedHosts = Sheet411PersonalConfig.getInspectedHosts3();
+        final String[] users = Sheet411PersonalConfig.getUsers3();
+        final String[] passwords = Sheet411PersonalConfig.getPasswords3();
+        final int[] ports = Sheet411PersonalConfig.getPorts3();
+
         PriorityQueue<Float> rootUsage = new PriorityQueue<>(comparator);
         PriorityQueue<Float> webLogicUsage = new PriorityQueue<>(comparator);
 
-        for(String host : inspectedHosts){
-            inspectHost(host, rootUsage, webLogicUsage);
+        for(int i=0; i<inspectedHosts.length; i++){
+            inspectHost(inspectedHosts[i], rootUsage, webLogicUsage
+                    , users[i], passwords[i], ports[i]);
         }
 
         if(!rootUsage.isEmpty()){
@@ -80,11 +90,16 @@ public class Sheet411PersonalCollector {
     //个税查询统计 4 以及 个税工作流 5
     private static void inspect45(Sheet411PersonalModel sheet411Model) throws Exception{
         final String[] inspectedHosts = Sheet411PersonalConfig.getInspectedHosts45();
+        final String[] users = Sheet411PersonalConfig.getUsers45();
+        final String[] passwords = Sheet411PersonalConfig.getPasswords45();
+        final int[] ports = Sheet411PersonalConfig.getPorts45();
+
         PriorityQueue<Float> rootUsage = new PriorityQueue<>(comparator);
         PriorityQueue<Float> webLogicUsage = new PriorityQueue<>(comparator);
 
-        for(String host : inspectedHosts){
-            inspectHost(host, rootUsage, webLogicUsage);
+        for(int i=0; i<inspectedHosts.length; i++){
+            inspectHost(inspectedHosts[i], rootUsage, webLogicUsage
+                    , users[i], passwords[i], ports[i]);
         }
 
         if(!rootUsage.isEmpty()){
@@ -109,11 +124,10 @@ public class Sheet411PersonalCollector {
     }
 
     private static void inspectHost(String host, PriorityQueue<Float> rootUsage
-            , PriorityQueue<Float> webLogicUsage) throws Exception{
+            , PriorityQueue<Float> webLogicUsage, String user
+            , String password, int port) throws Exception{
 
-        HostConnector.connect(Sheet411PersonalConfig.getUser()
-                , Sheet411PersonalConfig.getPassword()
-                , host, Sheet411PersonalConfig.getPort());
+        HostConnector.connect(user, password, host, port);
 
         String mountedSysCmd = DFFormat.getMountedSysCmd();
         String usageCmd = DFFormat.getUsageCmd();

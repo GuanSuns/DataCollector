@@ -20,8 +20,8 @@ public class CollectorsTest {
     @Test
     public void test_sheet411personal(){
         try{
-            //Sheet411PersonalCollector.inspect();
-            //Sheet411CoreCollector.inspect();
+            Sheet411PersonalCollector.inspect();
+            Sheet411CoreCollector.inspect();
             //Sheet421CoreCollector.inspect();
             //Sheet411CoreCollector.inspect();
             //Sheet411PersonalCollector.inspect();
@@ -32,7 +32,7 @@ public class CollectorsTest {
             //Sheet429CoreCollector.inspect();
             //Sheet429PersonalCollector.inspect();
             //Sheet426PersonalCollector.inspect();
-            Sheet426CoreCollector.inspect();
+            //Sheet426CoreCollector.inspect();
 
         }catch (Exception e){
             e.printStackTrace();
