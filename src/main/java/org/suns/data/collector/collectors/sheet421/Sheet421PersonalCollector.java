@@ -32,12 +32,17 @@ public class Sheet421PersonalCollector {
     //个税核心库 2
     private static void inspect2(Sheet421PersonalModel sheet421Model) throws Exception{
         final String[] inspectedHosts = Sheet421PersonalConfig.getInspectedHosts2();
+        final String[] users = Sheet421PersonalConfig.getUsers2();
+        final String[] passwords = Sheet421PersonalConfig.getPasswords2();
+        final int[] ports = Sheet421PersonalConfig.getPorts2();
+
         PriorityQueue<Float> rootUsage = new PriorityQueue<>(comparator);
         PriorityQueue<Float> u01Usage = new PriorityQueue<>(comparator);
         PriorityQueue<Float> goldengateUsage = new PriorityQueue<>(comparator);
 
-        for(String host : inspectedHosts){
-            inspectAllDirectory(host, rootUsage, u01Usage, goldengateUsage);
+        for(int i=0; i<inspectedHosts.length; i++){
+            inspectAllDirectory(inspectedHosts[i], rootUsage, u01Usage
+                    , goldengateUsage, users[i], passwords[i], ports[i]);
         }
 
         if(!rootUsage.isEmpty()){
@@ -65,11 +70,16 @@ public class Sheet421PersonalCollector {
     //个税查询库 3
     private static void inspect3(Sheet421PersonalModel sheet421Model) throws Exception{
         final String[] inspectedHosts = Sheet421PersonalConfig.getInspectedHosts3();
+        final String[] users = Sheet421PersonalConfig.getUsers3();
+        final String[] passwords = Sheet421PersonalConfig.getPasswords3();
+        final int[] ports = Sheet421PersonalConfig.getPorts3();
+
         PriorityQueue<Float> rootUsage = new PriorityQueue<>(comparator);
         PriorityQueue<Float> u01Usage = new PriorityQueue<>(comparator);
 
-        for(String host : inspectedHosts){
-            inspectUsageAndU01(host, rootUsage, u01Usage);
+        for(int i=0; i<inspectedHosts.length; i++){
+            inspectUsageAndU01(inspectedHosts[i], rootUsage, u01Usage
+                    , users[i], passwords[i], ports[i]);
         }
 
         if(!rootUsage.isEmpty()){
@@ -89,11 +99,10 @@ public class Sheet421PersonalCollector {
 
     private static void inspectUsageAndU01(String host
             , PriorityQueue<Float> rootUsage
-            , PriorityQueue<Float> u01Usage) throws Exception{
+            , PriorityQueue<Float> u01Usage
+            , String user, String password, int port) throws Exception{
 
-        HostConnector.connect(Sheet421PersonalConfig.getUser()
-                , Sheet421PersonalConfig.getPassword()
-                , host, Sheet421PersonalConfig.getPort());
+        HostConnector.connect(user, password, host, port);
 
         String mountedSysCmd = DFFormat.getMountedSysCmd();
         String usageCmd = DFFormat.getUsageCmd();
@@ -121,11 +130,10 @@ public class Sheet421PersonalCollector {
     private static void inspectAllDirectory(String host
             , PriorityQueue<Float> rootUsage
             , PriorityQueue<Float> u01Usage
-            , PriorityQueue<Float> goldenUsage) throws Exception{
+            , PriorityQueue<Float> goldenUsage
+            , String user, String password, int port) throws Exception{
 
-        HostConnector.connect(Sheet421PersonalConfig.getUser()
-                , Sheet421PersonalConfig.getPassword()
-                , host, Sheet421PersonalConfig.getPort());
+        HostConnector.connect(user, password, host, port);
 
         String mountedSysCmd = DFFormat.getMountedSysCmd();
         String usageCmd = DFFormat.getUsageCmd();

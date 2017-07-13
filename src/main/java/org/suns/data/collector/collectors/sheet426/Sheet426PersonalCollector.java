@@ -39,11 +39,12 @@ public class Sheet426PersonalCollector {
 
         final String[] hosts = Sheet426PersonalConfig.getInspectedHosts2();
         final String[] logPaths = Sheet426PersonalConfig.getLogPath2();
+        final String[] users = Sheet426PersonalConfig.getUsers2();
+        final String[] passwords = Sheet426PersonalConfig.getPasswords2();
+        final int[] ports = Sheet426PersonalConfig.getPorts2();
 
-        HostConnector.connect(Sheet426PersonalConfig.getUser()
-                , Sheet426PersonalConfig.getPassword()
-                , hosts[0]
-                , Sheet426PersonalConfig.getPort());
+        HostConnector.connect(users[0], passwords[0]
+                , hosts[0], ports[0]);
 
         String inspectCmd = Sheet426PersonalConfig.getORADetectionCmd(logPaths[0]);
         String strORA = HostConnector.executeCommand(inspectCmd);
@@ -64,11 +65,12 @@ public class Sheet426PersonalCollector {
 
         final String[] hosts = Sheet426PersonalConfig.getInspectedHosts2();
         final String[] logPaths = Sheet426PersonalConfig.getLogPath2();
+        final String[] users = Sheet426PersonalConfig.getUsers2();
+        final String[] passwords = Sheet426PersonalConfig.getPasswords2();
+        final int[] ports = Sheet426PersonalConfig.getPorts2();
 
-        HostConnector.connect(Sheet426PersonalConfig.getUser()
-                , Sheet426PersonalConfig.getPassword()
-                , hosts[1]
-                , Sheet426PersonalConfig.getPort());
+        HostConnector.connect(users[1], passwords[1]
+                , hosts[1], ports[1]);
 
         String inspectCmd = Sheet426PersonalConfig.getORADetectionCmd(logPaths[1]);
         String strORA = HostConnector.executeCommand(inspectCmd);

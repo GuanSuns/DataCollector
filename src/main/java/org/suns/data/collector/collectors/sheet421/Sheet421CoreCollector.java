@@ -35,12 +35,17 @@ public class Sheet421CoreCollector {
     //个税核心库 2
     private static void inspect2(Sheet421CoreModel sheet421Model) throws Exception{
         final String[] inspectedHosts = Sheet421CoreConfig.getInspectedHosts2();
+        final String[] users = Sheet421CoreConfig.getUsers2();
+        final String[] passwords = Sheet421CoreConfig.getPasswords2();
+        final int[] ports = Sheet421CoreConfig.getPorts2();
+
         PriorityQueue<Float> rootUsage = new PriorityQueue<>(comparator);
         PriorityQueue<Float> u01Usage = new PriorityQueue<>(comparator);
         PriorityQueue<Float> goldengateUsage = new PriorityQueue<>(comparator);
 
-        for(String host : inspectedHosts){
-            inspectAllDirectory(host, rootUsage, u01Usage, goldengateUsage);
+        for(int i=0; i<inspectedHosts.length; i++){
+            inspectAllDirectory(inspectedHosts[i], rootUsage, u01Usage
+                    , goldengateUsage, users[i], passwords[i], ports[i]);
         }
 
         if(!rootUsage.isEmpty()){
@@ -68,11 +73,16 @@ public class Sheet421CoreCollector {
     //个税查询库 3 以及 分发库 5
     private static void inspect35(Sheet421CoreModel sheet421Model) throws Exception{
         final String[] inspectedHosts = Sheet421CoreConfig.getInspectedHosts35();
+        final String[] users = Sheet421CoreConfig.getUsers35();
+        final String[] passwords = Sheet421CoreConfig.getPasswords35();
+        final int[] ports = Sheet421CoreConfig.getPorts35();
+
         PriorityQueue<Float> rootUsage = new PriorityQueue<>(comparator);
         PriorityQueue<Float> u01Usage = new PriorityQueue<>(comparator);
 
-        for(String host : inspectedHosts){
-            inspectUsageAndU01(host, rootUsage, u01Usage);
+        for(int i=0; i<inspectedHosts.length; i++){
+            inspectUsageAndU01(inspectedHosts[i], rootUsage, u01Usage
+                    , users[i], passwords[i], ports[i]);
         }
 
         if(!rootUsage.isEmpty()){
@@ -97,12 +107,17 @@ public class Sheet421CoreCollector {
     //集成平台库 4
     private static void inspect4(Sheet421CoreModel sheet421Model) throws Exception{
         final String[] inspectedHosts = Sheet421CoreConfig.getInspectedHosts4();
+        final String[] users = Sheet421CoreConfig.getUsers4();
+        final String[] passwords = Sheet421CoreConfig.getPasswords4();
+        final int[] ports = Sheet421CoreConfig.getPorts4();
+
         PriorityQueue<Float> rootUsage = new PriorityQueue<>(comparator);
         PriorityQueue<Float> u01Usage = new PriorityQueue<>(comparator);
         PriorityQueue<Float> goldengateUsage = new PriorityQueue<>(comparator);
 
-        for(String host : inspectedHosts){
-            inspectAllDirectory(host, rootUsage, u01Usage, goldengateUsage);
+        for(int i=0; i<inspectedHosts.length; i++){
+            inspectAllDirectory(inspectedHosts[i], rootUsage, u01Usage
+                    , goldengateUsage, users[i], passwords[i], ports[i]);
         }
 
         if(!rootUsage.isEmpty()){
@@ -129,11 +144,10 @@ public class Sheet421CoreCollector {
 
     private static void inspectUsageAndU01(String host
             , PriorityQueue<Float> rootUsage
-            , PriorityQueue<Float> u01Usage) throws Exception{
+            , PriorityQueue<Float> u01Usage
+            , String user, String password, int port) throws Exception{
 
-        HostConnector.connect(Sheet421CoreConfig.getUser()
-                , Sheet421CoreConfig.getPassword()
-                , host, Sheet421CoreConfig.getPort());
+        HostConnector.connect(user, password, host, port);
 
         String mountedSysCmd = DFFormat.getMountedSysCmd();
         String usageCmd = DFFormat.getUsageCmd();
@@ -161,11 +175,10 @@ public class Sheet421CoreCollector {
     private static void inspectAllDirectory(String host
             , PriorityQueue<Float> rootUsage
             , PriorityQueue<Float> u01Usage
-            , PriorityQueue<Float> goldenUsage) throws Exception{
+            , PriorityQueue<Float> goldenUsage
+            , String user, String password, int port) throws Exception{
 
-        HostConnector.connect(Sheet421CoreConfig.getUser()
-                , Sheet421CoreConfig.getPassword()
-                , host, Sheet421CoreConfig.getPort());
+        HostConnector.connect(user, password, host, port);
 
         String mountedSysCmd = DFFormat.getMountedSysCmd();
         String usageCmd = DFFormat.getUsageCmd();

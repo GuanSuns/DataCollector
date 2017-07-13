@@ -32,13 +32,17 @@ public class Sheet429CoreCollector {
 
     private static void inspect1(Sheet429CoreModel sheet429Model) throws Exception{
         final String[] inspectedHosts = Sheet429CoreConfig.getInspectedHosts1();
+        final String[] users = Sheet429CoreConfig.getUsers1();
+        final String[] passwords = Sheet429CoreConfig.getPasswords1();
+        final int[] ports = Sheet429CoreConfig.getPorts1();
+        final String[] sid = Sheet429CoreConfig.getSid1();
 
-        for(String host : inspectedHosts){
-            String strResult = inspectHost(Sheet429CoreConfig.getUser()
-                    , Sheet429CoreConfig.getPassword()
-                    , host
-                    , Sheet429CoreConfig.getPort()
-                    , Sheet429CoreConfig.getSid());
+        for(int i=0; i<inspectedHosts.length; i++){
+            String strResult = inspectHost(users[i]
+                    , passwords[i]
+                    , inspectedHosts[i]
+                    , ports[i]
+                    , sid[i]);
 
             sheet429Model.setHeartBeat1(strResult);
         }
@@ -46,13 +50,17 @@ public class Sheet429CoreCollector {
 
     private static void inspect2(Sheet429CoreModel sheet429Model) throws Exception{
         final String[] inspectedHosts = Sheet429CoreConfig.getInspectedHosts2();
+        final String[] users = Sheet429CoreConfig.getUsers2();
+        final String[] passwords = Sheet429CoreConfig.getPasswords2();
+        final int[] ports = Sheet429CoreConfig.getPorts2();
+        final String[] sid = Sheet429CoreConfig.getSid2();
 
-        for(String host : inspectedHosts){
-            String strResult = inspectHost(Sheet429CoreConfig.getUser()
-                    , Sheet429CoreConfig.getPassword()
-                    , host
-                    , Sheet429CoreConfig.getPort()
-                    , Sheet429CoreConfig.getSid());
+        for(int i=0; i<inspectedHosts.length; i++){
+            String strResult = inspectHost(users[i]
+                    , passwords[i]
+                    , inspectedHosts[i]
+                    , ports[i]
+                    , sid[i]);
 
             sheet429Model.setHeartBeat2(strResult);
         }
@@ -60,13 +68,17 @@ public class Sheet429CoreCollector {
 
     private static void inspect3(Sheet429CoreModel sheet429Model) throws Exception{
         final String[] inspectedHosts = Sheet429CoreConfig.getInspectedHosts3();
+        final String[] users = Sheet429CoreConfig.getUsers3();
+        final String[] passwords = Sheet429CoreConfig.getPasswords3();
+        final int[] ports = Sheet429CoreConfig.getPorts3();
+        final String[] sid = Sheet429CoreConfig.getSid3();
 
-        for(String host : inspectedHosts){
-            String strResult = inspectHost(Sheet429CoreConfig.getUser()
-                    , Sheet429CoreConfig.getPassword()
-                    , host
-                    , Sheet429CoreConfig.getPort()
-                    , Sheet429CoreConfig.getSid());
+        for(int i=0; i<inspectedHosts.length; i++){
+            String strResult = inspectHost(users[i]
+                    , passwords[i]
+                    , inspectedHosts[i]
+                    , ports[i]
+                    , sid[i]);
 
             sheet429Model.setHeartBeat3(strResult);
         }

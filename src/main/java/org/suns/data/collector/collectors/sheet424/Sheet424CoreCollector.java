@@ -1,5 +1,6 @@
 package org.suns.data.collector.collectors.sheet424;
 
+import org.suns.data.collector.config.sheet423.Sheet423PersonalConfig;
 import org.suns.data.collector.config.sheet424.Sheet424CoreConfig;
 import org.suns.data.collector.connector.OracleConnector;
 import org.suns.database.utils.controller.Sheet424Controller;
@@ -31,40 +32,40 @@ public class Sheet424CoreCollector {
 
     private static void inspect2(Sheet424CoreModel sheet424Model) throws Exception{
         final String[] inspectedHosts = Sheet424CoreConfig.getInspectedHosts2();
+        final String[] users = Sheet424CoreConfig.getUsers2();
+        final String[] passwords = Sheet424CoreConfig.getPasswords2();
+        final int[] ports = Sheet424CoreConfig.getPorts2();
+        final String[] sid = Sheet424CoreConfig.getSid2();
 
-        for(String host : inspectedHosts){
-            inspectHost2(Sheet424CoreConfig.getUser()
-                    , Sheet424CoreConfig.getPassword()
-                    , host
-                    , Sheet424CoreConfig.getPort()
-                    , Sheet424CoreConfig.getSid()
-                    , sheet424Model);
+        for(int i=0; i<inspectedHosts.length; i++){
+            inspectHost2(users[i], passwords[i], inspectedHosts[i]
+                    , ports[i], sid[i], sheet424Model);
         }
     }
 
     private static void inspect3(Sheet424CoreModel sheet424Model) throws Exception{
         final String[] inspectedHosts = Sheet424CoreConfig.getInspectedHosts3();
+        final String[] users = Sheet424CoreConfig.getUsers3();
+        final String[] passwords = Sheet424CoreConfig.getPasswords3();
+        final int[] ports = Sheet424CoreConfig.getPorts3();
+        final String[] sid = Sheet424CoreConfig.getSid3();
 
-        for(String host : inspectedHosts){
-            inspectHost3(Sheet424CoreConfig.getUser()
-                    , Sheet424CoreConfig.getPassword()
-                    , host
-                    , Sheet424CoreConfig.getPort()
-                    , Sheet424CoreConfig.getSid()
-                    , sheet424Model);
+        for(int i=0; i<inspectedHosts.length; i++){
+            inspectHost3(users[i], passwords[i], inspectedHosts[i]
+                    , ports[i], sid[i], sheet424Model);
         }
     }
 
     private static void inspect4(Sheet424CoreModel sheet424Model) throws Exception{
         final String[] inspectedHosts = Sheet424CoreConfig.getInspectedHosts4();
+        final String[] users = Sheet424CoreConfig.getUsers4();
+        final String[] passwords = Sheet424CoreConfig.getPasswords4();
+        final int[] ports = Sheet424CoreConfig.getPorts4();
+        final String[] sid = Sheet424CoreConfig.getSid4();
 
-        for(String host : inspectedHosts){
-            inspectHost4(Sheet424CoreConfig.getUser()
-                    , Sheet424CoreConfig.getPassword()
-                    , host
-                    , Sheet424CoreConfig.getPort()
-                    , Sheet424CoreConfig.getSid()
-                    , sheet424Model);
+        for(int i=0; i<inspectedHosts.length; i++){
+            inspectHost4(users[i], passwords[i], inspectedHosts[i]
+                    , ports[i], sid[i], sheet424Model);
         }
     }
 

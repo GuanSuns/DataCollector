@@ -35,11 +35,12 @@ public class Sheet426CoreCollector {
 
         final String[] hosts = Sheet426CoreConfig.getInspectedHosts2();
         final String[] logPaths = Sheet426CoreConfig.getLogPath2();
+        final String[] users = Sheet426CoreConfig.getUsers2();
+        final String[] passwords = Sheet426CoreConfig.getPasswords2();
+        final int[] ports = Sheet426CoreConfig.getPorts2();
 
-        HostConnector.connect(Sheet426CoreConfig.getUser()
-                , Sheet426CoreConfig.getPassword()
-                , hosts[0]
-                , Sheet426CoreConfig.getPort());
+        HostConnector.connect(users[0], passwords[0]
+                , hosts[0], ports[0]);
 
         String inspectCmd = Sheet426CoreConfig.getORADetectionCmd(logPaths[0]);
         String strORA = HostConnector.executeCommand(inspectCmd);
@@ -62,11 +63,12 @@ public class Sheet426CoreCollector {
 
         final String[] hosts = Sheet426CoreConfig.getInspectedHosts2();
         final String[] logPaths = Sheet426CoreConfig.getLogPath2();
+        final String[] users = Sheet426CoreConfig.getUsers2();
+        final String[] passwords = Sheet426CoreConfig.getPasswords2();
+        final int[] ports = Sheet426CoreConfig.getPorts2();
 
-        HostConnector.connect(Sheet426CoreConfig.getUser()
-                , Sheet426CoreConfig.getPassword()
-                , hosts[1]
-                , Sheet426CoreConfig.getPort());
+        HostConnector.connect(users[1], passwords[1]
+                , hosts[1], ports[1]);
 
         String inspectCmd = Sheet426CoreConfig.getORADetectionCmd(logPaths[1]);
         String strORA = HostConnector.executeCommand(inspectCmd);
@@ -89,11 +91,12 @@ public class Sheet426CoreCollector {
 
         final String[] hosts = Sheet426CoreConfig.getInspectedHosts3();
         final String[] logPaths = Sheet426CoreConfig.getLogPath3();
+        final String[] users = Sheet426CoreConfig.getUsers3();
+        final String[] passwords = Sheet426CoreConfig.getPasswords3();
+        final int[] ports = Sheet426CoreConfig.getPorts3();
 
-        HostConnector.connect(Sheet426CoreConfig.getUser()
-                , Sheet426CoreConfig.getPassword()
-                , hosts[0]
-                , Sheet426CoreConfig.getPort());
+        HostConnector.connect(users[0], passwords[0]
+                , hosts[0], ports[0]);
 
         String inspectCmd = Sheet426CoreConfig.getORADetectionCmd(logPaths[0]);
         String strORA = HostConnector.executeCommand(inspectCmd);
@@ -121,11 +124,12 @@ public class Sheet426CoreCollector {
 
         final String[] hosts = Sheet426CoreConfig.getInspectedHosts4();
         final String[] logPaths = Sheet426CoreConfig.getLogPath4();
+        final String[] users = Sheet426CoreConfig.getUsers4();
+        final String[] passwords = Sheet426CoreConfig.getPasswords4();
+        final int[] ports = Sheet426CoreConfig.getPorts4();
 
-        HostConnector.connect(Sheet426CoreConfig.getUser()
-                , Sheet426CoreConfig.getPassword()
-                , hosts[0]
-                , Sheet426CoreConfig.getPort());
+        HostConnector.connect(users[0], passwords[0]
+                , hosts[0], ports[0]);
 
         String inspectCmd = Sheet426CoreConfig.getORADetectionCmd(logPaths[0]);
         String strORA = HostConnector.executeCommand(inspectCmd);
@@ -147,12 +151,13 @@ public class Sheet426CoreCollector {
     private static void inspectHost41(Sheet426CoreModel sheet426Model) throws Exception{
 
         final String[] hosts = Sheet426CoreConfig.getInspectedHosts2();
-        final String[] logPaths = Sheet426CoreConfig.getLogPath2();
+        final String[] logPaths = Sheet426CoreConfig.getLogPath4();
+        final String[] users = Sheet426CoreConfig.getUsers4();
+        final String[] passwords = Sheet426CoreConfig.getPasswords4();
+        final int[] ports = Sheet426CoreConfig.getPorts4();
 
-        HostConnector.connect(Sheet426CoreConfig.getUser()
-                , Sheet426CoreConfig.getPassword()
-                , hosts[1]
-                , Sheet426CoreConfig.getPort());
+        HostConnector.connect(users[1], passwords[1]
+                , hosts[1], ports[1]);
 
         String inspectCmd = Sheet426CoreConfig.getORADetectionCmd(logPaths[1]);
         String strORA = HostConnector.executeCommand(inspectCmd);

@@ -109,40 +109,40 @@ public class Sheet423CoreCollector {
 
     private static void inspect2(ArrayList<Sheet423CoreModel> sheet423Models) throws Exception{
         final String[] inspectedHosts = Sheet423CoreConfig.getInspectedHosts2();
+        final String[] users = Sheet423CoreConfig.getUsers2();
+        final String[] passwords = Sheet423CoreConfig.getPasswords2();
+        final int[] ports = Sheet423CoreConfig.getPorts2();
+        final String[] sid = Sheet423CoreConfig.getSid2();
 
-        for(String host : inspectedHosts){
-            inspectHost2(Sheet423CoreConfig.getUser()
-                    , Sheet423CoreConfig.getPassword()
-                    , host
-                    , Sheet423CoreConfig.getPort()
-                    , Sheet423CoreConfig.getSid()
-                    , sheet423Models);
+        for(int i=0; i<inspectedHosts.length; i++){
+            inspectHost2(users[i], passwords[i], inspectedHosts[i]
+                    , ports[i], sid[i], sheet423Models);
         }
     }
 
     private static void inspect3(ArrayList<Sheet423CoreModel> sheet423Models) throws Exception{
         final String[] inspectedHosts = Sheet423CoreConfig.getInspectedHosts3();
+        final String[] users = Sheet423CoreConfig.getUsers3();
+        final String[] passwords = Sheet423CoreConfig.getPasswords3();
+        final int[] ports = Sheet423CoreConfig.getPorts3();
+        final String[] sid = Sheet423CoreConfig.getSid3();
 
-        for(String host : inspectedHosts){
-            inspectHost3(Sheet423CoreConfig.getUser()
-                    , Sheet423CoreConfig.getPassword()
-                    , host
-                    , Sheet423CoreConfig.getPort()
-                    , Sheet423CoreConfig.getSid()
-                    , sheet423Models);
+        for(int i=0; i<inspectedHosts.length; i++){
+            inspectHost3(users[i], passwords[i], inspectedHosts[i]
+                    , ports[i], sid[i], sheet423Models);
         }
     }
 
     private static void inspect4(ArrayList<Sheet423CoreModel> sheet423Models) throws Exception{
         final String[] inspectedHosts = Sheet423CoreConfig.getInspectedHosts4();
+        final String[] users = Sheet423CoreConfig.getUsers4();
+        final String[] passwords = Sheet423CoreConfig.getPasswords4();
+        final int[] ports = Sheet423CoreConfig.getPorts4();
+        final String[] sid = Sheet423CoreConfig.getSid4();
 
-        for(String host : inspectedHosts){
-            inspectHost4(Sheet423CoreConfig.getUser()
-                    , Sheet423CoreConfig.getPassword()
-                    , host
-                    , Sheet423CoreConfig.getPort()
-                    , Sheet423CoreConfig.getSid()
-                    , sheet423Models);
+        for(int i=0; i<inspectedHosts.length; i++){
+            inspectHost4(users[i], passwords[i], inspectedHosts[i]
+                    , ports[i], sid[i], sheet423Models);
         }
     }
 

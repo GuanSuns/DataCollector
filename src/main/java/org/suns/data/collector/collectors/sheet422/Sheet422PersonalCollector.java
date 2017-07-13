@@ -27,14 +27,14 @@ public class Sheet422PersonalCollector {
 
     private static void inspect2(ArrayList<Sheet422PersonalModel> sheet422Models) throws Exception{
         final String[] inspectedHosts = Sheet422PersonalConfig.getInspectedHosts();
+        final String[] users = Sheet422PersonalConfig.getUsers();
+        final String[] passwords = Sheet422PersonalConfig.getPasswords();
+        final int[] ports = Sheet422PersonalConfig.getPorts();
+        final String[] sid = Sheet422PersonalConfig.getSid();
 
-        for(String host : inspectedHosts){
-            inspectHost2(Sheet422PersonalConfig.getUser()
-                    , Sheet422PersonalConfig.getPassword()
-                    , host
-                    , Sheet422PersonalConfig.getPort()
-                    , Sheet422PersonalConfig.getSid()
-                    , sheet422Models);
+        for(int i=0; i<inspectedHosts.length; i++){
+            inspectHost2(users[i], passwords[i], inspectedHosts[i]
+                    , ports[i], sid[i], sheet422Models);
         }
     }
 

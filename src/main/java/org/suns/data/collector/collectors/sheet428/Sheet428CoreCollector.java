@@ -19,9 +19,21 @@ import static org.suns.data.collector.collectors.sheet428.Sheet428PersonalCollec
 public class Sheet428CoreCollector {
     public static void inspect() throws Exception{
         Sheet428CoreModel sheet428Model = new Sheet428CoreModel();
-        inspect1(sheet428Model);
-        inspect2(sheet428Model);
-        inspect34(sheet428Model);
+
+        String strTime = getTimeFromHost(Sheet428CoreConfig.getTimeServer()
+                , Sheet428CoreConfig.getPortsTimeServer()[0]
+                , Sheet428CoreConfig.getUsersTimeServer()[0]
+                , Sheet428CoreConfig.getPasswordsTimeServer()[0]);
+
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date currentTime = new Date();
+        Date hostTime = df.parse(strTime);
+
+        long timeServerDiff = Math.abs(currentTime.getTime() - hostTime.getTime());
+
+        inspect1(sheet428Model, timeServerDiff);
+        inspect2(sheet428Model, timeServerDiff);
+        inspect34(sheet428Model, timeServerDiff);
         sheet428Model.setStatus5("");
         sheet428Model.setDate(new Timestamp(new Date().getTime()));
 
@@ -30,25 +42,29 @@ public class Sheet428CoreCollector {
         }
     }
 
-    private static void inspect1(Sheet428CoreModel sheet428) throws Exception{
+    private static void inspect1(Sheet428CoreModel sheet428
+            , long timeServerDiff) throws Exception{
         final String[] hosts = Sheet428CoreConfig.getInspectedHosts1();
+        final String[] users = Sheet428CoreConfig.getUsers1();
+        final String[] passwords = Sheet428CoreConfig.getPasswords1();
+        final int[] ports = Sheet428CoreConfig.getPorts1();
 
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String result = "";
-        for(String host: hosts){
-            String strTime = Sheet428PersonalCollector.getTimeFromHost(host
-                    , Sheet428CoreConfig.getPort()
-                    , Sheet428CoreConfig.getUser()
-                    , Sheet428CoreConfig.getPassword());
+        for(int i=0; i<hosts.length; i++){
+            String strTime = getTimeFromHost(hosts[i], ports[i]
+                    , users[i], passwords[i]);
 
             Date currentTime = new Date();
             Date hostTime = df.parse(strTime);
 
             long diff = Math.abs(currentTime.getTime() - hostTime.getTime());
-            long diffMinute = (diff/1000)/60;
+            long diffWithTimeServer = Math.abs(timeServerDiff - diff);
+            long diffMinute = (diffWithTimeServer/1000)/60;
 
-            if(diff > Sheet428CoreConfig.getDiffTolerance()){
-                result = result + host + " 与时间服务器相差 " + diffMinute + "分钟\n";
+            if(diffWithTimeServer > Sheet428CoreConfig.getDiffTolerance()){
+                result = result + hosts[i] + " 与时间服务器相差 "
+                        + diffMinute + "分钟\n";
             }
         }
 
@@ -59,25 +75,29 @@ public class Sheet428CoreCollector {
         sheet428.setStatus1(result);
     }
 
-    private static void inspect2(Sheet428CoreModel sheet428) throws Exception{
+    private static void inspect2(Sheet428CoreModel sheet428
+            , long timeServerDiff) throws Exception{
         final String[] hosts = Sheet428CoreConfig.getInspectedHosts2();
+        final String[] users = Sheet428CoreConfig.getUsers2();
+        final String[] passwords = Sheet428CoreConfig.getPasswords2();
+        final int[] ports = Sheet428CoreConfig.getPorts2();
 
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String result = "";
-        for(String host: hosts){
-            String strTime = Sheet428PersonalCollector.getTimeFromHost(host
-                    , Sheet428CoreConfig.getPort()
-                    , Sheet428CoreConfig.getUser()
-                    , Sheet428CoreConfig.getPassword());
+        for(int i=0; i<hosts.length; i++){
+            String strTime = getTimeFromHost(hosts[i], ports[i]
+                    , users[i], passwords[i]);
 
             Date currentTime = new Date();
             Date hostTime = df.parse(strTime);
 
             long diff = Math.abs(currentTime.getTime() - hostTime.getTime());
-            long diffMinute = (diff/1000)/60;
+            long diffWithTimeServer = Math.abs(timeServerDiff - diff);
+            long diffMinute = (diffWithTimeServer/1000)/60;
 
-            if(diff > Sheet428CoreConfig.getDiffTolerance()){
-                result = result + host + " 与时间服务器相差 " + diffMinute + "分钟\n";
+            if(diffWithTimeServer > Sheet428CoreConfig.getDiffTolerance()){
+                result = result + hosts[i] + " 与时间服务器相差 "
+                        + diffMinute + "分钟\n";
             }
         }
 
@@ -88,25 +108,29 @@ public class Sheet428CoreCollector {
         sheet428.setStatus2(result);
     }
 
-    private static void inspect34(Sheet428CoreModel sheet428) throws Exception{
+    private static void inspect34(Sheet428CoreModel sheet428
+            , long timeServerDiff) throws Exception{
         final String[] hosts = Sheet428CoreConfig.getInspectedHosts34();
+        final String[] users = Sheet428CoreConfig.getUsers34();
+        final String[] passwords = Sheet428CoreConfig.getPasswords34();
+        final int[] ports = Sheet428CoreConfig.getPorts34();
 
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String result = "";
-        for(String host: hosts){
-            String strTime = Sheet428PersonalCollector.getTimeFromHost(host
-                    , Sheet428CoreConfig.getPort()
-                    , Sheet428CoreConfig.getUser()
-                    , Sheet428CoreConfig.getPassword());
+        for(int i=0; i<hosts.length; i++){
+            String strTime = getTimeFromHost(hosts[i], ports[i]
+                    , users[i], passwords[i]);
 
             Date currentTime = new Date();
             Date hostTime = df.parse(strTime);
 
             long diff = Math.abs(currentTime.getTime() - hostTime.getTime());
-            long diffMinute = (diff/1000)/60;
+            long diffWithTimeServer = Math.abs(timeServerDiff - diff);
+            long diffMinute = (diffWithTimeServer/1000)/60;
 
-            if(diff > Sheet428CoreConfig.getDiffTolerance()){
-                result = result + host + " 与时间服务器相差 " + diffMinute + "分钟\n";
+            if(diffWithTimeServer > Sheet428CoreConfig.getDiffTolerance()){
+                result = result + hosts[i]
+                        + " 与时间服务器相差 " + diffMinute + "分钟\n";
             }
         }
 
