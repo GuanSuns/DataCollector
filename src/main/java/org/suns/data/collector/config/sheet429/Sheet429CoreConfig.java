@@ -4,25 +4,7 @@ package org.suns.data.collector.config.sheet429;
  * Created by guanl on 6/30/2017.
  */
 public class Sheet429CoreConfig {
-    private static String[] inspectedHosts1 = {"192.168.14.82"};
-    private static int[] ports1 = {1521};
-    private static String[] users1 = {"dev_01"};
-    private static String[] passwords1 = {"a"};
-    private static String[] sid1 = {"ggjs"};
 
-    private static String[] inspectedHosts2 = {"192.168.14.82"};
-    private static int[] ports2 = {1521};
-    private static String[] users2 = {"dev_01"};
-    private static String[] passwords2 = {"a"};
-    private static String[] sid2 = {"ggjs"};
-
-    private static String[] inspectedHosts3 = {"192.168.14.82"};
-    private static int[] ports3 = {1521};
-    private static String[] users3 = {"dev_01"};
-    private static String[] passwords3 = {"a"};
-    private static String[] sid3 = {"ggjs"};
-
-/*
     private static String[] inspectedHosts1 = {"150.12.201.20"};
     //Alternative Host "150.12.201.22"
     private static int[] ports1 = {1521};
@@ -42,7 +24,6 @@ public class Sheet429CoreConfig {
     private static String[] users3 = {"dev_01"};
     private static String[] passwords3 = {"a"};
     private static String[] sid3 = {"ggjs"};
-*/
 
     private static String[] fieldNames = {"instID", "btime"
             , "INTSIZE", "metricName", "val", "MINVAL", "MAXVAL"

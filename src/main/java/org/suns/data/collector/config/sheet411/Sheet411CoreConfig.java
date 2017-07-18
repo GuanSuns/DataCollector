@@ -4,41 +4,7 @@ package org.suns.data.collector.config.sheet411;
  * Created by guanl on 6/28/2017.
  */
 public class Sheet411CoreConfig {
-    private static String[] inspectedHosts2 = {"119.29.201.188"};
-    private static int[] ports2 = {22};
-    private static String[] users2 = {"root"};
-    private static String[] passwords2 = {"whiteglcap25"};
 
-    private static String[] inspectedHosts3 = {"119.29.201.188"};
-    private static int[] ports3 = {22};
-    private static String[] users3 = {"root"};
-    private static String[] passwords3 = {"whiteglcap25"};
-
-    private static String[] inspectedHosts4 = {"119.29.201.188"};
-    private static int[] ports4 = {22};
-    private static String[] users4 = {"root"};
-    private static String[] passwords4 = {"whiteglcap25"};
-
-    private static String[] inspectedHosts5 = {"119.29.201.188"};
-    private static int[] ports5 = {22};
-    private static String[] users5 = {"root"};
-    private static String[] passwords5 = {"whiteglcap25"};
-
-    private static String[] inspectedHosts6 = {"119.29.201.188"};
-    private static int[] ports6 = {22};
-    private static String[] users6 = {"root"};
-    private static String[] passwords6 = {"whiteglcap25"};
-
-    private static String[] inspectedHosts8 = {"119.29.201.188"};
-    private static int[] ports8 = {22};
-    private static String[] users8 = {"root"};
-    private static String[] passwords8 = {"whiteglcap25"};
-
-
-    private static String rootDirectory = "/";
-    private static String softwareDirectory = "/dev";
-
-/*
     private static String rootDirectory = "/";
     private static String softwareDirectory = "/software";
 
@@ -92,7 +58,7 @@ public class Sheet411CoreConfig {
     private static String[] users8 = {"root", "root"};
     private static String[] passwords8 = {"whiteglcap25"
             , "whiteglcap25"};
-*/
+
 
     public static String[] getInspectedHosts2() {
         return inspectedHosts2;

@@ -5,20 +5,6 @@ package org.suns.data.collector.config.sheet412;
  */
 public class Sheet421PersonalConfig {
 
-    private static String[] inspectedHosts2 = {"119.29.201.188"};
-    private static int[] ports2 = {22};
-    private static String[] users2 = {"root"};
-    private static String[] passwords2 = {"whiteglcap25"};
-
-    private static String[] inspectedHosts3 = {"119.29.201.188"};
-    private static int[] ports3 = {22};
-    private static String[] users3 = {"root"};
-    private static String[] passwords3 = {"whiteglcap25"};
-
-    private static String rootDirectory = "/";
-    private static String softwareDirectory = "/run";
-    private static String softwareGgsDirectory = "/dev/shm";
-/*
     private static String rootDirectory = "/";
     private static String softwareDirectory = "/software";
     private static String softwareGgsDirectory = "/software/ggs";
@@ -38,8 +24,6 @@ public class Sheet421PersonalConfig {
     private static String[] users3 = {"root", "root"};
     private static String[] passwords3 = {"whiteglcap25"
             , "whiteglcap25"};
-
-    */
 
     public static String[] getInspectedHosts2() {
         return inspectedHosts2;

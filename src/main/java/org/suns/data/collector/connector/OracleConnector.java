@@ -28,9 +28,6 @@ public class OracleConnector {
         props.put("user", user);
         props.put("password", password);
 
-        System.out.println(dbURL);
-        System.out.println("user: " + user + ", password: " + password);
-
         connection = driver.connect(dbURL, props);
     }
 

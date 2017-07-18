@@ -4,7 +4,9 @@ package org.suns.data.collector.config.sheet426;
  * Created by guanl on 7/4/2017.
  */
 public class Sheet426CoreConfig {
+
     private static String[] inspectedHosts2 = {"119.29.201.188", "119.29.201.188"};
+
     private static String[] logPath2 = {
             "/software/oracle/trace/test.log"
             , "/software/oracle/trace/test2.log"
@@ -15,6 +17,7 @@ public class Sheet426CoreConfig {
             , "whiteglcap25"};
 
     private static String[] inspectedHosts3 = {"119.29.201.188"};
+
     private static String[] logPath3 = {
             "/software/oracle/trace/test.log"
     };
@@ -23,6 +26,7 @@ public class Sheet426CoreConfig {
     private static String[] passwords3 = {"whiteglcap25"};
 
     private static String[] inspectedHosts4 = {"119.29.201.188", "119.29.201.188"};
+
     private static String[] logPath4 = {
             "/software/oracle/trace/test.log"
             , "/software/oracle/trace/test2.log"
@@ -31,36 +35,6 @@ public class Sheet426CoreConfig {
     private static String[] users4 = {"root", "root"};
     private static String[] passwords4 = {"whiteglcap25"
             , "whiteglcap25"};
-
-/*
-    private static String[] inspectedHost2 = {"150.12.201.20", "150.12.201.22"};
-    private static String[] logPath2 = {
-            "/software/oracle/diag/rdbms/gdlthxzg/gdlthxzg1/trace/alert_gdlthxzg1.log"
-            , "/software/oracle/diag/rdbms/gdlthxzg/gdlthxzg2/trace/alert_gdlthxzg2.log"
-    };
-    private static int[] ports2 = {22, 22};
-    private static String[] users2 = {"root", "root"};
-    private static String[] passwords2 = {"whiteglcap25"
-            , "whiteglcap25"};
-
-    private static String[] inspectedHost3 = {"150.12.201.28"};
-    private static String[] logPath3 = {
-            "/software/oracle/diag/rdbms/gdltcxff/gdltgcxff/trace/alert_gdltcxff.log"
-    };
-    private static int[] ports3 = {22};
-    private static String[] users3 = {"root"};
-    private static String[] passwords3 = {"whiteglcap25"};
-
-    private static String[] inspectedHost4 = {"150.12.201.30", "150.12.201.32"};
-    private static String[] logPath4 = {
-            "/software/oracle/diag/rdbms/gdltjcpt/gdltjcpt1/trace/alert_gdltjcpt1.log"
-            , "/software/oracle/diag/rdbms/gdltjcpt/gdltjcpt2/trace/alert_gdltjcpt2.log"
-    };
-    private static int[] ports4 = {22, 22};
-    private static String[] users4 = {"root", "root"};
-    private static String[] passwords4 = {"whiteglcap25"
-            , "whiteglcap25"};
-*/
 
     public static String[] getInspectedHosts2() {
         return inspectedHosts2;

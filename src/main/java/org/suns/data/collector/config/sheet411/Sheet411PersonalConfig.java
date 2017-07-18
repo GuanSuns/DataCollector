@@ -4,25 +4,7 @@ package org.suns.data.collector.config.sheet411;
  * Created by guanl on 6/28/2017.
  */
 public class Sheet411PersonalConfig {
-    private static String[] inspectedHosts2 = {"119.29.201.188"};
-    private static int[] ports2 = {22};
-    private static String[] users2 = {"root"};
-    private static String[] passwords2 = {"whiteglcap25"};
 
-    private static String[] inspectedHosts3 = {"119.29.201.188"};
-    private static int[] ports3 = {22};
-    private static String[] users3 = {"root"};
-    private static String[] passwords3 = {"whiteglcap25"};
-
-    private static String[] inspectedHosts45 = {"119.29.201.188"};
-    private static int[] ports45 = {22};
-    private static String[] users45 = {"root"};
-    private static String[] passwords45 = {"whiteglcap25"};
-
-    private static String rootDirectory = "/";
-    private static String softwareDirectory = "/dev";
-
-    /*
     private static String rootDirectory = "/";
     private static String softwareDirectory = "/software";
 
@@ -52,7 +34,6 @@ public class Sheet411PersonalConfig {
     private static String[] passwords45 = {"whiteglcap25"
             , "whiteglcap25"};
 
-    */
 
     public static String[] getInspectedHosts2() {
         return inspectedHosts2;

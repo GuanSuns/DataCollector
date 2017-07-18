@@ -4,20 +4,14 @@ package org.suns.data.collector.config.sheet424;
  * Created by guanl on 6/30/2017.
  */
 public class Sheet424PersonalConfig {
-    private static String[] inspectedHosts = {"192.168.14.82"};
-    private static int[] ports = {1521};
-    private static String[] users = {"dev_01"};
-    private static String[] passwords = {"a"};
-    private static String[] sid = {"ggjs"};
 
-    /*
     private static String[] inspectedHosts = {"150.12.201.40"};
     //Alternative host "150.12.201.42"
     private static int[] ports = {1521};
     private static String[] users = {"dev_01"};
     private static String[] passwords = {"a"};
     private static String[] sid = {"ggjs"};
-    */
+
 
     private static String[] fieldNamesTime = {"lastAnalysis"};
 
