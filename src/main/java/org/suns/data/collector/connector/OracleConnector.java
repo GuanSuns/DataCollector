@@ -3,8 +3,7 @@ package org.suns.data.collector.connector;
 import org.suns.data.collector.config.OracleConnectorConfig;
 
 import java.sql.Connection;
-import java.sql.Driver;
-import java.util.Properties;
+import java.sql.DriverManager;
 
 /**
  * Created by guanl on 6/29/2017.
@@ -17,18 +16,14 @@ public class OracleConnector {
             , String password, String host
             , int port, String sid) throws Exception{
 
-        Driver driver = (Driver)Class.forName(OracleConnectorConfig.getDriver()).newInstance();
-
         String dbURL = OracleConnectorConfig.getUrl()
                 + host + ":"
                 + port + ":"
                 + sid;
 
-        Properties props = new Properties();
-        props.put("user", user);
-        props.put("password", password);
-
-        connection = driver.connect(dbURL, props);
+        Class.forName(OracleConnectorConfig.getDriver());
+        connection = DriverManager.getConnection(dbURL
+                , user, password);
     }
 
     public static Connection getConnection(String user

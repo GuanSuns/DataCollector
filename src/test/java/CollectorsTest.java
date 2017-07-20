@@ -24,7 +24,7 @@ public class CollectorsTest {
     @Test
     public void test_sheet411personal(){
         try{
-            /*
+
             Sheet411PersonalCollector.inspect();
             Sheet411CoreCollector.inspect();
             Sheet421CoreCollector.inspect();
@@ -41,7 +41,7 @@ public class CollectorsTest {
             Sheet426CoreCollector.inspect();
             Sheet428PersonalCollector.inspect();
             Sheet428CoreCollector.inspect();
-            */
+
 
         }catch (Exception e){
             e.printStackTrace();
