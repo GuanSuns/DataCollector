@@ -33,11 +33,11 @@ public class DFFormat {
     }
 
     public static String getMountedSysCmd(){
-        return "df -h | awk '{print $" + mountedSysColumn + "}'";
+        return "df -Ph | awk '{print $" + mountedSysColumn + "}'";
     }
 
     public static String getUsageCmd(){
-        return "df -h | awk '{print $" + usageColumn + "}'";
+        return "df -Ph | awk '{print $" + usageColumn + "}'";
     }
 
 }

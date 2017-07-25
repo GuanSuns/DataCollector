@@ -169,7 +169,6 @@ public class Sheet428PersonalCollector {
 
     public static String getTimeFromHost(String host, int port
             , String user, String password) throws Exception{
-
         HostConnector.connect(user
                 , password
                 , host, port);

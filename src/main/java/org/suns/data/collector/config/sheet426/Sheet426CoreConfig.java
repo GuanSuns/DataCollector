@@ -5,16 +5,16 @@ package org.suns.data.collector.config.sheet426;
  */
 public class Sheet426CoreConfig {
 
-    private static String[] inspectedHosts2 = {"119.29.201.188", "119.29.201.188"};
+    private static String[] inspectedHosts2 = {"150.12.201.42", "150.12.201.40"};
 
     private static String[] logPath2 = {
-            "/software/oracle/trace/test.log"
-            , "/software/oracle/trace/test2.log"
+            "/software/oracle/diag/rdbms/gdltgshx/gdltgshx2/trace/alert_gdltgshx2.log"
+            , "/software/oracle/diag/rdbms/gdltgshx/gdltgshx1/trace/alert_gdltgshx1.log"
     };
     private static int[] ports2 = {22, 22};
-    private static String[] users2 = {"root", "root"};
-    private static String[] passwords2 = {"whiteglcap25"
-            , "whiteglcap25"};
+    private static String[] users2 = {"monitor", "monitor"};
+    private static String[] passwords2 = {"##micR66"
+            , "##micR66"};
 
     private static String[] inspectedHosts3 = {"119.29.201.188"};
 

@@ -16,9 +16,24 @@ import java.util.PriorityQueue;
 /**
  * Created by guanl on 6/29/2017.
  */
-public class Sheet421PersonalCollector {
+public class Sheet421PersonalCollector extends AbstractSheet421Collector{
 
-    public static void inspect() throws Exception{
+    @Override
+    protected String getRootDirectory() {
+        return Sheet421PersonalConfig.getRootDirectory();
+    }
+
+    @Override
+    protected String getSoftwareDirectory() {
+        return Sheet421PersonalConfig.getSoftwareDirectory();
+    }
+
+    @Override
+    protected String getSoftwareGgsDirectory() {
+        return Sheet421PersonalConfig.getSoftwareGgsDirectory();
+    }
+
+    public void inspect() throws Exception{
         Sheet421PersonalModel sheet421Model = new Sheet421PersonalModel();
         inspect2(sheet421Model);
         inspect3(sheet421Model);
@@ -30,45 +45,28 @@ public class Sheet421PersonalCollector {
     }
 
     //个税核心库 2
-    private static void inspect2(Sheet421PersonalModel sheet421Model) throws Exception{
-        final String[] inspectedHosts = Sheet421PersonalConfig.getInspectedHosts2();
-        final String[] users = Sheet421PersonalConfig.getUsers2();
-        final String[] passwords = Sheet421PersonalConfig.getPasswords2();
-        final int[] ports = Sheet421PersonalConfig.getPorts2();
+    @Override
+    protected String[] getInspectHosts2() {
+        return Sheet421PersonalConfig.getInspectedHosts2();
+    }
 
-        PriorityQueue<Float> rootUsage = new PriorityQueue<>(comparator);
-        PriorityQueue<Float> u01Usage = new PriorityQueue<>(comparator);
-        PriorityQueue<Float> goldengateUsage = new PriorityQueue<>(comparator);
+    @Override
+    protected String[] getPasswords2() {
+        return Sheet421PersonalConfig.getPasswords2();
+    }
 
-        for(int i=0; i<inspectedHosts.length; i++){
-            inspectAllDirectory(inspectedHosts[i], rootUsage, u01Usage
-                    , goldengateUsage, users[i], passwords[i], ports[i]);
-        }
+    @Override
+    protected String[] getUsers2() {
+        return Sheet421PersonalConfig.getUsers2();
+    }
 
-        if(!rootUsage.isEmpty()){
-            Float maxRootUsage = rootUsage.poll();
-            sheet421Model.setUsage2(maxRootUsage);
-        }else{
-            sheet421Model.setUsage2((float) DBConfig.getDefaultNumericNullValue());
-        }
-
-        if(!goldengateUsage.isEmpty()){
-            Float maxGoldengateUsage = goldengateUsage.poll();
-            sheet421Model.setGoldUsage2(maxGoldengateUsage);
-        }else{
-            sheet421Model.setGoldUsage2((float) DBConfig.getDefaultNumericNullValue());
-        }
-
-        if(!u01Usage.isEmpty()){
-            Float maxU01Usage = u01Usage.poll();
-            sheet421Model.setU01Usage2(maxU01Usage);
-        }else{
-            sheet421Model.setU01Usage2((float) DBConfig.getDefaultNumericNullValue());
-        }
+    @Override
+    protected int[] getPorts2() {
+        return Sheet421PersonalConfig.getPorts2();
     }
 
     //个税查询库 3
-    private static void inspect3(Sheet421PersonalModel sheet421Model) throws Exception{
+    private void inspect3(Sheet421PersonalModel sheet421Model) throws Exception{
         final String[] inspectedHosts = Sheet421PersonalConfig.getInspectedHosts3();
         final String[] users = Sheet421PersonalConfig.getUsers3();
         final String[] passwords = Sheet421PersonalConfig.getPasswords3();
@@ -78,7 +76,7 @@ public class Sheet421PersonalCollector {
         PriorityQueue<Float> u01Usage = new PriorityQueue<>(comparator);
 
         for(int i=0; i<inspectedHosts.length; i++){
-            inspectUsageAndU01(inspectedHosts[i], rootUsage, u01Usage
+            inspectOSRootAndSoftware(inspectedHosts[i], rootUsage, u01Usage
                     , users[i], passwords[i], ports[i]);
         }
 
@@ -97,89 +95,5 @@ public class Sheet421PersonalCollector {
         }
     }
 
-    private static void inspectUsageAndU01(String host
-            , PriorityQueue<Float> rootUsage
-            , PriorityQueue<Float> u01Usage
-            , String user, String password, int port) throws Exception{
-
-        HostConnector.connect(user, password, host, port);
-
-        String mountedSysCmd = DFFormat.getMountedSysCmd();
-        String usageCmd = DFFormat.getUsageCmd();
-        String strSysNames = HostConnector.executeCommand(mountedSysCmd);
-        String strUsages = HostConnector.executeCommand(usageCmd);
-
-        String[] sysNames = parseSysNames(strSysNames);
-        Float[] usages = parseUsages(strUsages);
-        if(sysNames.length != usages.length){
-            HostConnector.disconnect();
-            throw new Exception("Unexpected result of parsing df -h");
-        }
-
-        for(int i=0; i<sysNames.length; i++){
-            if(sysNames[i].equals(Sheet421PersonalConfig.getRootDirectory())){
-                rootUsage.add(usages[i]);
-            }else if(sysNames[i].equals(Sheet421PersonalConfig.getSoftwareDirectory())){
-                u01Usage.add(usages[i]);
-            }
-        }
-
-        HostConnector.disconnect();
-    }
-
-    private static void inspectAllDirectory(String host
-            , PriorityQueue<Float> rootUsage
-            , PriorityQueue<Float> u01Usage
-            , PriorityQueue<Float> goldenUsage
-            , String user, String password, int port) throws Exception{
-
-        HostConnector.connect(user, password, host, port);
-
-        String mountedSysCmd = DFFormat.getMountedSysCmd();
-        String usageCmd = DFFormat.getUsageCmd();
-        String strSysNames = HostConnector.executeCommand(mountedSysCmd);
-        String strUsages = HostConnector.executeCommand(usageCmd);
-
-        String[] sysNames = parseSysNames(strSysNames);
-        Float[] usages = parseUsages(strUsages);
-        if(sysNames.length != usages.length){
-            throw new Exception("Unexpected result of parsing df -h");
-        }
-
-        for(int i=0; i<sysNames.length; i++){
-            if(sysNames[i].equals(Sheet421PersonalConfig.getRootDirectory())){
-                rootUsage.add(usages[i]);
-            }else if(sysNames[i].equals(Sheet421PersonalConfig.getSoftwareDirectory())){
-                u01Usage.add(usages[i]);
-            }else if(sysNames[i].equals(Sheet421PersonalConfig.getSoftwareGgsDirectory())){
-                goldenUsage.add(usages[i]);
-            }
-        }
-    }
-
-    private static String[] parseSysNames(String strSysNames){
-        String[] sysNames = strSysNames.split("\n");
-        return Arrays.copyOfRange(sysNames, 1, sysNames.length);
-    }
-
-    private static Float[] parseUsages(String strUsage){
-        String[] strUsages = strUsage.split("[%\n]+");
-        if(strUsages.length <= 1){
-            return new Float[0];
-        }
-
-        Float[] usages = new Float[strUsages.length-1];
-
-        for(int i=0; i<strUsages.length - 1; i++){
-            usages[i] = Float.valueOf(strUsages[i+1]);
-        }
-        return usages;
-    }
-
-    private static Comparator<Float> comparator = new Comparator<Float>() {
-        @Override
-        public int compare(Float o1, Float o2) {
-            return (int)(o2-o1);
-        }
-    };
+    
 }

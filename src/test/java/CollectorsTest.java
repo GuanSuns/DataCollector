@@ -15,6 +15,8 @@ import org.suns.data.collector.collectors.sheet428.Sheet428CoreCollector;
 import org.suns.data.collector.collectors.sheet428.Sheet428PersonalCollector;
 import org.suns.data.collector.collectors.sheet429.Sheet429CoreCollector;
 import org.suns.data.collector.collectors.sheet429.Sheet429PersonalCollector;
+import org.suns.data.collector.config.sheet411.Sheet411PersonalConfig;
+import org.suns.database.utils.config.DBConfig;
 
 /**
  * Created by guanl on 6/28/2017.
@@ -22,11 +24,17 @@ import org.suns.data.collector.collectors.sheet429.Sheet429PersonalCollector;
 public class CollectorsTest {
 
     @Test
-    public void test_sheet411personal(){
+    public void test_all_sheets(){
         try{
+            DBConfig.setConfigToMySQL();
+            Sheet411PersonalCollector sheet411PersonalCollector
+                    = new Sheet411PersonalCollector();
+            sheet411PersonalCollector.inspect();
 
-            Sheet411PersonalCollector.inspect();
-            Sheet411CoreCollector.inspect();
+            Sheet411CoreCollector sheet411CoreCollector
+                    = new Sheet411CoreCollector();
+            sheet411CoreCollector.inspect();
+            /*
             Sheet421CoreCollector.inspect();
             Sheet421PersonalCollector.inspect();
             Sheet422PersonalCollector.inspect();
@@ -41,7 +49,7 @@ public class CollectorsTest {
             Sheet426CoreCollector.inspect();
             Sheet428PersonalCollector.inspect();
             Sheet428CoreCollector.inspect();
-
+*/
 
         }catch (Exception e){
             e.printStackTrace();
