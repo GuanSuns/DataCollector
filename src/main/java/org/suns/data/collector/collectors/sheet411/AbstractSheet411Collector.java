@@ -1,25 +1,24 @@
 package org.suns.data.collector.collectors.sheet411;
 
 import org.suns.data.collector.collectors.AbstractOSInspectionCollector;
-import org.suns.data.collector.config.DFFormat;
-import org.suns.data.collector.connector.HostConnector;
 import org.suns.database.utils.config.DBConfig;
+import org.suns.database.utils.model.Sheet411CoreModel;
 import org.suns.database.utils.model.Sheet411PersonalModel;
 
 import java.util.PriorityQueue;
 
 public abstract class AbstractSheet411Collector extends AbstractOSInspectionCollector{
+    @Override
+    protected String getSoftwareGgsDirectory() {
+        return null;
+    }
 
-    protected abstract String[] getInspectHosts2();
-    protected abstract String[] getPasswords2();
-    protected abstract String[] getUsers2();
-    protected abstract int[] getPorts2();
-
-    protected void inspect2(Sheet411PersonalModel sheet411Model) throws Exception{
-        final String[] inspectedHosts = getInspectHosts2();
-        final String[] users = getUsers2();
-        final String[] passwords = getPasswords2();
-        final int[] ports = getPorts2();
+    protected void inspectHostID(Sheet411PersonalModel sheet411Model
+            , HostsId hostsId) throws Exception{
+        final String[] inspectedHosts = getInspectHosts(hostsId);
+        final String[] users = getUsers(hostsId);
+        final String[] passwords = getPasswords(hostsId);
+        final int[] ports = getPorts(hostsId);
 
         PriorityQueue<Float> rootUsage = new PriorityQueue<>(comparator);
         PriorityQueue<Float> webLogicUsage = new PriorityQueue<>(comparator);
@@ -31,50 +30,79 @@ public abstract class AbstractSheet411Collector extends AbstractOSInspectionColl
 
         if(!rootUsage.isEmpty()){
             Float maxRootUsage = rootUsage.poll();
-            sheet411Model.setUsage2(maxRootUsage);
+            setUsage(sheet411Model, hostsId, maxRootUsage);
         }else{
-            sheet411Model.setUsage2((float) DBConfig.getDefaultNumericNullValue());
+            setUsage(sheet411Model, hostsId, (float)DBConfig.getDefaultNumericNullValue());
         }
 
         if(!webLogicUsage.isEmpty()){
             Float maxWebLogicUsage = webLogicUsage.poll();
-            sheet411Model.setWeblogicUsage2(maxWebLogicUsage);
+            setWeblogicUsage(sheet411Model, hostsId, maxWebLogicUsage);
         }else{
-            sheet411Model.setWeblogicUsage2((float)DBConfig.getDefaultNumericNullValue());
+            setWeblogicUsage(sheet411Model, hostsId
+                    , (float)DBConfig.getDefaultNumericNullValue());
         }
     }
 
-    protected abstract String[] getInspectHosts3();
-    protected abstract String[] getPasswords3();
-    protected abstract String[] getUsers3();
-    protected abstract int[] getPorts3();
-
-    protected void inspect3(Sheet411PersonalModel sheet411Model) throws Exception{
-        final String[] inspectedHosts = getInspectHosts3();
-        final String[] users = getUsers3();
-        final String[] passwords = getPasswords3();
-        final int[] ports = getPorts3();
-
-        PriorityQueue<Float> rootUsage = new PriorityQueue<>(comparator);
-        PriorityQueue<Float> webLogicUsage = new PriorityQueue<>(comparator);
-
-        for(int i=0; i<inspectedHosts.length; i++){
-            inspectOSRootAndSoftware(inspectedHosts[i], rootUsage, webLogicUsage
-                    , users[i], passwords[i], ports[i]);
+    protected void setUsage(Sheet411PersonalModel sheet411Model
+            , HostsId hostsId, Float usage){
+        switch (hostsId){
+            case HOST1:
+                return;
+            case HOST2:
+                sheet411Model.setUsage2(usage);
+                return;
+            case HOST3:
+                sheet411Model.setUsage3(usage);
+                return;
+            case HOST4:
+                sheet411Model.setUsage4(usage);
+                return;
+            case HOST5:
+                sheet411Model.setUsage5(usage);
+                return;
+            case HOST6:
+                sheet411Model.setUsage6(usage);
+            case HOST7:
+                sheet411Model.setUsage7(usage);
+                return;
+            case HOST8:
+                Sheet411CoreModel sheet411CoreModel = (Sheet411CoreModel)sheet411Model;
+                sheet411CoreModel.setUsage8(usage);
+                return;
+            default:
+                return;
         }
+    }
 
-        if(!rootUsage.isEmpty()){
-            Float maxRootUsage = rootUsage.poll();
-            sheet411Model.setUsage3(maxRootUsage);
-        }else{
-            sheet411Model.setUsage3((float)DBConfig.getDefaultNumericNullValue());
-        }
-
-        if(!webLogicUsage.isEmpty()){
-            Float maxWebLogicUsage = webLogicUsage.poll();
-            sheet411Model.setWeblogicUsage3(maxWebLogicUsage);
-        }else{
-            sheet411Model.setWeblogicUsage3((float)DBConfig.getDefaultNumericNullValue());
+    protected void setWeblogicUsage(Sheet411PersonalModel sheet411Model
+            , HostsId hostsId, Float webLogicUsage){
+        switch (hostsId){
+            case HOST1:
+                return;
+            case HOST2:
+                sheet411Model.setWeblogicUsage2(webLogicUsage);
+                return;
+            case HOST3:
+                sheet411Model.setWeblogicUsage3(webLogicUsage);
+                return;
+            case HOST4:
+                sheet411Model.setWeblogicUsage4(webLogicUsage);
+                return;
+            case HOST5:
+                sheet411Model.setWeblogicUsage5(webLogicUsage);
+                return;
+            case HOST6:
+                sheet411Model.setWeblogicUsage6(webLogicUsage);
+            case HOST7:
+                sheet411Model.setWeblogicUsage7(webLogicUsage);
+                return;
+            case HOST8:
+                Sheet411CoreModel sheet411CoreModel = (Sheet411CoreModel)sheet411Model;
+                sheet411CoreModel.setWeblogicUsage8(webLogicUsage);
+                return;
+            default:
+                return;
         }
     }
 }

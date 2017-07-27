@@ -21,9 +21,15 @@ public class OracleConnector {
                 + port + ":"
                 + sid;
 
-        Class.forName(OracleConnectorConfig.getDriver());
-        connection = DriverManager.getConnection(dbURL
-                , user, password);
+        try{
+            Class.forName(OracleConnectorConfig.getDriver());
+            connection = DriverManager.getConnection(dbURL
+                    , user, password);
+        }catch (Exception e){
+            throw new Exception("Fail to connect to Database"
+                    + dbURL + "; " + e.toString());
+        }
+
     }
 
     public static Connection getConnection(String user

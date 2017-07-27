@@ -7,9 +7,10 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
-public abstract class AbstractOSInspectionCollector {
+public abstract class AbstractOSInspectionCollector extends AbstractDataCollector{
     protected abstract String getRootDirectory();
     protected abstract String getSoftwareDirectory();
+    protected abstract String getSoftwareGgsDirectory();
 
     protected void inspectOSRootAndSoftware(String host
             , PriorityQueue<Float> rootUsage
@@ -39,6 +40,36 @@ public abstract class AbstractOSInspectionCollector {
         }
 
         HostConnector.disconnect();
+    }
+
+    protected void inspectAllDirectory(String host
+            , PriorityQueue<Float> rootUsage
+            , PriorityQueue<Float> u01Usage
+            , PriorityQueue<Float> goldenUsage
+            , String user, String password, int port) throws Exception{
+
+        HostConnector.connect(user, password, host, port);
+
+        String mountedSysCmd = DFFormat.getMountedSysCmd();
+        String usageCmd = DFFormat.getUsageCmd();
+        String strSysNames = HostConnector.executeCommand(mountedSysCmd);
+        String strUsages = HostConnector.executeCommand(usageCmd);
+
+        String[] sysNames = parseSysNames(strSysNames);
+        Float[] usages = parseUsages(strUsages);
+        if(sysNames.length != usages.length){
+            throw new Exception("Unexpected result of parsing df -h");
+        }
+
+        for(int i=0; i<sysNames.length; i++){
+            if(sysNames[i].equals(getRootDirectory())){
+                rootUsage.add(usages[i]);
+            }else if(sysNames[i].equals(getSoftwareDirectory())){
+                u01Usage.add(usages[i]);
+            }else if(sysNames[i].equals(getSoftwareGgsDirectory())){
+                goldenUsage.add(usages[i]);
+            }
+        }
     }
 
     protected String[] parseSysNames(String strSysNames){

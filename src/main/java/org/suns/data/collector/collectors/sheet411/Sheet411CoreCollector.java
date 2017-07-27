@@ -39,6 +39,10 @@ public class Sheet411CoreCollector extends AbstractSheet411Collector{
     }
 
     //核心前端 2
+    private void inspect2(Sheet411CoreModel sheet411Model) throws Exception{
+        inspectHostID(sheet411Model, HostsId.HOST2);
+    }
+    
     @Override
     protected String[] getInspectHosts2() {
         return Sheet411CoreConfig.getInspectedHosts2();
@@ -60,6 +64,10 @@ public class Sheet411CoreCollector extends AbstractSheet411Collector{
     }
 
     //核心后端 3
+    private void inspect3(Sheet411CoreModel sheet411Model) throws Exception{
+        inspectHostID(sheet411Model, HostsId.HOST3);
+    }
+    
     @Override
     protected String[] getInspectHosts3() {
         return Sheet411CoreConfig.getInspectedHosts3();
@@ -82,121 +90,101 @@ public class Sheet411CoreCollector extends AbstractSheet411Collector{
 
     //通用查询 4
     private void inspect4(Sheet411CoreModel sheet411Model) throws Exception{
-        final String[] inspectedHosts = Sheet411CoreConfig.getInspectedHosts4();
-        final String[] users = Sheet411CoreConfig.getUsers4();
-        final String[] passwords = Sheet411CoreConfig.getPasswords4();
-        final int[] ports = Sheet411CoreConfig.getPorts4();
+        inspectHostID(sheet411Model, HostsId.HOST4);
+    }
 
-        PriorityQueue<Float> rootUsage = new PriorityQueue<>(comparator);
-        PriorityQueue<Float> webLogicUsage = new PriorityQueue<>(comparator);
+    @Override
+    protected String[] getInspectHosts4() {
+        return Sheet411CoreConfig.getInspectedHosts4();
+    }
 
-        for(int i=0; i<inspectedHosts.length; i++){
-            inspectOSRootAndSoftware(inspectedHosts[i], rootUsage, webLogicUsage
-                    , users[i], passwords[i], ports[i]);
-        }
+    @Override
+    protected String[] getPasswords4() {
+        return Sheet411CoreConfig.getPasswords4();
+    }
 
-        if(!rootUsage.isEmpty()){
-            Float maxRootUsage = rootUsage.poll();
-            sheet411Model.setUsage4(maxRootUsage);
-        }else{
-            sheet411Model.setUsage4((float)DBConfig.getDefaultNumericNullValue());
-        }
+    @Override
+    protected String[] getUsers4() {
+        return Sheet411CoreConfig.getUsers4();
+    }
 
-        if(!webLogicUsage.isEmpty()){
-            Float maxWebLogicUsage = webLogicUsage.poll();
-            sheet411Model.setWeblogicUsage4(maxWebLogicUsage);
-        }else{
-            sheet411Model.setWeblogicUsage4((float)DBConfig.getDefaultNumericNullValue());
-        }
+    @Override
+    protected int[] getPorts4() {
+        return Sheet411CoreConfig.getPorts4();
     }
 
     //web门户 5
     private void inspect5(Sheet411CoreModel sheet411Model) throws Exception{
-        final String[] inspectedHosts = Sheet411CoreConfig.getInspectedHosts5();
-        final String[] users = Sheet411CoreConfig.getUsers5();
-        final String[] passwords = Sheet411CoreConfig.getPasswords5();
-        final int[] ports = Sheet411CoreConfig.getPorts5();
+        inspectHostID(sheet411Model, HostsId.HOST5);
+    }
 
-        PriorityQueue<Float> rootUsage = new PriorityQueue<>(comparator);
-        PriorityQueue<Float> webLogicUsage = new PriorityQueue<>(comparator);
+    @Override
+    protected String[] getInspectHosts5() {
+        return Sheet411CoreConfig.getInspectedHosts5();
+    }
 
-        for(int i=0; i<inspectedHosts.length; i++){
-            inspectOSRootAndSoftware(inspectedHosts[i], rootUsage, webLogicUsage
-                    , users[i], passwords[i], ports[i]);
-        }
+    @Override
+    protected String[] getPasswords5() {
+        return Sheet411CoreConfig.getPasswords5();
+    }
 
-        if(!rootUsage.isEmpty()){
-            Float maxRootUsage = rootUsage.poll();
-            sheet411Model.setUsage5(maxRootUsage);
-        }else{
-            sheet411Model.setUsage5((float)DBConfig.getDefaultNumericNullValue());
-        }
+    @Override
+    protected String[] getUsers5() {
+        return Sheet411CoreConfig.getUsers5();
+    }
 
-        if(!webLogicUsage.isEmpty()){
-            Float maxWebLogicUsage = webLogicUsage.poll();
-            sheet411Model.setWeblogicUsage5(maxWebLogicUsage);
-        }else{
-            sheet411Model.setWeblogicUsage5((float)DBConfig.getDefaultNumericNullValue());
-        }
+    @Override
+    protected int[] getPorts5() {
+        return Sheet411CoreConfig.getPorts5();
     }
 
     //核心工作 6
     private void inspect6(Sheet411CoreModel sheet411Model) throws Exception{
-        final String[] inspectedHosts = Sheet411CoreConfig.getInspectedHosts6();
-        final String[] users = Sheet411CoreConfig.getUsers6();
-        final String[] passwords = Sheet411CoreConfig.getPasswords6();
-        final int[] ports = Sheet411CoreConfig.getPorts6();
+        inspectHostID(sheet411Model, HostsId.HOST6);
+    }
 
-        PriorityQueue<Float> rootUsage = new PriorityQueue<>(comparator);
-        PriorityQueue<Float> webLogicUsage = new PriorityQueue<>(comparator);
+    @Override
+    protected String[] getInspectHosts6() {
+        return Sheet411CoreConfig.getInspectedHosts6();
+    }
 
-        for(int i=0; i<inspectedHosts.length; i++){
-            inspectOSRootAndSoftware(inspectedHosts[i], rootUsage, webLogicUsage
-                    , users[i], passwords[i], ports[i]);
-        }
+    @Override
+    protected String[] getPasswords6() {
+        return Sheet411CoreConfig.getPasswords6();
+    }
 
-        if(!rootUsage.isEmpty()){
-            Float maxRootUsage = rootUsage.poll();
-            sheet411Model.setUsage6(maxRootUsage);
-        }else{
-            sheet411Model.setUsage6((float) DBConfig.getDefaultNumericNullValue());
-        }
+    @Override
+    protected String[] getUsers6() {
+        return Sheet411CoreConfig.getUsers6();
+    }
 
-        if(!webLogicUsage.isEmpty()){
-            Float maxWebLogicUsage = webLogicUsage.poll();
-            sheet411Model.setWeblogicUsage6(maxWebLogicUsage);
-        }else{
-            sheet411Model.setWeblogicUsage6((float)DBConfig.getDefaultNumericNullValue());
-        }
+    @Override
+    protected int[] getPorts6() {
+        return Sheet411CoreConfig.getPorts6();
     }
 
     //跨层平台 8
     private void inspect8(Sheet411CoreModel sheet411Model) throws Exception{
-        final String[] inspectedHosts = Sheet411CoreConfig.getInspectedHosts8();
-        final String[] users = Sheet411CoreConfig.getUsers8();
-        final String[] passwords = Sheet411CoreConfig.getPasswords8();
-        final int[] ports = Sheet411CoreConfig.getPorts8();
+        inspectHostID(sheet411Model, HostsId.HOST8);
+    }
 
-        PriorityQueue<Float> rootUsage = new PriorityQueue<>(comparator);
-        PriorityQueue<Float> webLogicUsage = new PriorityQueue<>(comparator);
+    @Override
+    protected String[] getInspectHosts8() {
+        return Sheet411CoreConfig.getInspectedHosts8();
+    }
 
-        for(int i=0; i<inspectedHosts.length; i++){
-            inspectOSRootAndSoftware(inspectedHosts[i], rootUsage, webLogicUsage
-                    , users[i], passwords[i], ports[i]);
-        }
+    @Override
+    protected String[] getPasswords8() {
+        return Sheet411CoreConfig.getPasswords8();
+    }
 
-        if(!rootUsage.isEmpty()){
-            Float maxRootUsage = rootUsage.poll();
-            sheet411Model.setUsage8(maxRootUsage);
-        }else{
-            sheet411Model.setUsage8((float)DBConfig.getDefaultNumericNullValue());
-        }
+    @Override
+    protected String[] getUsers8() {
+        return Sheet411CoreConfig.getUsers8();
+    }
 
-        if(!webLogicUsage.isEmpty()){
-            Float maxWebLogicUsage = webLogicUsage.poll();
-            sheet411Model.setWeblogicUsage8(maxWebLogicUsage);
-        }else{
-            sheet411Model.setWeblogicUsage8((float)DBConfig.getDefaultNumericNullValue());
-        }
+    @Override
+    protected int[] getPorts8() {
+        return Sheet411CoreConfig.getPorts8();
     }
 }

@@ -1,21 +1,6 @@
 import org.junit.Test;
 import org.suns.data.collector.collectors.sheet411.Sheet411CoreCollector;
 import org.suns.data.collector.collectors.sheet411.Sheet411PersonalCollector;
-import org.suns.data.collector.collectors.sheet421.Sheet421CoreCollector;
-import org.suns.data.collector.collectors.sheet421.Sheet421PersonalCollector;
-import org.suns.data.collector.collectors.sheet422.Sheet422CoreCollector;
-import org.suns.data.collector.collectors.sheet422.Sheet422PersonalCollector;
-import org.suns.data.collector.collectors.sheet423.Sheet423CoreCollector;
-import org.suns.data.collector.collectors.sheet423.Sheet423PersonalCollector;
-import org.suns.data.collector.collectors.sheet424.Sheet424CoreCollector;
-import org.suns.data.collector.collectors.sheet424.Sheet424PersonalCollector;
-import org.suns.data.collector.collectors.sheet426.Sheet426CoreCollector;
-import org.suns.data.collector.collectors.sheet426.Sheet426PersonalCollector;
-import org.suns.data.collector.collectors.sheet428.Sheet428CoreCollector;
-import org.suns.data.collector.collectors.sheet428.Sheet428PersonalCollector;
-import org.suns.data.collector.collectors.sheet429.Sheet429CoreCollector;
-import org.suns.data.collector.collectors.sheet429.Sheet429PersonalCollector;
-import org.suns.data.collector.config.sheet411.Sheet411PersonalConfig;
 import org.suns.database.utils.config.DBConfig;
 
 /**
@@ -37,8 +22,8 @@ public class CollectorsTest {
             /*
             Sheet421CoreCollector.inspect();
             Sheet421PersonalCollector.inspect();
-            Sheet422PersonalCollector.inspect();
-            Sheet422CoreCollector.inspect();
+            UsagePersonalCollector.inspect();
+            UsageCoreCollector.inspect();
             Sheet423PersonalCollector.inspect();
             Sheet423CoreCollector.inspect();
             Sheet424PersonalCollector.inspect();

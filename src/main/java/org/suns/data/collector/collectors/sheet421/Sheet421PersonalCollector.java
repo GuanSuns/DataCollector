@@ -1,17 +1,11 @@
 package org.suns.data.collector.collectors.sheet421;
 
-import org.suns.database.utils.config.DBConfig;
-import org.suns.data.collector.config.DFFormat;
 import org.suns.data.collector.config.sheet412.Sheet421PersonalConfig;
-import org.suns.data.collector.connector.HostConnector;
 import org.suns.database.utils.controller.Sheet421Controller;
 import org.suns.database.utils.model.Sheet421PersonalModel;
 
 import java.sql.Timestamp;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Date;
-import java.util.PriorityQueue;
 
 /**
  * Created by guanl on 6/29/2017.
@@ -45,6 +39,10 @@ public class Sheet421PersonalCollector extends AbstractSheet421Collector{
     }
 
     //个税核心库 2
+    private void inspect2(Sheet421PersonalModel sheet421Model) throws Exception{
+        inspectAllDirectoryByHostID(sheet421Model, HostsId.HOST2);
+    }
+
     @Override
     protected String[] getInspectHosts2() {
         return Sheet421PersonalConfig.getInspectedHosts2();
@@ -67,33 +65,26 @@ public class Sheet421PersonalCollector extends AbstractSheet421Collector{
 
     //个税查询库 3
     private void inspect3(Sheet421PersonalModel sheet421Model) throws Exception{
-        final String[] inspectedHosts = Sheet421PersonalConfig.getInspectedHosts3();
-        final String[] users = Sheet421PersonalConfig.getUsers3();
-        final String[] passwords = Sheet421PersonalConfig.getPasswords3();
-        final int[] ports = Sheet421PersonalConfig.getPorts3();
-
-        PriorityQueue<Float> rootUsage = new PriorityQueue<>(comparator);
-        PriorityQueue<Float> u01Usage = new PriorityQueue<>(comparator);
-
-        for(int i=0; i<inspectedHosts.length; i++){
-            inspectOSRootAndSoftware(inspectedHosts[i], rootUsage, u01Usage
-                    , users[i], passwords[i], ports[i]);
-        }
-
-        if(!rootUsage.isEmpty()){
-            Float maxRootUsage = rootUsage.poll();
-            sheet421Model.setUsage3(maxRootUsage);
-        }else{
-            sheet421Model.setUsage3((float) DBConfig.getDefaultNumericNullValue());
-        }
-
-        if(!u01Usage.isEmpty()){
-            Float maxU01Usage = u01Usage.poll();
-            sheet421Model.setU01Usage3(maxU01Usage);
-        }else{
-            sheet421Model.setU01Usage3((float) DBConfig.getDefaultNumericNullValue());
-        }
+        inspectRootAndSoftwareDirectoryByHostId(sheet421Model, HostsId.HOST3);
     }
 
-    
+    @Override
+    protected String[] getInspectHosts3() {
+        return new String[0];
+    }
+
+    @Override
+    protected String[] getPasswords3() {
+        return new String[0];
+    }
+
+    @Override
+    protected String[] getUsers3() {
+        return new String[0];
+    }
+
+    @Override
+    protected int[] getPorts3() {
+        return new int[0];
+    }
 }
