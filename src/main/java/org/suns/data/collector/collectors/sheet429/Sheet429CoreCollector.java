@@ -14,9 +14,19 @@ import java.util.Date;
 /**
  * Created by guanl on 6/30/2017.
  */
-public class Sheet429CoreCollector {
+public class Sheet429CoreCollector extends AbstractSheet429Collector{
 
-    public static void inspect() throws Exception{
+    @Override
+    protected String getInspectSQL() {
+        return Sheet429CoreConfig.getInspectSQL();
+    }
+
+    @Override
+    protected String[] getFieldNames() {
+        return Sheet429CoreConfig.getFieldNames();
+    }
+
+    public void inspect() throws Exception{
         Sheet429CoreModel sheet429Model = new Sheet429CoreModel();
 
         inspect1(sheet429Model);
@@ -30,93 +40,91 @@ public class Sheet429CoreCollector {
         }
     }
 
-    private static void inspect1(Sheet429CoreModel sheet429Model) throws Exception{
-        final String[] inspectedHosts = Sheet429CoreConfig.getInspectedHosts1();
-        final String[] users = Sheet429CoreConfig.getUsers1();
-        final String[] passwords = Sheet429CoreConfig.getPasswords1();
-        final int[] ports = Sheet429CoreConfig.getPorts1();
-        final String[] sid = Sheet429CoreConfig.getSid1();
-
-        for(int i=0; i<inspectedHosts.length; i++){
-            String strResult = inspectHost(users[i]
-                    , passwords[i]
-                    , inspectedHosts[i]
-                    , ports[i]
-                    , sid[i]);
-
-            sheet429Model.setHeartBeat1(strResult);
-        }
+    private void inspect1(Sheet429CoreModel sheet429Model) throws Exception{
+        inspectHostById(HostsId.HOST1, sheet429Model);
     }
 
-    private static void inspect2(Sheet429CoreModel sheet429Model) throws Exception{
-        final String[] inspectedHosts = Sheet429CoreConfig.getInspectedHosts2();
-        final String[] users = Sheet429CoreConfig.getUsers2();
-        final String[] passwords = Sheet429CoreConfig.getPasswords2();
-        final int[] ports = Sheet429CoreConfig.getPorts2();
-        final String[] sid = Sheet429CoreConfig.getSid2();
-
-        for(int i=0; i<inspectedHosts.length; i++){
-            String strResult = inspectHost(users[i]
-                    , passwords[i]
-                    , inspectedHosts[i]
-                    , ports[i]
-                    , sid[i]);
-
-            sheet429Model.setHeartBeat2(strResult);
-        }
+    private void inspect2(Sheet429CoreModel sheet429Model) throws Exception{
+        inspectHostById(HostsId.HOST2, sheet429Model);
     }
 
-    private static void inspect3(Sheet429CoreModel sheet429Model) throws Exception{
-        final String[] inspectedHosts = Sheet429CoreConfig.getInspectedHosts3();
-        final String[] users = Sheet429CoreConfig.getUsers3();
-        final String[] passwords = Sheet429CoreConfig.getPasswords3();
-        final int[] ports = Sheet429CoreConfig.getPorts3();
-        final String[] sid = Sheet429CoreConfig.getSid3();
-
-        for(int i=0; i<inspectedHosts.length; i++){
-            String strResult = inspectHost(users[i]
-                    , passwords[i]
-                    , inspectedHosts[i]
-                    , ports[i]
-                    , sid[i]);
-
-            sheet429Model.setHeartBeat3(strResult);
-        }
+    private void inspect3(Sheet429CoreModel sheet429Model) throws Exception{
+        inspectHostById(HostsId.HOST3, sheet429Model);
     }
 
-    private static String inspectHost(String user
-            , String password, String host
-            , int port, String sid) throws Exception{
+    @Override
+    protected String[] getSids1() {
+        return Sheet429CoreConfig.getSid1();
+    }
 
-        Connection connection = OracleConnector.getConnection(user
-                , password, host, port, sid);
+    @Override
+    protected String[] getInspectHosts1() {
+        return Sheet429CoreConfig.getInspectedHosts1();
+    }
 
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(Sheet429CoreConfig.getInspectSQL());
+    @Override
+    protected String[] getPasswords1() {
+        return Sheet429CoreConfig.getPasswords1();
+    }
 
-        final String[] fieldNames = Sheet429CoreConfig.getFieldNames();
-        String strResult = "";
-        while (resultSet.next()){
-            String instID = resultSet.getString(fieldNames[0]);
-            String btime = resultSet.getString(fieldNames[1]);
-            String intSize = resultSet.getString(fieldNames[2]);
-            String metricName = resultSet.getString(fieldNames[3]);
-            String val = resultSet.getString(fieldNames[4]);
-            String minVal = resultSet.getString(fieldNames[5]);
-            String maxVal = resultSet.getString(fieldNames[6]);
-            String avg = resultSet.getString(fieldNames[7]);
-            String std = resultSet.getString(fieldNames[8]);
-            String sumSquare = resultSet.getString(fieldNames[9]);
+    @Override
+    protected String[] getUsers1() {
+        return Sheet429CoreConfig.getUsers1();
+    }
 
-            strResult = strResult + " " + instID + " " + btime
-                    + " " + intSize + " " + metricName + " " + val
-                    + " " + minVal + " " + maxVal + " " + avg
-                    + " " + std + " " +sumSquare + "\n";
-        }
+    @Override
+    protected int[] getPorts1() {
+        return Sheet429CoreConfig.getPorts1();
+    }
 
-        OracleConnector.closeConnection();
+    @Override
+    protected String[] getSids2() {
+        return Sheet429CoreConfig.getSid2();
+    }
 
-        return strResult;
+    @Override
+    protected String[] getInspectHosts2() {
+        return Sheet429CoreConfig.getInspectedHosts2();
+    }
+
+    @Override
+    protected String[] getPasswords2() {
+        return Sheet429CoreConfig.getPasswords2();
+    }
+
+    @Override
+    protected String[] getUsers2() {
+        return Sheet429CoreConfig.getUsers2();
+    }
+
+    @Override
+    protected int[] getPorts2() {
+        return Sheet429CoreConfig.getPorts2();
+    }
+
+    @Override
+    protected String[] getSids3() {
+        return Sheet429CoreConfig.getSid3();
+    }
+
+    @Override
+    protected String[] getInspectHosts3() {
+        return Sheet429CoreConfig.getInspectedHosts3();
+    }
+
+    @Override
+    protected String[] getPasswords3() {
+        return Sheet429CoreConfig.getPasswords3();
+    }
+
+    @Override
+    protected String[] getUsers3() {
+        return Sheet429CoreConfig.getUsers3();
+    }
+
+    @Override
+    protected int[] getPorts3() {
+        return Sheet429CoreConfig.getPorts3();
     }
     
 }

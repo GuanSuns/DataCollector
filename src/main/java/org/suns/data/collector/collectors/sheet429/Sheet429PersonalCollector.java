@@ -15,10 +15,20 @@ import java.util.Date;
  * Created by guanl on 6/30/2017.
  */
 
-public class Sheet429PersonalCollector {
-    public static void inspect() throws Exception{
+public class Sheet429PersonalCollector extends AbstractSheet429Collector{
+    @Override
+    protected String getInspectSQL() {
+        return Sheet429PersonalConfig.getInspectSQL();
+    }
+
+    @Override
+    protected String[] getFieldNames() {
+        return Sheet429PersonalConfig.getFieldNames();
+    }
+
+    public void inspect() throws Exception{
         Sheet429PersonalModel sheet429Model = new Sheet429PersonalModel();
-        doInspect(sheet429Model);
+        inspect1(sheet429Model);
 
         sheet429Model.setInspectTime(new Timestamp(new Date().getTime()));
 
@@ -27,55 +37,32 @@ public class Sheet429PersonalCollector {
         }
     }
 
-    private static void doInspect(Sheet429PersonalModel sheet429Model) throws Exception{
-        final String[] inspectedHosts = Sheet429PersonalConfig.getInspectedHosts();
-        final String[] users = Sheet429PersonalConfig.getUsers();
-        final String[] passwords = Sheet429PersonalConfig.getPasswords();
-        final int[] ports = Sheet429PersonalConfig.getPorts();
-        final String[] sid = Sheet429PersonalConfig.getSid();
-
-        for(int i=0; i<inspectedHosts.length; i++){
-            inspectHost(users[i]
-                    , passwords[i]
-                    , inspectedHosts[i]
-                    , ports[i]
-                    , sid[i], sheet429Model);
-        }
+    private void inspect1(Sheet429PersonalModel sheet429Model) throws Exception{
+        inspectHostById(HostsId.HOST1, sheet429Model);
     }
 
-    private static void inspectHost(String user
-            , String password, String host
-            , int port, String sid
-            , Sheet429PersonalModel sheet429Model) throws Exception{
+    @Override
+    protected String[] getSids1() {
+        return Sheet429PersonalConfig.getSid();
+    }
 
-        Connection connection = OracleConnector.getConnection(user
-                , password, host, port, sid);
+    @Override
+    protected String[] getInspectHosts1() {
+        return Sheet429PersonalConfig.getInspectedHosts();
+    }
 
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(Sheet429PersonalConfig.getInspectSQL());
+    @Override
+    protected String[] getPasswords1() {
+        return Sheet429PersonalConfig.getPasswords();
+    }
 
-        final String[] fieldNames = Sheet429PersonalConfig.getFieldNames();
-        String strResult = "";
-        while (resultSet.next()){
-            String instID = resultSet.getString(fieldNames[0]);
-            String btime = resultSet.getString(fieldNames[1]);
-            String intSize = resultSet.getString(fieldNames[2]);
-            String metricName = resultSet.getString(fieldNames[3]);
-            String val = resultSet.getString(fieldNames[4]);
-            String minVal = resultSet.getString(fieldNames[5]);
-            String maxVal = resultSet.getString(fieldNames[6]);
-            String avg = resultSet.getString(fieldNames[7]);
-            String std = resultSet.getString(fieldNames[8]);
-            String sumSquare = resultSet.getString(fieldNames[9]);
+    @Override
+    protected String[] getUsers1() {
+        return Sheet429PersonalConfig.getUsers();
+    }
 
-            strResult = strResult + " " + instID + " " + btime
-                    + " " + intSize + " " + metricName + " " + val
-                    + " " + minVal + " " + maxVal + " " + avg
-                    + " " + std + " " +sumSquare + "\n";
-        }
-
-        sheet429Model.setHeartBeat1(strResult);
-
-        OracleConnector.closeConnection();
+    @Override
+    protected int[] getPorts1() {
+        return Sheet429PersonalConfig.getPorts();
     }
 }

@@ -13,20 +13,30 @@ import java.util.Date;
 /**
  * Created by guanl on 7/1/2017.
  */
-public class Sheet428PersonalCollector {
-    public static void inspect() throws Exception{
+public class Sheet428PersonalCollector extends AbstractSheet428Collector{
+
+    @Override
+    protected String getObtainTimeCmd() {
+        return Sheet428PersonalConfig.getTimeCmd();
+    }
+
+    @Override
+    protected long getTimeDiffTolerance() {
+        return Sheet428PersonalConfig.getDiffTolerance();
+    }
+
+    @Override
+    protected String getCorrectReport() {
+        return Sheet428PersonalConfig.getCorrectReport();
+    }
+
+    public void inspect() throws Exception{
         Sheet428PersonalModel sheet428Model = new Sheet428PersonalModel();
 
-        String strTime = getTimeFromHost(Sheet428PersonalConfig.getTimeServer()
-                , Sheet428PersonalConfig.getPortsTimeServer()[0]
+        long timeServerDiff = getHostTimeDiff(Sheet428PersonalConfig.getTimeServer()
                 , Sheet428PersonalConfig.getUsersTimeServer()[0]
-                , Sheet428PersonalConfig.getPasswordsTimeServer()[0]);
-
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date currentTime = new Date();
-        Date hostTime = df.parse(strTime);
-
-        long timeServerDiff = Math.abs(currentTime.getTime() - hostTime.getTime());
+                , Sheet428PersonalConfig.getPasswordsTimeServer()[0]
+                , Sheet428PersonalConfig.getPortsTimeServer()[0]);
 
         inspect1(sheet428Model, timeServerDiff);
         inspect2(sheet428Model, timeServerDiff);
@@ -39,145 +49,103 @@ public class Sheet428PersonalCollector {
         }
     }
 
-    private static void inspect1(Sheet428PersonalModel sheet428
+    private void inspect1(Sheet428PersonalModel sheet428
             , long timeServerDiff) throws Exception{
-        final String[] hosts = Sheet428PersonalConfig.getInspectedHosts1();
-        final String[] users = Sheet428PersonalConfig.getUsers1();
-        final String[] passwords = Sheet428PersonalConfig.getPasswords1();
-        final int[] ports = Sheet428PersonalConfig.getPorts1();
-
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String result = "";
-        for(int i=0; i<hosts.length; i++){
-            String strTime = getTimeFromHost(hosts[i], ports[i]
-                    , users[i], passwords[i]);
-
-            Date currentTime = new Date();
-            Date hostTime = df.parse(strTime);
-
-            long diff = Math.abs(currentTime.getTime() - hostTime.getTime());
-            long diffWithTimeServer = Math.abs(timeServerDiff - diff);
-            long diffMinute = (diffWithTimeServer/1000)/60;
-
-            if(diffWithTimeServer > Sheet428PersonalConfig.getDiffTolerance()){
-                result = result + hosts[i] + " 与时间服务器相差 " + diffMinute + "分钟\n";
-            }
-        }
-
-        if(result.equals("")){
-            result = Sheet428PersonalConfig.getCorrectReport();
-        }
-
-        sheet428.setStatus1(result);
+        inspectHostById(HostsId.HOST1, timeServerDiff, sheet428);
     }
 
-    private static void inspect2(Sheet428PersonalModel sheet428
+    private void inspect2(Sheet428PersonalModel sheet428
             , long timeServerDiff) throws Exception{
-        final String[] hosts = Sheet428PersonalConfig.getInspectedHosts2();
-        final String[] users = Sheet428PersonalConfig.getUsers2();
-        final String[] passwords = Sheet428PersonalConfig.getPasswords2();
-        final int[] ports = Sheet428PersonalConfig.getPorts2();
-
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String result = "";
-        for(int i=0; i<hosts.length; i++){
-            String strTime = getTimeFromHost(hosts[i], ports[i]
-                    , users[i], passwords[i]);
-
-            Date currentTime = new Date();
-            Date hostTime = df.parse(strTime);
-
-            long diff = Math.abs(currentTime.getTime() - hostTime.getTime());
-            long diffWithTimeServer = Math.abs(timeServerDiff - diff);
-            long diffMinute = (diffWithTimeServer/1000)/60;
-
-            if(diffWithTimeServer > Sheet428PersonalConfig.getDiffTolerance()){
-                result = result + hosts[i] + " 与时间服务器相差 " + diffMinute + "分钟\n";
-            }
-        }
-
-        if(result.equals("")){
-            result = Sheet428PersonalConfig.getCorrectReport();
-        }
-
-        sheet428.setStatus2(result);
+        inspectHostById(HostsId.HOST2, timeServerDiff, sheet428);
     }
 
-    private static void inspect3(Sheet428PersonalModel sheet428
+    private void inspect3(Sheet428PersonalModel sheet428
             , long timeServerDiff) throws Exception{
-        final String[] hosts = Sheet428PersonalConfig.getInspectedHosts3();
-        final String[] users = Sheet428PersonalConfig.getUsers3();
-        final String[] passwords = Sheet428PersonalConfig.getPasswords3();
-        final int[] ports = Sheet428PersonalConfig.getPorts3();
-
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String result = "";
-        for(int i=0; i<hosts.length; i++){
-            String strTime = getTimeFromHost(hosts[i], ports[i]
-                    , users[i], passwords[i]);
-
-            Date currentTime = new Date();
-            Date hostTime = df.parse(strTime);
-
-            long diff = Math.abs(currentTime.getTime() - hostTime.getTime());
-            long diffWithTimeServer = Math.abs(timeServerDiff - diff);
-            long diffMinute = (diffWithTimeServer/1000)/60;
-
-            if(diffWithTimeServer > Sheet428PersonalConfig.getDiffTolerance()){
-                result = result + hosts[i] + " 与时间服务器相差 " + diffMinute + "分钟\n";
-            }
-        }
-
-        if(result.equals("")){
-            result = Sheet428PersonalConfig.getCorrectReport();
-        }
-
-        sheet428.setStatus3(result);
+        inspectHostById(HostsId.HOST3, timeServerDiff, sheet428);
     }
 
-    private static void inspect4(Sheet428PersonalModel sheet428
+    private void inspect4(Sheet428PersonalModel sheet428
             , long timeServerDiff) throws Exception{
-        final String[] hosts = Sheet428PersonalConfig.getInspectedHosts4();
-        final String[] users = Sheet428PersonalConfig.getUsers4();
-        final String[] passwords = Sheet428PersonalConfig.getPasswords4();
-        final int[] ports = Sheet428PersonalConfig.getPorts4();
-
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String result = "";
-        for(int i=0; i<hosts.length; i++){
-            String strTime = getTimeFromHost(hosts[i], ports[i]
-                    , users[i], passwords[i]);
-
-            Date currentTime = new Date();
-            Date hostTime = df.parse(strTime);
-
-            long diff = Math.abs(currentTime.getTime() - hostTime.getTime());
-            long diffWithTimeServer = Math.abs(timeServerDiff - diff);
-            long diffMinute = (diffWithTimeServer/1000)/60;
-
-            if(diffWithTimeServer > Sheet428PersonalConfig.getDiffTolerance()){
-                result = result + hosts[i] + " 与时间服务器相差 " + diffMinute + "分钟\n";
-            }
-        }
-
-        if(result.equals("")){
-            result = Sheet428PersonalConfig.getCorrectReport();
-        }
-
-        sheet428.setStatus4(result);
+        inspectHostById(HostsId.HOST4, timeServerDiff, sheet428);
     }
 
-    public static String getTimeFromHost(String host, int port
-            , String user, String password) throws Exception{
-        HostConnector.connect(user
-                , password
-                , host, port);
+    @Override
+    protected String[] getInspectHosts1() {
+        return Sheet428PersonalConfig.getInspectedHosts1();
+    }
 
-        final String queryCmd = Sheet428PersonalConfig.getTimeCmd();
-        String strTime = HostConnector.executeCommand(queryCmd);
+    @Override
+    protected String[] getPasswords1() {
+        return Sheet428PersonalConfig.getPasswords1();
+    }
 
-        HostConnector.disconnect();
+    @Override
+    protected String[] getUsers1() {
+        return Sheet428PersonalConfig.getUsers1();
+    }
 
-        return strTime;
+    @Override
+    protected int[] getPorts1() {
+        return Sheet428PersonalConfig.getPorts1();
+    }
+
+    @Override
+    protected String[] getInspectHosts2() {
+        return Sheet428PersonalConfig.getInspectedHosts2();
+    }
+
+    @Override
+    protected String[] getPasswords2() {
+        return Sheet428PersonalConfig.getPasswords2();
+    }
+
+    @Override
+    protected String[] getUsers2() {
+        return Sheet428PersonalConfig.getUsers2();
+    }
+
+    @Override
+    protected int[] getPorts2() {
+        return Sheet428PersonalConfig.getPorts2();
+    }
+
+    @Override
+    protected String[] getInspectHosts3() {
+        return Sheet428PersonalConfig.getInspectedHosts3();
+    }
+
+    @Override
+    protected String[] getPasswords3() {
+        return Sheet428PersonalConfig.getPasswords3();
+    }
+
+    @Override
+    protected String[] getUsers3() {
+        return Sheet428PersonalConfig.getUsers3();
+    }
+
+    @Override
+    protected int[] getPorts3() {
+        return Sheet428PersonalConfig.getPorts3();
+    }
+
+    @Override
+    protected String[] getInspectHosts4() {
+        return Sheet428PersonalConfig.getInspectedHosts4();
+    }
+
+    @Override
+    protected String[] getPasswords4() {
+        return Sheet428PersonalConfig.getPasswords4();
+    }
+
+    @Override
+    protected String[] getUsers4() {
+        return Sheet428PersonalConfig.getUsers4();
+    }
+
+    @Override
+    protected int[] getPorts4() {
+        return Sheet428PersonalConfig.getPorts4();
     }
 }
