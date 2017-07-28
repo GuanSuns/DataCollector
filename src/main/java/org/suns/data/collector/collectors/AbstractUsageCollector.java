@@ -114,7 +114,7 @@ public abstract class AbstractUsageCollector extends AbstractDBCollector {
         }
     }
 
-    protected void setModelToNull(HostsId hostsId, Sheet422PersonalModel to) throws Exception{
+    protected void setModelToNull(HostsId hostsId, AbstractUsageModel to) throws Exception{
 
         float nullValue = DBConfig.getDefaultNumericNullValue();
 

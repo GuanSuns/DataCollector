@@ -22,8 +22,8 @@ public class CollectorsTest {
             /*
             Sheet421CoreCollector.inspect();
             Sheet421PersonalCollector.inspect();
-            UsagePersonalCollector.inspect();
-            UsageCoreCollector.inspect();
+            Sheet422PersonalCollector.inspect();
+            Sheet422CoreCollector.inspect();
             Sheet423PersonalCollector.inspect();
             Sheet423CoreCollector.inspect();
             Sheet424PersonalCollector.inspect();

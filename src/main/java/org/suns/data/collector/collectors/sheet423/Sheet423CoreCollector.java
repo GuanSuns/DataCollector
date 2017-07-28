@@ -1,14 +1,10 @@
 package org.suns.data.collector.collectors.sheet423;
 
-import org.suns.database.utils.config.DBConfig;
 import org.suns.data.collector.config.sheet423.Sheet423CoreConfig;
-import org.suns.data.collector.connector.OracleConnector;
 import org.suns.database.utils.controller.Sheet423Controller;
+import org.suns.database.utils.model.AbstractUsageModel;
 import org.suns.database.utils.model.Sheet423CoreModel;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,11 +12,22 @@ import java.util.Date;
 /**
  * Created by guanl on 6/30/2017.
  */
-public class Sheet423CoreCollector {
-    public static void inspect() throws Exception{
-        ArrayList<Sheet423CoreModel> result2 = new ArrayList<>();
-        ArrayList<Sheet423CoreModel> result3 = new ArrayList<>();
-        ArrayList<Sheet423CoreModel> result4 = new ArrayList<>();
+public class Sheet423CoreCollector extends AbstractSheet423Collector{
+
+    @Override
+    protected String getSQLCmd() {
+        return Sheet423CoreConfig.getInspectSQL();
+    }
+
+    @Override
+    protected String[] getFieldNames() {
+        return Sheet423CoreConfig.getFieldNames();
+    }
+
+    public void inspect() throws Exception{
+        ArrayList<AbstractUsageModel> result2 = new ArrayList<>();
+        ArrayList<AbstractUsageModel> result3 = new ArrayList<>();
+        ArrayList<AbstractUsageModel> result4 = new ArrayList<>();
         ArrayList<Sheet423CoreModel> totalResult = new ArrayList<>();
 
         inspect2(result2);
@@ -37,10 +44,10 @@ public class Sheet423CoreCollector {
         }
     }
 
-    private static void mergeAllResults(ArrayList<Sheet423CoreModel> totalResult
-            , ArrayList<Sheet423CoreModel> result2
-            , ArrayList<Sheet423CoreModel> result3
-            , ArrayList<Sheet423CoreModel> result4){
+    private void mergeAllResults(ArrayList<Sheet423CoreModel> totalResult
+            , ArrayList<AbstractUsageModel> result2
+            , ArrayList<AbstractUsageModel> result3
+            , ArrayList<AbstractUsageModel> result4) throws Exception{
 
         int size2 = result2.size();
         int size3 = result3.size();
@@ -51,188 +58,108 @@ public class Sheet423CoreCollector {
             Sheet423CoreModel sheet423CoreModel = new Sheet423CoreModel();
             sheet423CoreModel.setDate(new Timestamp(new Date().getTime()));
 
-            setModel2(size2, i, result2, sheet423CoreModel);
-            setModel3(size3, i, result3, sheet423CoreModel);
-            setModel4(size4, i, result4, sheet423CoreModel);
+            setModelByIndex(HostsId.HOST2, size2, i, result2, sheet423CoreModel);
+            setModelByIndex(HostsId.HOST3, size3, i, result3, sheet423CoreModel);
+            setModelByIndex(HostsId.HOST4, size4, i, result4, sheet423CoreModel);
 
             totalResult.add(sheet423CoreModel);
         }
     }
 
-    private static void setModel2(int size, int index
-            , ArrayList<Sheet423CoreModel> from, Sheet423CoreModel to){
+    private void setModelByIndex(HostsId hostsId, int size, int index
+            , ArrayList<AbstractUsageModel> from, Sheet423CoreModel to) throws Exception{
         if(index >= size){
-            to.setAsmName2("");
-            to.setTotalSpace2(DBConfig.getDefaultNumericNullValue());
-            to.setRemainSpace2(DBConfig.getDefaultNumericNullValue());
-            to.setUsage2((float)DBConfig.getDefaultNumericNullValue());
+            setModelToNull(hostsId, to);
         }else{
-            Sheet423CoreModel fromModel = from.get(index);
-            to.setAsmName2(fromModel.getAsmName2());
-            to.setTotalSpace2(fromModel.getTotalSpace2());
-            to.setRemainSpace2(fromModel.getRemainSpace2());
-            to.setUsage2(fromModel.getUsage2());
+            Sheet423CoreModel fromModel = (Sheet423CoreModel)from.get(index);
+            setModel(hostsId, fromModel, to);
         }
     }
 
-    private static void setModel3(int size, int index
-            , ArrayList<Sheet423CoreModel> from, Sheet423CoreModel to){
-        if(index >= size){
-            to.setAsmName3("");
-            to.setTotalSpace3(DBConfig.getDefaultNumericNullValue());
-            to.setRemainSpace3(DBConfig.getDefaultNumericNullValue());
-            to.setUsage3((float)DBConfig.getDefaultNumericNullValue());
-        }else{
-            Sheet423CoreModel fromModel = from.get(index);
-            to.setAsmName3(fromModel.getAsmName3());
-            to.setTotalSpace3(fromModel.getTotalSpace3());
-            to.setRemainSpace3(fromModel.getRemainSpace3());
-            to.setUsage3(fromModel.getUsage3());
-        }
+    private void inspect2(ArrayList<AbstractUsageModel> sheet423Models) throws Exception{
+        inspectHostsByHostsId(HostsId.HOST2, ModelType.CORE, sheet423Models);
     }
 
-    private static void setModel4(int size, int index
-            , ArrayList<Sheet423CoreModel> from, Sheet423CoreModel to){
-        if(index >= size){
-            to.setAsmName4("");
-            to.setTotalSpace4(DBConfig.getDefaultNumericNullValue());
-            to.setRemainSpace4(DBConfig.getDefaultNumericNullValue());
-            to.setUsage4((float)DBConfig.getDefaultNumericNullValue());
-        }else{
-            Sheet423CoreModel fromModel = from.get(index);
-            to.setAsmName4(fromModel.getAsmName4());
-            to.setTotalSpace4(fromModel.getTotalSpace4());
-            to.setRemainSpace4(fromModel.getRemainSpace4());
-            to.setUsage4(fromModel.getUsage4());
-        }
+    private void inspect3(ArrayList<AbstractUsageModel> sheet423Models) throws Exception{
+        inspectHostsByHostsId(HostsId.HOST3, ModelType.CORE, sheet423Models);
     }
 
-    private static void inspect2(ArrayList<Sheet423CoreModel> sheet423Models) throws Exception{
-        final String[] inspectedHosts = Sheet423CoreConfig.getInspectedHosts2();
-        final String[] users = Sheet423CoreConfig.getUsers2();
-        final String[] passwords = Sheet423CoreConfig.getPasswords2();
-        final int[] ports = Sheet423CoreConfig.getPorts2();
-        final String[] sid = Sheet423CoreConfig.getSid2();
-
-        for(int i=0; i<inspectedHosts.length; i++){
-            inspectHost2(users[i], passwords[i], inspectedHosts[i]
-                    , ports[i], sid[i], sheet423Models);
-        }
+    private void inspect4(ArrayList<AbstractUsageModel> sheet423Models) throws Exception{
+        inspectHostsByHostsId(HostsId.HOST4, ModelType.CORE, sheet423Models);
     }
 
-    private static void inspect3(ArrayList<Sheet423CoreModel> sheet423Models) throws Exception{
-        final String[] inspectedHosts = Sheet423CoreConfig.getInspectedHosts3();
-        final String[] users = Sheet423CoreConfig.getUsers3();
-        final String[] passwords = Sheet423CoreConfig.getPasswords3();
-        final int[] ports = Sheet423CoreConfig.getPorts3();
-        final String[] sid = Sheet423CoreConfig.getSid3();
-
-        for(int i=0; i<inspectedHosts.length; i++){
-            inspectHost3(users[i], passwords[i], inspectedHosts[i]
-                    , ports[i], sid[i], sheet423Models);
-        }
+    @Override
+    protected String[] getSids2() {
+        return Sheet423CoreConfig.getSid2();
     }
 
-    private static void inspect4(ArrayList<Sheet423CoreModel> sheet423Models) throws Exception{
-        final String[] inspectedHosts = Sheet423CoreConfig.getInspectedHosts4();
-        final String[] users = Sheet423CoreConfig.getUsers4();
-        final String[] passwords = Sheet423CoreConfig.getPasswords4();
-        final int[] ports = Sheet423CoreConfig.getPorts4();
-        final String[] sid = Sheet423CoreConfig.getSid4();
-
-        for(int i=0; i<inspectedHosts.length; i++){
-            inspectHost4(users[i], passwords[i], inspectedHosts[i]
-                    , ports[i], sid[i], sheet423Models);
-        }
+    @Override
+    protected String[] getInspectHosts2() {
+        return Sheet423CoreConfig.getInspectedHosts2();
     }
 
-    private static void inspectHost2(String user
-            , String password, String host
-            , int port, String sid
-            , ArrayList<Sheet423CoreModel> sheet423Models) throws Exception{
-
-        Connection connection = OracleConnector.getConnection(user
-                , password, host, port, sid);
-
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(Sheet423CoreConfig.getInspectSQL());
-
-        final String[] fieldNames = Sheet423CoreConfig.getFieldNames();
-        while (resultSet.next()){
-            String asmName = resultSet.getString(fieldNames[0]);
-            Integer totalSpace = resultSet.getInt(fieldNames[1]);
-            Integer remainSpace = resultSet.getInt(fieldNames[2]);
-            Float usage = resultSet.getFloat(fieldNames[3]);
-
-            Sheet423CoreModel sheet423CoreModel = new Sheet423CoreModel();
-            sheet423CoreModel.setAsmName2(asmName);
-            sheet423CoreModel.setTotalSpace2(totalSpace);
-            sheet423CoreModel.setRemainSpace2(remainSpace);
-            sheet423CoreModel.setUsage2(usage);
-
-            sheet423Models.add(sheet423CoreModel);
-        }
-
-        OracleConnector.closeConnection();
+    @Override
+    protected String[] getPasswords2() {
+        return Sheet423CoreConfig.getPasswords2();
     }
 
-    private static void inspectHost3(String user
-            , String password, String host
-            , int port, String sid
-            , ArrayList<Sheet423CoreModel> sheet423Models) throws Exception{
-
-        Connection connection = OracleConnector.getConnection(user
-                , password, host, port, sid);
-
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(Sheet423CoreConfig.getInspectSQL());
-
-        final String[] fieldNames = Sheet423CoreConfig.getFieldNames();
-        while (resultSet.next()){
-            String asmName = resultSet.getString(fieldNames[0]);
-            Integer totalSpace = resultSet.getInt(fieldNames[1]);
-            Integer remainSpace = resultSet.getInt(fieldNames[2]);
-            Float usage = resultSet.getFloat(fieldNames[3]);
-
-            Sheet423CoreModel sheet423CoreModel = new Sheet423CoreModel();
-            sheet423CoreModel.setAsmName3(asmName);
-            sheet423CoreModel.setTotalSpace3(totalSpace);
-            sheet423CoreModel.setRemainSpace3(remainSpace);
-            sheet423CoreModel.setUsage3(usage);
-
-            sheet423Models.add(sheet423CoreModel);
-        }
-
-        OracleConnector.closeConnection();
+    @Override
+    protected String[] getUsers2() {
+        return Sheet423CoreConfig.getUsers2();
     }
 
-    private static void inspectHost4(String user
-            , String password, String host
-            , int port, String sid
-            , ArrayList<Sheet423CoreModel> sheet423Models) throws Exception{
+    @Override
+    protected int[] getPorts2() {
+        return Sheet423CoreConfig.getPorts2();
+    }
 
-        Connection connection = OracleConnector.getConnection(user
-                , password, host, port, sid);
+    @Override
+    protected String[] getSids3() {
+        return Sheet423CoreConfig.getSid3();
+    }
 
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(Sheet423CoreConfig.getInspectSQL());
+    @Override
+    protected String[] getInspectHosts3() {
+        return Sheet423CoreConfig.getInspectedHosts3();
+    }
 
-        final String[] fieldNames = Sheet423CoreConfig.getFieldNames();
-        while (resultSet.next()){
-            String asmName = resultSet.getString(fieldNames[0]);
-            Integer totalSpace = resultSet.getInt(fieldNames[1]);
-            Integer remainSpace = resultSet.getInt(fieldNames[2]);
-            Float usage = resultSet.getFloat(fieldNames[3]);
+    @Override
+    protected String[] getPasswords3() {
+        return Sheet423CoreConfig.getPasswords3();
+    }
 
-            Sheet423CoreModel sheet423CoreModel = new Sheet423CoreModel();
-            sheet423CoreModel.setAsmName4(asmName);
-            sheet423CoreModel.setTotalSpace4(totalSpace);
-            sheet423CoreModel.setRemainSpace4(remainSpace);
-            sheet423CoreModel.setUsage4(usage);
+    @Override
+    protected String[] getUsers3() {
+        return Sheet423CoreConfig.getUsers3();
+    }
 
-            sheet423Models.add(sheet423CoreModel);
-        }
+    @Override
+    protected int[] getPorts3() {
+        return Sheet423CoreConfig.getPorts3();
+    }
 
-        OracleConnector.closeConnection();
+    @Override
+    protected String[] getSids4() {
+        return Sheet423CoreConfig.getSid4();
+    }
+
+    @Override
+    protected String[] getInspectHosts4() {
+        return Sheet423CoreConfig.getInspectedHosts4();
+    }
+
+    @Override
+    protected String[] getPasswords4() {
+        return Sheet423CoreConfig.getPasswords4();
+    }
+
+    @Override
+    protected String[] getUsers4() {
+        return Sheet423CoreConfig.getUsers4();
+    }
+
+    @Override
+    protected int[] getPorts4() {
+        return Sheet423CoreConfig.getPorts4();
     }
 }

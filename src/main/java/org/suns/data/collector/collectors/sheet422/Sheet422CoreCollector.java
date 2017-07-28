@@ -1,11 +1,9 @@
 package org.suns.data.collector.collectors.sheet422;
 
-import org.suns.data.collector.collectors.AbstractUsageCollector;
 import org.suns.data.collector.config.sheet422.Sheet422CoreConfig;
 import org.suns.database.utils.controller.Sheet422Controller;
 import org.suns.database.utils.model.AbstractUsageModel;
 import org.suns.database.utils.model.Sheet422CoreModel;
-import org.suns.database.utils.model.Sheet422PersonalModel;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -14,7 +12,7 @@ import java.util.Date;
 /**
  * Created by guanl on 6/29/2017.
  */
-public class UsageCoreCollector extends AbstractSheet422Collector {
+public class Sheet422CoreCollector extends AbstractSheet422Collector {
 
     @Override
     protected String getSQLCmd() {
@@ -37,8 +35,10 @@ public class UsageCoreCollector extends AbstractSheet422Collector {
         inspect4(result4);
 
         mergeAllResults(totalResult, result2, result3, result4);
+        Timestamp inspectTime = new Timestamp(new Date().getTime());
 
         for(Sheet422CoreModel sheet422Model : totalResult){
+            sheet422Model.setDate(inspectTime);
             if(!Sheet422Controller.addCore(sheet422Model)){
                 throw new Exception("Fail to add Sheet 422 Core model to database");
             }

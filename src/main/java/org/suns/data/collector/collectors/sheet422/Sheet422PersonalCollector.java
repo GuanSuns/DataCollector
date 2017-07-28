@@ -1,17 +1,18 @@
 package org.suns.data.collector.collectors.sheet422;
 
-import org.suns.data.collector.collectors.AbstractUsageCollector;
 import org.suns.data.collector.config.sheet422.Sheet422PersonalConfig;
 import org.suns.database.utils.controller.Sheet422Controller;
 import org.suns.database.utils.model.AbstractUsageModel;
 import org.suns.database.utils.model.Sheet422PersonalModel;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by guanl on 6/29/2017.
  */
-public class UsagePersonalCollector extends AbstractSheet422Collector {
+public class Sheet422PersonalCollector extends AbstractSheet422Collector {
 
     @Override
     protected String getSQLCmd() {
@@ -26,9 +27,11 @@ public class UsagePersonalCollector extends AbstractSheet422Collector {
     public void inspect() throws Exception{
         ArrayList<AbstractUsageModel> sheet422Models = new ArrayList<>();
         inspect2(sheet422Models);
+        Timestamp inspectTime = new Timestamp(new Date().getTime());
 
         for(AbstractUsageModel sheet422Model : sheet422Models){
             Sheet422PersonalModel sheet422PersonalModel = (Sheet422PersonalModel)sheet422Model;
+            sheet422PersonalModel.setDate(inspectTime);
             if(!Sheet422Controller.addPersonal(sheet422PersonalModel)){
                 throw new Exception("Fail to add Sheet 422 personal model to database");
             }
