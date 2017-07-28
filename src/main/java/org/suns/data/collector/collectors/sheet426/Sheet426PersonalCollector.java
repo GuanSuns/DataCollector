@@ -1,5 +1,6 @@
 package org.suns.data.collector.collectors.sheet426;
 
+import org.suns.data.collector.collectors.AbstractDataCollector;
 import org.suns.data.collector.config.DFFormat;
 import org.suns.data.collector.config.sheet426.Sheet426PersonalConfig;
 import org.suns.data.collector.connector.HostConnector;
@@ -17,9 +18,28 @@ import java.util.Date;
 /**
  * Created by guanl on 7/4/2017.
  */
-public class Sheet426PersonalCollector {
+public class Sheet426PersonalCollector extends AbstractSheet426Collector{
+    @Override
+    protected String[] getLogPaths(HostsId hostsId) {
+        switch (hostsId){
+            case HOST2:
+                return Sheet426PersonalConfig.getLogPath2();
+            default:
+                return new String[0];
+        }
+    }
 
-    public static void inspect() throws Exception{
+    @Override
+    protected String getORACmdByLogPath(String logPath) {
+        return Sheet426PersonalConfig.getORADetectionCmd(logPath);
+    }
+
+    @Override
+    protected String getLogCmdByLogPath(String logPath) {
+        return Sheet426PersonalConfig.getLogCmd(logPath);
+    }
+
+    public void inspect() throws Exception{
         Sheet426PersonalModel sheet426Model = new Sheet426PersonalModel();
         inspect2(sheet426Model);
         sheet426Model.setDate((new Timestamp(new Date().getTime())));
@@ -30,63 +50,28 @@ public class Sheet426PersonalCollector {
 
     }
 
-    private static void inspect2(Sheet426PersonalModel sheet426Model) throws Exception{
-        inspectHost20(sheet426Model);
-        inspectHost21(sheet426Model);
+    private void inspect2(Sheet426PersonalModel sheet426Model) throws Exception{
+        inspectHostById(HostsId.HOST2, LogType.LOG20, sheet426Model);
+        inspectHostById(HostsId.HOST2, LogType.LOG21, sheet426Model);
     }
 
-    private static void inspectHost20(Sheet426PersonalModel sheet426Model) throws Exception{
-
-        final String[] hosts = Sheet426PersonalConfig.getInspectedHosts2();
-        final String[] logPaths = Sheet426PersonalConfig.getLogPath2();
-        final String[] users = Sheet426PersonalConfig.getUsers2();
-        final String[] passwords = Sheet426PersonalConfig.getPasswords2();
-        final int[] ports = Sheet426PersonalConfig.getPorts2();
-
-        HostConnector.connect(users[0], passwords[0]
-                , hosts[0], ports[0]);
-
-        String inspectCmd = Sheet426PersonalConfig.getORADetectionCmd(logPaths[0]);
-        String strORA = HostConnector.executeCommand(inspectCmd);
-        int cntError = Integer.valueOf(strORA.trim());
-
-        if(cntError > 0){
-            sheet426Model.setErrorInfo20(1);
-        }
-
-        String getLogCmd = Sheet426PersonalConfig.getLogCmd(logPaths[0]);
-        String strLog = HostConnector.executeCommand(getLogCmd);
-        sheet426Model.setLog20(strLog);
-
-        HostConnector.disconnect();
+    @Override
+    protected String[] getInspectHosts2() {
+        return Sheet426PersonalConfig.getInspectedHosts2();
     }
 
-    private static void inspectHost21(Sheet426PersonalModel sheet426Model) throws Exception{
-
-        final String[] hosts = Sheet426PersonalConfig.getInspectedHosts2();
-        final String[] logPaths = Sheet426PersonalConfig.getLogPath2();
-        final String[] users = Sheet426PersonalConfig.getUsers2();
-        final String[] passwords = Sheet426PersonalConfig.getPasswords2();
-        final int[] ports = Sheet426PersonalConfig.getPorts2();
-
-        HostConnector.connect(users[1], passwords[1]
-                , hosts[1], ports[1]);
-
-        String inspectCmd = Sheet426PersonalConfig.getORADetectionCmd(logPaths[1]);
-        String strORA = HostConnector.executeCommand(inspectCmd);
-        int cntError = Integer.valueOf(strORA.trim());
-
-        if(cntError > 0){
-            sheet426Model.setErrorInfo21(1);
-        }else{
-            sheet426Model.setErrorInfo21(0);
-        }
-
-        String getLogCmd = Sheet426PersonalConfig.getLogCmd(logPaths[1]);
-        String strLog = HostConnector.executeCommand(getLogCmd);
-        sheet426Model.setLog21(strLog);
-
-        HostConnector.disconnect();
+    @Override
+    protected String[] getPasswords2() {
+        return Sheet426PersonalConfig.getPasswords2();
     }
-    
+
+    @Override
+    protected String[] getUsers2() {
+        return Sheet426PersonalConfig.getUsers2();
+    }
+
+    @Override
+    protected int[] getPorts2() {
+        return Sheet426PersonalConfig.getPorts2();
+    }
 }
