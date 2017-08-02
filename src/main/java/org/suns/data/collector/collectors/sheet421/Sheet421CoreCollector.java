@@ -3,6 +3,7 @@ package org.suns.data.collector.collectors.sheet421;
 import org.suns.data.collector.config.sheet412.Sheet421CoreConfig;
 import org.suns.database.utils.controller.Sheet421Controller;
 import org.suns.database.utils.model.Sheet421CoreModel;
+import org.suns.inspection.logger.InspectionLogger;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -35,6 +36,8 @@ public class Sheet421CoreCollector extends AbstractSheet421Collector{
         inspect4(sheet421Model);
 
         sheet421Model.setDate(new Timestamp(new Date().getTime()));
+
+        InspectionLogger.debug("Finish inspecting core 421 - " + sheet421Model.toString());
 
         if(!Sheet421Controller.addCore(sheet421Model)){
             throw new Exception("Fail to add Sheet 421 Core model to database");

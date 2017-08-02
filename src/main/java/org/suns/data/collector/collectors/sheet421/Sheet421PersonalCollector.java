@@ -3,6 +3,7 @@ package org.suns.data.collector.collectors.sheet421;
 import org.suns.data.collector.config.sheet412.Sheet421PersonalConfig;
 import org.suns.database.utils.controller.Sheet421Controller;
 import org.suns.database.utils.model.Sheet421PersonalModel;
+import org.suns.inspection.logger.InspectionLogger;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -32,6 +33,9 @@ public class Sheet421PersonalCollector extends AbstractSheet421Collector{
         inspect2(sheet421Model);
         inspect3(sheet421Model);
         sheet421Model.setDate(new Timestamp(new Date().getTime()));
+
+        InspectionLogger.debug("Finish inspecting personal 421 - " + sheet421Model.toString());
+
 
         if(!Sheet421Controller.addPersonal(sheet421Model)){
             throw new Exception("Fail to add Sheet 421 personal model to database");
@@ -70,21 +74,21 @@ public class Sheet421PersonalCollector extends AbstractSheet421Collector{
 
     @Override
     protected String[] getInspectHosts3() {
-        return new String[0];
+        return Sheet421PersonalConfig.getInspectedHosts3();
     }
 
     @Override
     protected String[] getPasswords3() {
-        return new String[0];
+        return Sheet421PersonalConfig.getPasswords3();
     }
 
     @Override
     protected String[] getUsers3() {
-        return new String[0];
+        return Sheet421PersonalConfig.getUsers3();
     }
 
     @Override
     protected int[] getPorts3() {
-        return new int[0];
+        return Sheet421PersonalConfig.getPorts3();
     }
 }

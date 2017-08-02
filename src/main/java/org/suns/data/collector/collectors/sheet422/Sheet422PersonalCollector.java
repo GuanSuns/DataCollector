@@ -4,6 +4,7 @@ import org.suns.data.collector.config.sheet422.Sheet422PersonalConfig;
 import org.suns.database.utils.controller.Sheet422Controller;
 import org.suns.database.utils.model.AbstractUsageModel;
 import org.suns.database.utils.model.Sheet422PersonalModel;
+import org.suns.inspection.logger.InspectionLogger;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -29,9 +30,13 @@ public class Sheet422PersonalCollector extends AbstractSheet422Collector {
         inspect2(sheet422Models);
         Timestamp inspectTime = new Timestamp(new Date().getTime());
 
+        InspectionLogger.debug("Finish inspecting personal 422 - ");
+
         for(AbstractUsageModel sheet422Model : sheet422Models){
             Sheet422PersonalModel sheet422PersonalModel = (Sheet422PersonalModel)sheet422Model;
             sheet422PersonalModel.setDate(inspectTime);
+            InspectionLogger.debug(sheet422Model.toString());
+
             if(!Sheet422Controller.addPersonal(sheet422PersonalModel)){
                 throw new Exception("Fail to add Sheet 422 personal model to database");
             }

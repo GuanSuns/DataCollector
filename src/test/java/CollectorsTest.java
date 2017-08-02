@@ -27,6 +27,7 @@ public class CollectorsTest {
     public void test_all_sheets(){
         try{
             DBConfig.setConfigToMySQL();
+            /*
             Sheet411PersonalCollector sheet411PersonalCollector
                     = new Sheet411PersonalCollector();
             sheet411PersonalCollector.inspect();
@@ -50,7 +51,7 @@ public class CollectorsTest {
             Sheet422CoreCollector sheet422CoreCollector
                     = new Sheet422CoreCollector();
             sheet422CoreCollector.inspect();
-
+*/
             Sheet423CoreCollector sheet423CoreCollector
                     = new Sheet423CoreCollector();
             sheet423CoreCollector.inspect();
@@ -58,7 +59,7 @@ public class CollectorsTest {
             Sheet423PersonalCollector sheet423PersonalCollector
                     = new Sheet423PersonalCollector();
             sheet423PersonalCollector.inspect();
-            
+     /*
             Sheet424PersonalCollector sheet424PersonalCollector
                     = new Sheet424PersonalCollector();
             sheet424PersonalCollector.inspect();
@@ -90,7 +91,7 @@ public class CollectorsTest {
             Sheet428PersonalCollector sheet428PersonalCollector
                     = new Sheet428PersonalCollector();
             sheet428PersonalCollector.inspect();
-
+*/
         }catch (Exception e){
             e.printStackTrace();
         }

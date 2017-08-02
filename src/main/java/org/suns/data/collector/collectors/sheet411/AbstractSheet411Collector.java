@@ -1,6 +1,7 @@
 package org.suns.data.collector.collectors.sheet411;
 
 import org.suns.data.collector.collectors.AbstractOSInspectionCollector;
+import org.suns.data.collector.config.DFFormat;
 import org.suns.database.utils.config.DBConfig;
 import org.suns.database.utils.model.Sheet411CoreModel;
 import org.suns.database.utils.model.Sheet411PersonalModel;
@@ -24,7 +25,8 @@ public abstract class AbstractSheet411Collector extends AbstractOSInspectionColl
         PriorityQueue<Float> webLogicUsage = new PriorityQueue<>(comparator);
 
         for(int i=0; i<inspectedHosts.length; i++){
-            inspectOSRootAndSoftware(inspectedHosts[i], rootUsage, webLogicUsage
+            inspectOSRootAndSoftware(DFFormat.InspectionSysType.LINUX
+                    , inspectedHosts[i], rootUsage, webLogicUsage
                     , users[i], passwords[i], ports[i]);
         }
 

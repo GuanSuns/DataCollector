@@ -2,6 +2,7 @@ package org.suns.data.collector.connector;
 
 import com.jcraft.jsch.*;
 import org.suns.data.collector.config.HostConnectorConfig;
+import org.suns.inspection.logger.InspectionLogger;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -29,6 +30,11 @@ public class HostConnector {
         config.put("StrictHostKeyChecking", "no");
         session.setConfig(config);
         session.setTimeout(HostConnectorConfig.getSessionTimeout());
+
+        InspectionLogger.debug("Connecting to " + host + ":"
+                + port + "  user: " + user
+                + " ,password: " + password );
+
         session.connect();
     }
 

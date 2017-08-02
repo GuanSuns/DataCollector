@@ -52,6 +52,11 @@ public class Sheet423PersonalCollector extends AbstractSheet423Collector {
     }
 
     @Override
+    protected String[] getSids2() {
+        return Sheet423PersonalConfig.getSid();
+    }
+
+    @Override
     protected String[] getPasswords2() {
         return Sheet423PersonalConfig.getPasswords();
     }

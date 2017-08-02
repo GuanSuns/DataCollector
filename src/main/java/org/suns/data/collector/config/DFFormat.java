@@ -4,40 +4,96 @@ package org.suns.data.collector.config;
  * Created by guanl on 6/28/2017.
  */
 public class DFFormat {
-    private static int fileSystemColumn = 1;
-    private static int mountedSysColumn = 6;
-    private static int usageColumn = 5;
+    public enum InspectionSysType{
+        LINUX,
+        AIX
+    }
+    
+    private static int fileSystemColumnLinux = 1;
+    private static int mountedSysColumnLinux = 6;
+    private static int usageColumnLinux = 5;
+    private static int fileSystemColumnAIX = 1;
+    private static int mountedSysColumnAIX = 6;
+    private static int usageColumnAIX = 5;
 
-    public static int getMountedSysColumn() {
-        return mountedSysColumn;
+    public static void setFileSystemColumnLinux(int fileSystemColumnLinux) {
+        DFFormat.fileSystemColumnLinux = fileSystemColumnLinux;
     }
 
-    public static int getFileSystemColumn() {
-        return fileSystemColumn;
+    public static void setMountedSysColumnLinux(int mountedSysColumnLinux) {
+        DFFormat.mountedSysColumnLinux = mountedSysColumnLinux;
     }
 
-    public static int getUsageColumn() {
-        return usageColumn;
+    public static void setUsageColumnLinux(int usageColumnLinux) {
+        DFFormat.usageColumnLinux = usageColumnLinux;
     }
 
-    public static void setFileSystemColumn(int fileSystemColumn) {
-        DFFormat.fileSystemColumn = fileSystemColumn;
+    public static void setFileSystemColumnAIX(int fileSystemColumnAIX) {
+        DFFormat.fileSystemColumnAIX = fileSystemColumnAIX;
     }
 
-    public static void setMountedSysColumn(int mountedSysColumn) {
-        DFFormat.mountedSysColumn = mountedSysColumn;
+    public static void setMountedSysColumnAIX(int mountedSysColumnAIX) {
+        DFFormat.mountedSysColumnAIX = mountedSysColumnAIX;
     }
 
-    public static void setUsageColumn(int usageColumn) {
-        DFFormat.usageColumn = usageColumn;
+    public static void setUsageColumnAIX(int usageColumnAIX) {
+        DFFormat.usageColumnAIX = usageColumnAIX;
     }
 
-    public static String getMountedSysCmd(){
-        return "df -Ph | awk '{print $" + mountedSysColumn + "}'";
+    public static int getMountedSysColumn(InspectionSysType sysType) {
+        switch (sysType){
+            case AIX:
+                return mountedSysColumnAIX;
+            case LINUX:
+                return mountedSysColumnLinux;
+            default:
+                return 0;
+        }
     }
 
-    public static String getUsageCmd(){
-        return "df -Ph | awk '{print $" + usageColumn + "}'";
+    public static int getFileSystemColumn(InspectionSysType sysType) {
+        switch (sysType){
+            case AIX:
+                return fileSystemColumnAIX;
+            case LINUX:
+                return fileSystemColumnLinux;
+            default:
+                return 0;
+        }
+    }
+
+    public static int getUsageColumn(InspectionSysType sysType) {
+        switch (sysType){
+            case AIX:
+                return usageColumnAIX;
+            case LINUX:
+                return usageColumnLinux;
+            default:
+                return 0;
+        }
+    }
+
+    public static String getMountedSysCmd(InspectionSysType sysType){
+        switch (sysType){
+            case AIX:
+                return "df -Pg | awk '{print $" + mountedSysColumnAIX + "}'";
+            case LINUX:
+                return "df -Ph | awk '{print $" + mountedSysColumnLinux + "}'";
+            default:
+                return "df -Ph | awk '{print $" + mountedSysColumnLinux + "}'";
+        }
+        
+    }
+
+    public static String getUsageCmd(InspectionSysType sysType){
+        switch (sysType){
+            case AIX:
+                return "df -Pg | awk '{print $" + usageColumnAIX + "}'";
+            case LINUX:
+                return "df -Ph | awk '{print $" + usageColumnLinux + "}'";
+            default:
+                return "df -Ph | awk '{print $" + usageColumnLinux + "}'";
+        }
     }
 
 }

@@ -2,6 +2,8 @@ package org.suns.data.collector.collectors;
 
 import org.suns.data.collector.config.DFFormat;
 import org.suns.data.collector.connector.HostConnector;
+import org.suns.database.utils.config.DBConfig;
+import org.suns.inspection.logger.InspectionLogger;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -12,17 +14,20 @@ public abstract class AbstractOSInspectionCollector extends AbstractDataCollecto
     protected abstract String getSoftwareDirectory();
     protected abstract String getSoftwareGgsDirectory();
 
-    protected void inspectOSRootAndSoftware(String host
+    protected void inspectOSRootAndSoftware(DFFormat.InspectionSysType sysType, String host
             , PriorityQueue<Float> rootUsage
             , PriorityQueue<Float> webLogicUsage, String user
             , String password, int port) throws Exception{
 
         HostConnector.connect(user, password, host, port);
 
-        String mountedSysCmd = DFFormat.getMountedSysCmd();
-        String usageCmd = DFFormat.getUsageCmd();
+        String mountedSysCmd = DFFormat.getMountedSysCmd(sysType);
+        String usageCmd = DFFormat.getUsageCmd(sysType);
         String strSysNames = HostConnector.executeCommand(mountedSysCmd);
+        //InspectionLogger.debug(strSysNames);
+
         String strUsages = HostConnector.executeCommand(usageCmd);
+        //InspectionLogger.debug(strUsages);
 
         String[] sysNames = parseSysNames(strSysNames);
         Float[] usages = parseUsages(strUsages);
@@ -42,7 +47,7 @@ public abstract class AbstractOSInspectionCollector extends AbstractDataCollecto
         HostConnector.disconnect();
     }
 
-    protected void inspectAllDirectory(String host
+    protected void inspectAllDirectory(DFFormat.InspectionSysType sysType, String host
             , PriorityQueue<Float> rootUsage
             , PriorityQueue<Float> u01Usage
             , PriorityQueue<Float> goldenUsage
@@ -50,10 +55,20 @@ public abstract class AbstractOSInspectionCollector extends AbstractDataCollecto
 
         HostConnector.connect(user, password, host, port);
 
-        String mountedSysCmd = DFFormat.getMountedSysCmd();
-        String usageCmd = DFFormat.getUsageCmd();
+        if(sysType.equals(DFFormat.InspectionSysType.LINUX)){
+            //InspectionLogger.debug(HostConnector.executeCommand("df -Ph"));
+        }else if(sysType.equals(DFFormat.InspectionSysType.AIX)){
+            //InspectionLogger.debug(HostConnector.executeCommand("df -Pg"));
+        }
+
+        String mountedSysCmd = DFFormat.getMountedSysCmd(sysType);
+        String usageCmd = DFFormat.getUsageCmd(sysType);
+
         String strSysNames = HostConnector.executeCommand(mountedSysCmd);
+        //InspectionLogger.debug(strSysNames);
+
         String strUsages = HostConnector.executeCommand(usageCmd);
+        //InspectionLogger.debug(strUsages);
 
         String[] sysNames = parseSysNames(strSysNames);
         Float[] usages = parseUsages(strUsages);
@@ -86,7 +101,11 @@ public abstract class AbstractOSInspectionCollector extends AbstractDataCollecto
         Float[] usages = new Float[strUsages.length-1];
 
         for(int i=0; i < strUsages.length-1; i++){
-            usages[i] = Float.valueOf(strUsages[i+1]);
+            if(strUsages[i+1].equals("-")){
+                usages[i] = (float)DBConfig.getDefaultNumericNullValue();
+            }else{
+                usages[i] = Float.valueOf(strUsages[i+1]);
+            }
         }
         return usages;
     }

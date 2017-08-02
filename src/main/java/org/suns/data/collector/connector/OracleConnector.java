@@ -26,7 +26,7 @@ public class OracleConnector {
             connection = DriverManager.getConnection(dbURL
                     , user, password);
         }catch (Exception e){
-            throw new Exception("Fail to connect to Database"
+            throw new Exception("Fail to connect to Database "
                     + dbURL + "; " + e.toString());
         }
 

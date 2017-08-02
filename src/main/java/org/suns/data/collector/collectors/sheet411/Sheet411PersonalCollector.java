@@ -5,6 +5,7 @@ import org.suns.database.utils.config.DBConfig;
 import org.suns.data.collector.config.sheet411.Sheet411PersonalConfig;
 import org.suns.database.utils.controller.Sheet411Controller;
 import org.suns.database.utils.model.Sheet411PersonalModel;
+import org.suns.inspection.logger.InspectionLogger;
 
 import java.sql.Timestamp;
 import java.util.*;
@@ -20,6 +21,8 @@ public class Sheet411PersonalCollector extends AbstractSheet411Collector{
         inspect3(sheet411Model);
         inspect45(sheet411Model);
         sheet411Model.setDate(new Timestamp(new Date().getTime()));
+
+        InspectionLogger.debug(" Finish inspecting personal Sheet 411 - " + sheet411Model.toString());
 
         if(!Sheet411Controller.addPersonal(sheet411Model)){
             throw new Exception("Fail to add Sheet 411 personal model to database");

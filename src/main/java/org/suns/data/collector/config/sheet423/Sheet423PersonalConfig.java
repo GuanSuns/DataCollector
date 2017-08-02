@@ -5,7 +5,7 @@ package org.suns.data.collector.config.sheet423;
  */
 public class Sheet423PersonalConfig {
 
-    private static String[] inspectedHosts = {"150.12.201.40"};
+    private static String[] inspectedHosts = {"192.168.14.82"};
     //Alternative host "150.12.201.42"
     private static int[] ports = {1521};
     private static String[] users = {"dev_01"};

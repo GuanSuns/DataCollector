@@ -4,6 +4,7 @@ import org.suns.data.collector.config.sheet422.Sheet422CoreConfig;
 import org.suns.database.utils.controller.Sheet422Controller;
 import org.suns.database.utils.model.AbstractUsageModel;
 import org.suns.database.utils.model.Sheet422CoreModel;
+import org.suns.inspection.logger.InspectionLogger;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -37,8 +38,12 @@ public class Sheet422CoreCollector extends AbstractSheet422Collector {
         mergeAllResults(totalResult, result2, result3, result4);
         Timestamp inspectTime = new Timestamp(new Date().getTime());
 
+        InspectionLogger.debug("Finish inspecting core 422 - ");
+
         for(Sheet422CoreModel sheet422Model : totalResult){
             sheet422Model.setDate(inspectTime);
+            InspectionLogger.debug(sheet422Model.toString());
+
             if(!Sheet422Controller.addCore(sheet422Model)){
                 throw new Exception("Fail to add Sheet 422 Core model to database");
             }

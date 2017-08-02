@@ -1,6 +1,7 @@
 package org.suns.data.collector.collectors.sheet421;
 
 import org.suns.data.collector.collectors.AbstractOSInspectionCollector;
+import org.suns.data.collector.config.DFFormat;
 import org.suns.database.utils.config.DBConfig;
 import org.suns.database.utils.model.Sheet421CoreModel;
 import org.suns.database.utils.model.Sheet421PersonalModel;
@@ -21,7 +22,8 @@ public abstract class AbstractSheet421Collector extends AbstractOSInspectionColl
         PriorityQueue<Float> goldengateUsage = new PriorityQueue<>(comparator);
 
         for(int i=0; i<inspectedHosts.length; i++){
-            inspectAllDirectory(inspectedHosts[i], rootUsage, u01Usage
+            inspectAllDirectory(DFFormat.InspectionSysType.AIX
+                    , inspectedHosts[i], rootUsage, u01Usage
                     , goldengateUsage, users[i], passwords[i], ports[i]);
         }
 
@@ -61,7 +63,8 @@ public abstract class AbstractSheet421Collector extends AbstractOSInspectionColl
         PriorityQueue<Float> u01Usage = new PriorityQueue<>(comparator);
 
         for(int i=0; i<inspectedHosts.length; i++){
-            inspectOSRootAndSoftware(inspectedHosts[i], rootUsage, u01Usage
+            inspectOSRootAndSoftware(DFFormat.InspectionSysType.AIX
+                    , inspectedHosts[i], rootUsage, u01Usage
                     , users[i], passwords[i], ports[i]);
         }
 
