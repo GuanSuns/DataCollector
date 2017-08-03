@@ -10,9 +10,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- * Created by guanl on 6/29/2017.
- */
+/** 表空间使用率检查 **/
 public class Sheet422CoreCollector extends AbstractSheet422Collector {
 
     @Override

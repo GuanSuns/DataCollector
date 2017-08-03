@@ -9,9 +9,8 @@ import org.suns.database.utils.model.Sheet426CoreModel;
 import java.sql.Timestamp;
 import java.util.Date;
 
-/**
- * Created by guanl on 7/4/2017.
- */
+
+/** Alert日志检查 **/
 public class Sheet426CoreCollector extends AbstractSheet426Collector{
 
     @Override

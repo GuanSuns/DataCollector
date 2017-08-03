@@ -13,9 +13,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- * Created by guanl on 6/30/2017.
- */
+/** ASM共享磁盘检查 **/
 public class Sheet423PersonalCollector extends AbstractSheet423Collector {
     @Override
     protected String getSQLCmd() {

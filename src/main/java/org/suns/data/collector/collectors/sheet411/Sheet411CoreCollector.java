@@ -10,9 +10,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.PriorityQueue;
 
-/**
- * Created by guanl on 6/29/2017.
- */
+/** 应用OS文件系统目录使用率 **/
 public class Sheet411CoreCollector extends AbstractSheet411Collector{
     public void inspect() throws Exception{
         Sheet411CoreModel sheet411Model = new Sheet411CoreModel();

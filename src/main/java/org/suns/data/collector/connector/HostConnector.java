@@ -16,7 +16,7 @@ public class HostConnector {
     private static JSch jsch;
     private static Session session;
 
-    public static void connect(String user, String password, String host, int port) throws JSchException {
+    public static void connect(String user, String password, String host, int port) throws Exception {
 
         if(session != null && session.isConnected()){
             session.disconnect();
@@ -35,7 +35,15 @@ public class HostConnector {
                 + port + "  user: " + user
                 + " ,password: " + password );
 
-        session.connect();
+        try{
+            session.connect();
+        }catch (Exception e){
+            throw new Exception("Fail to connect to host " + host + ":"
+                    + port + "  user: " + user
+                    + " ,password: " + password
+                    + "  -  " + e.toString());
+        }
+
     }
 
     public static void disconnect(){
@@ -45,10 +53,11 @@ public class HostConnector {
         }
     }
 
-    public static String executeCommand(String command){
+    public static String executeCommand(String command) throws Exception{
         BufferedReader reader = null;
         Channel channel = null;
         StringBuffer stringBuffer = new StringBuffer();
+        String errorInfo = "";
 
         try {
             channel = session.openChannel("exec");
@@ -65,19 +74,23 @@ public class HostConnector {
             }
 
         }catch (Exception e){
-            e.printStackTrace();
+            errorInfo = "Host connector failing in executing " + command;
         } finally {
             try{
                 if(reader!=null){
                     reader.close();
                 }
             }catch (Exception eReader){
-                eReader.printStackTrace();
+                errorInfo = errorInfo + " - Host connector failing in closing reader";
             }
 
             if(channel != null){
                 channel.disconnect();
             }
+        }
+
+        if(!errorInfo.equals("")){
+            throw new Exception(errorInfo);
         }
 
         return stringBuffer.toString();

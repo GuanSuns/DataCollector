@@ -15,9 +15,7 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.Date;
 
-/**
- * Created by guanl on 7/4/2017.
- */
+/** Alert日志检查 **/
 public class Sheet426PersonalCollector extends AbstractSheet426Collector{
     @Override
     protected String[] getLogPaths(HostsId hostsId) {

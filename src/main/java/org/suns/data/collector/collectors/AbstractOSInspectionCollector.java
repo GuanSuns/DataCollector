@@ -55,12 +55,6 @@ public abstract class AbstractOSInspectionCollector extends AbstractDataCollecto
 
         HostConnector.connect(user, password, host, port);
 
-        if(sysType.equals(DFFormat.InspectionSysType.LINUX)){
-            //InspectionLogger.debug(HostConnector.executeCommand("df -Ph"));
-        }else if(sysType.equals(DFFormat.InspectionSysType.AIX)){
-            //InspectionLogger.debug(HostConnector.executeCommand("df -Pg"));
-        }
-
         String mountedSysCmd = DFFormat.getMountedSysCmd(sysType);
         String usageCmd = DFFormat.getUsageCmd(sysType);
 

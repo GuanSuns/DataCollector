@@ -8,9 +8,7 @@ import org.suns.inspection.logger.InspectionLogger;
 import java.sql.Timestamp;
 import java.util.Date;
 
-/**
- * Created by guanl on 6/29/2017.
- */
+/** 数据库OS文件系统目录使用率 **/
 public class Sheet421PersonalCollector extends AbstractSheet421Collector{
 
     @Override

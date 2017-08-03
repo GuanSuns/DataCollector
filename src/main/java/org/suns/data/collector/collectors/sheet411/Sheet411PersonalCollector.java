@@ -10,9 +10,7 @@ import org.suns.inspection.logger.InspectionLogger;
 import java.sql.Timestamp;
 import java.util.*;
 
-/**
- * Created by guanl on 6/28/2017.
- */
+/** 应用OS文件系统目录使用率 **/
 public class Sheet411PersonalCollector extends AbstractSheet411Collector{
 
     public void inspect() throws Exception{

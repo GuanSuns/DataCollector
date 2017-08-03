@@ -10,9 +10,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by guanl on 7/1/2017.
- */
+/** 时钟同步检查 **/
 public class Sheet428PersonalCollector extends AbstractSheet428Collector{
 
     @Override

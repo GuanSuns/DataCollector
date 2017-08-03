@@ -7,9 +7,7 @@ import org.suns.database.utils.model.Sheet424CoreModel;
 import java.sql.Timestamp;
 import java.util.Date;
 
-/**
- * Created by guanl on 6/30/2017.
- */
+/** 统计信息检查 **/
 public class Sheet424CoreCollector extends AbstractSheet424Collector{
     @Override
     protected String getInspectTimeSQL() {

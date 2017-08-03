@@ -7,9 +7,8 @@ import org.suns.database.utils.model.Sheet428CoreModel;
 import java.sql.Timestamp;
 import java.util.Date;
 
-/**
- * Created by guanl on 7/1/2017.
- */
+
+/** 时钟同步检查 **/
 public class Sheet428CoreCollector extends AbstractSheet428Collector{
 
     @Override

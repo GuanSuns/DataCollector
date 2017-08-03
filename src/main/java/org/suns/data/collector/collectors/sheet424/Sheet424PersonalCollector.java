@@ -11,9 +11,8 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.Date;
 
-/**
- * Created by guanl on 6/30/2017.
- */
+
+/**统计信息检查**/
 public class Sheet424PersonalCollector extends AbstractSheet424Collector{
 
     @Override
