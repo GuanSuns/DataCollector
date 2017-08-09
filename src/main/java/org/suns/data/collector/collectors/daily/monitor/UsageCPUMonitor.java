@@ -1,4 +1,4 @@
-package org.suns.data.collector.collectors.daily.app.monitor;
+package org.suns.data.collector.collectors.daily.monitor;
 
 import org.suns.data.collector.config.daily.AppInspectionConfig;
 import org.suns.host.config.AppHost;

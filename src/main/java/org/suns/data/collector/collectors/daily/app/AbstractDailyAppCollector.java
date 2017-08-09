@@ -1,9 +1,9 @@
 package org.suns.data.collector.collectors.daily.app;
 
-import org.suns.data.collector.collectors.daily.app.monitor.UsageCPUMonitor;
-import org.suns.data.collector.collectors.daily.app.monitor.UsageMemoryMonitor;
-import org.suns.data.collector.collectors.daily.app.monitor.UsageSoftwareDirectoryMonitor;
-import org.suns.data.collector.collectors.daily.app.monitor.WebLogicMonitor;
+import org.suns.data.collector.collectors.daily.monitor.UsageCPUMonitor;
+import org.suns.data.collector.collectors.daily.monitor.UsageMemoryMonitor;
+import org.suns.data.collector.collectors.daily.monitor.UsageSoftwareDirectoryMonitor;
+import org.suns.data.collector.collectors.daily.monitor.WebLogicMonitor;
 import org.suns.database.utils.model.DailyAppInspectionModel;
 import org.suns.host.config.AppCluster;
 import org.suns.host.config.AppHost;

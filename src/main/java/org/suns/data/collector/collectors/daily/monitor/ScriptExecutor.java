@@ -1,4 +1,4 @@
-package org.suns.data.collector.collectors.daily.app.monitor;
+package org.suns.data.collector.collectors.daily.monitor;
 
 import org.suns.data.collector.connector.HostConnector;
 import org.suns.inspection.logger.InspectionLogger;
