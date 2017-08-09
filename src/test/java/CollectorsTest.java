@@ -1,6 +1,6 @@
 import org.junit.Test;
-import org.suns.data.collector.collectors.daily.monitor.UsageMemoryMonitor;
-import org.suns.data.collector.collectors.daily.monitor.WebLogicMonitor;
+import org.suns.data.collector.collectors.daily.app.monitor.UsageSoftwareDirectoryMonitor;
+import org.suns.data.collector.collectors.daily.app.monitor.WebLogicMonitor;
 import org.suns.database.utils.config.DBConfig;
 import org.suns.database.utils.model.DailyAppInspectionModel;
 import org.suns.host.config.AppCluster;
@@ -52,7 +52,7 @@ public class CollectorsTest {
             webLogicServer.setUser("weblogic");
 
             WebLogicMonitor.monitorWebLogicServer(webLogicServer, dailyAppModels);
-            System.out.println(UsageMemoryMonitor.monitorMemoryUsage(hosts));
+            System.out.println(UsageSoftwareDirectoryMonitor.monitorSoftwareDirectoryUsage(hosts));
 
 
 /*

@@ -1,4 +1,4 @@
-package org.suns.data.collector.collectors.daily.monitor;
+package org.suns.data.collector.collectors.daily.app.monitor;
 
 import org.suns.data.collector.config.WebLogicConnectorConfig;
 import org.suns.data.collector.connector.WebLogicConnector;

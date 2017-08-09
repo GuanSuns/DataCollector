@@ -76,11 +76,11 @@ public class DFFormat {
     public static String getMountedSysCmd(InspectionSysType sysType){
         switch (sysType){
             case AIX:
-                return "df -Pg | awk '{print $" + mountedSysColumnAIX + "}'";
+                return "df -Pk | awk '{print $" + mountedSysColumnAIX + "}'";
             case LINUX:
-                return "df -Ph | awk '{print $" + mountedSysColumnLinux + "}'";
+                return "df -Pk | awk '{print $" + mountedSysColumnLinux + "}'";
             default:
-                return "df -Ph | awk '{print $" + mountedSysColumnLinux + "}'";
+                return "df -Pk | awk '{print $" + mountedSysColumnLinux + "}'";
         }
         
     }
@@ -88,11 +88,11 @@ public class DFFormat {
     public static String getUsageCmd(InspectionSysType sysType){
         switch (sysType){
             case AIX:
-                return "df -Pg | awk '{print $" + usageColumnAIX + "}'";
+                return "df -Pk | awk '{print $" + usageColumnAIX + "}'";
             case LINUX:
-                return "df -Ph | awk '{print $" + usageColumnLinux + "}'";
+                return "df -Pk | awk '{print $" + usageColumnLinux + "}'";
             default:
-                return "df -Ph | awk '{print $" + usageColumnLinux + "}'";
+                return "df -Pk | awk '{print $" + usageColumnLinux + "}'";
         }
     }
 

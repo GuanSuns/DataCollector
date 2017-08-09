@@ -14,6 +14,35 @@ public abstract class AbstractOSInspectionCollector extends AbstractDataCollecto
     protected abstract String getSoftwareDirectory();
     protected abstract String getSoftwareGgsDirectory();
 
+    protected void inspectSoftware(DFFormat.InspectionSysType sysType
+            , String host, String user
+            , String password, int port
+            , PriorityQueue<Float> webLogicUsage) throws Exception{
+
+        HostConnector.connect(user, password, host, port);
+
+        String mountedSysCmd = DFFormat.getMountedSysCmd(sysType);
+        String usageCmd = DFFormat.getUsageCmd(sysType);
+
+        String strSysNames = HostConnector.executeCommand(mountedSysCmd);
+        String strUsages = HostConnector.executeCommand(usageCmd);
+
+        String[] sysNames = parseSysNames(strSysNames);
+        Float[] usages = parseUsages(strUsages);
+        if(sysNames.length != usages.length){
+            HostConnector.disconnect();
+            throw new Exception("Unexpected result of parsing df -h");
+        }
+
+        for(int i=0; i<sysNames.length; i++){
+            if(sysNames[i].equals(getSoftwareDirectory())){
+                webLogicUsage.add(usages[i]);
+            }
+        }
+
+        HostConnector.disconnect();
+    }
+
     protected void inspectOSRootAndSoftware(DFFormat.InspectionSysType sysType, String host
             , PriorityQueue<Float> rootUsage
             , PriorityQueue<Float> webLogicUsage, String user
@@ -23,8 +52,8 @@ public abstract class AbstractOSInspectionCollector extends AbstractDataCollecto
 
         String mountedSysCmd = DFFormat.getMountedSysCmd(sysType);
         String usageCmd = DFFormat.getUsageCmd(sysType);
-        String strSysNames = HostConnector.executeCommand(mountedSysCmd);
 
+        String strSysNames = HostConnector.executeCommand(mountedSysCmd);
         String strUsages = HostConnector.executeCommand(usageCmd);
 
         String[] sysNames = parseSysNames(strSysNames);
@@ -62,6 +91,7 @@ public abstract class AbstractOSInspectionCollector extends AbstractDataCollecto
         String[] sysNames = parseSysNames(strSysNames);
         Float[] usages = parseUsages(strUsages);
         if(sysNames.length != usages.length){
+            HostConnector.disconnect();
             throw new Exception("Unexpected result of parsing df -h");
         }
 

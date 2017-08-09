@@ -1,6 +1,6 @@
 package org.suns.data.collector.collectors.sheet421;
 
-import org.suns.data.collector.config.sheet412.Sheet421CoreConfig;
+import org.suns.data.collector.config.sheet421.Sheet421CoreConfig;
 import org.suns.database.utils.controller.Sheet421Controller;
 import org.suns.database.utils.model.Sheet421CoreModel;
 import org.suns.inspection.logger.InspectionLogger;
