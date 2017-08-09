@@ -1,21 +1,14 @@
 import org.junit.Test;
-import org.suns.data.collector.collectors.sheet411.Sheet411CoreCollector;
-import org.suns.data.collector.collectors.sheet411.Sheet411PersonalCollector;
-import org.suns.data.collector.collectors.sheet421.Sheet421CoreCollector;
-import org.suns.data.collector.collectors.sheet421.Sheet421PersonalCollector;
-import org.suns.data.collector.collectors.sheet422.Sheet422CoreCollector;
-import org.suns.data.collector.collectors.sheet422.Sheet422PersonalCollector;
-import org.suns.data.collector.collectors.sheet423.Sheet423CoreCollector;
-import org.suns.data.collector.collectors.sheet423.Sheet423PersonalCollector;
-import org.suns.data.collector.collectors.sheet424.Sheet424CoreCollector;
-import org.suns.data.collector.collectors.sheet424.Sheet424PersonalCollector;
-import org.suns.data.collector.collectors.sheet426.Sheet426CoreCollector;
-import org.suns.data.collector.collectors.sheet426.Sheet426PersonalCollector;
-import org.suns.data.collector.collectors.sheet428.Sheet428CoreCollector;
-import org.suns.data.collector.collectors.sheet428.Sheet428PersonalCollector;
-import org.suns.data.collector.collectors.sheet429.Sheet429CoreCollector;
-import org.suns.data.collector.collectors.sheet429.Sheet429PersonalCollector;
+import org.suns.data.collector.collectors.daily.monitor.UsageMemoryMonitor;
+import org.suns.data.collector.collectors.daily.monitor.WebLogicMonitor;
 import org.suns.database.utils.config.DBConfig;
+import org.suns.database.utils.model.DailyAppInspectionModel;
+import org.suns.host.config.AppCluster;
+import org.suns.host.config.AppHost;
+import org.suns.host.config.WebLogicServer;
+import org.suns.inspection.logger.InspectionLogger;
+
+import java.util.ArrayList;
 
 /**
  * Created by guanl on 6/28/2017.
@@ -26,8 +19,43 @@ public class CollectorsTest {
     @Test
     public void test_all_sheets(){
         try{
+            InspectionLogger.turnOnDebug();
             DBConfig.setConfigToMySQL();
-            /*
+            ArrayList<DailyAppInspectionModel> dailyAppModels = new ArrayList<>();
+            WebLogicServer webLogicServer = new WebLogicServer();
+
+            String server = "AdminServer";
+            ArrayList<String> servers = new ArrayList<>();
+            servers.add(server);
+
+            ArrayList<AppHost> hosts = new ArrayList<>();
+            AppHost host = new AppHost();
+            host.setServers(servers);
+            host.setIp("119.29.201.188");
+            host.setPort(22);
+            host.setUser("root");
+            host.setPassword("whiteglcap25");
+            host.setScriptCPUPath("/script/lc.sh");
+            host.setScriptMemoryPath("/script/lm.sh");
+            hosts.add(host);
+
+            AppCluster cluster = new AppCluster();
+            cluster.setHosts(hosts);
+            cluster.setName("Test Cluster");
+            ArrayList<AppCluster> clusters = new ArrayList<>();
+            clusters.add(cluster);
+
+            webLogicServer.setClusters(clusters);
+            webLogicServer.setPort(7001);
+            webLogicServer.setIp("192.168.14.90");
+            webLogicServer.setPassword("123456789");
+            webLogicServer.setUser("weblogic");
+
+            WebLogicMonitor.monitorWebLogicServer(webLogicServer, dailyAppModels);
+            System.out.println(UsageMemoryMonitor.monitorMemoryUsage(hosts));
+
+
+/*
             Sheet411PersonalCollector sheet411PersonalCollector
                     = new Sheet411PersonalCollector();
             sheet411PersonalCollector.inspect();
@@ -51,7 +79,7 @@ public class CollectorsTest {
             Sheet422CoreCollector sheet422CoreCollector
                     = new Sheet422CoreCollector();
             sheet422CoreCollector.inspect();
-*/
+
             Sheet423CoreCollector sheet423CoreCollector
                     = new Sheet423CoreCollector();
             sheet423CoreCollector.inspect();
@@ -59,7 +87,7 @@ public class CollectorsTest {
             Sheet423PersonalCollector sheet423PersonalCollector
                     = new Sheet423PersonalCollector();
             sheet423PersonalCollector.inspect();
-     /*
+
             Sheet424PersonalCollector sheet424PersonalCollector
                     = new Sheet424PersonalCollector();
             sheet424PersonalCollector.inspect();

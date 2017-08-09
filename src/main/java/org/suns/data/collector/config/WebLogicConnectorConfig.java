@@ -13,7 +13,7 @@ public class WebLogicConnectorConfig {
     private static String protocolProviderPackage = "weblogic.management.remote";
 
     private static String serverRunningState = "RUNNING";
-    private static String jdbcRunningState = "RUNNING";
+    private static String jdbcRunningState = "Running";
 
     public static String getJdbcRunningState() {
         return jdbcRunningState;

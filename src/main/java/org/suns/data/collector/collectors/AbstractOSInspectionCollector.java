@@ -24,10 +24,8 @@ public abstract class AbstractOSInspectionCollector extends AbstractDataCollecto
         String mountedSysCmd = DFFormat.getMountedSysCmd(sysType);
         String usageCmd = DFFormat.getUsageCmd(sysType);
         String strSysNames = HostConnector.executeCommand(mountedSysCmd);
-        //InspectionLogger.debug(strSysNames);
 
         String strUsages = HostConnector.executeCommand(usageCmd);
-        //InspectionLogger.debug(strUsages);
 
         String[] sysNames = parseSysNames(strSysNames);
         Float[] usages = parseUsages(strUsages);
@@ -59,10 +57,7 @@ public abstract class AbstractOSInspectionCollector extends AbstractDataCollecto
         String usageCmd = DFFormat.getUsageCmd(sysType);
 
         String strSysNames = HostConnector.executeCommand(mountedSysCmd);
-        //InspectionLogger.debug(strSysNames);
-
         String strUsages = HostConnector.executeCommand(usageCmd);
-        //InspectionLogger.debug(strUsages);
 
         String[] sysNames = parseSysNames(strSysNames);
         Float[] usages = parseUsages(strUsages);
@@ -79,6 +74,8 @@ public abstract class AbstractOSInspectionCollector extends AbstractDataCollecto
                 goldenUsage.add(usages[i]);
             }
         }
+
+        HostConnector.disconnect();
     }
 
     protected String[] parseSysNames(String strSysNames){
