@@ -2,6 +2,7 @@ package org.suns.data.collector.collectors.daily.monitor;
 
 import org.suns.data.collector.collectors.AbstractOSInspectionCollector;
 import org.suns.data.collector.config.DFFormat;
+import org.suns.data.collector.config.daily.AppInspectionConfig;
 import org.suns.host.config.AppHost;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class UsageSoftwareDirectoryMonitor extends AbstractOSInspectionCollector
 
     @Override
     protected String getSoftwareDirectory() {
-        return "/software";
+        return AppInspectionConfig.getSoftwareDirectory();
     }
 
     @Override
