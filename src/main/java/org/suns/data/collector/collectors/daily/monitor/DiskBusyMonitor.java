@@ -1,5 +1,6 @@
 package org.suns.data.collector.collectors.daily.monitor;
 
+import org.suns.database.utils.config.DBConfig;
 import org.suns.host.config.AppHost;
 
 import java.util.ArrayList;
@@ -23,6 +24,11 @@ public class DiskBusyMonitor {
 
             totalDiskBusy = totalDiskBusy + cpuUsage;
         }
-        return totalDiskBusy/cntHosts;
+
+        if(cntHosts == 0){
+            return (float) DBConfig.getDefaultNumericNullValue();
+        }else{
+            return totalDiskBusy/cntHosts;
+        }
     }
 }

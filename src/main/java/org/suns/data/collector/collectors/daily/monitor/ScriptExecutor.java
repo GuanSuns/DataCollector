@@ -30,7 +30,7 @@ public class ScriptExecutor {
             return null;
         }
 
-        return Float.valueOf(matcher.group())/100f;
+        return Float.valueOf(matcher.group());
     }
 
 

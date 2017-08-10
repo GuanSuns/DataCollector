@@ -2,6 +2,7 @@ package org.suns.data.collector.collectors.daily.monitor;
 
 import org.suns.data.collector.config.WebLogicConnectorConfig;
 import org.suns.data.collector.connector.WebLogicConnector;
+import org.suns.database.utils.config.DBConfig;
 import org.suns.database.utils.model.DailyAppInspectionModel;
 import org.suns.host.config.AppCluster;
 import org.suns.host.config.WebLogicServer;
@@ -93,7 +94,7 @@ public class WebLogicMonitor {
         }
 
         if(cntServer == 0){
-            dailyAppModel.setDataSourceConnectionCount(0f);
+            dailyAppModel.setDataSourceConnectionCount((float)DBConfig.getDefaultNumericNullValue());
         }else{
             dailyAppModel.setDataSourceConnectionCount(totalConnectionCnt/cntServer);
         }
@@ -211,7 +212,7 @@ public class WebLogicMonitor {
         }
 
         if(cntServer == 0){
-            dailyAppModel.setHoggingCount(0f);
+            dailyAppModel.setHoggingCount((float)DBConfig.getDefaultNumericNullValue());
         }else{
             dailyAppModel.setHoggingCount(hoggingThreadCnt/cntServer);
         }

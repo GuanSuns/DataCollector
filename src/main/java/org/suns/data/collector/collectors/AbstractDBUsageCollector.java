@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public abstract class AbstractUsageCollector extends AbstractDBCollector {
+public abstract class AbstractDBUsageCollector extends AbstractDBCollector {
     
     protected abstract String getSQLCmd();
     protected abstract String[] getFieldNames();

@@ -1,20 +1,16 @@
 package org.suns.data.collector.collectors.sheet423;
 
 import org.suns.data.collector.config.sheet423.Sheet423PersonalConfig;
-import org.suns.data.collector.connector.OracleConnector;
 import org.suns.database.utils.controller.Sheet423Controller;
 import org.suns.database.utils.model.AbstractUsageModel;
 import org.suns.database.utils.model.Sheet423PersonalModel;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
 /** ASM共享磁盘检查 **/
-public class Sheet423PersonalCollector extends AbstractSheet423Collector {
+public class Sheet423PersonalCollectorDB extends AbstractDBSheet423Collector {
     @Override
     protected String getSQLCmd() {
         return Sheet423PersonalConfig.getInspectSQL();

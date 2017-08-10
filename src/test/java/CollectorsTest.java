@@ -72,20 +72,20 @@ public class CollectorsTest {
                     = new Sheet421PersonalCollector();
             sheet421PersonalCollector.inspect();
             
-            Sheet422PersonalCollector sheet422PersonalCollector
-                    = new Sheet422PersonalCollector();
+            Sheet422PersonalCollectorDB sheet422PersonalCollector
+                    = new Sheet422PersonalCollectorDB();
             sheet422PersonalCollector.inspect();
 
-            Sheet422CoreCollector sheet422CoreCollector
-                    = new Sheet422CoreCollector();
+            Sheet422CoreCollectorDB sheet422CoreCollector
+                    = new Sheet422CoreCollectorDB();
             sheet422CoreCollector.inspect();
 
-            Sheet423CoreCollector sheet423CoreCollector
-                    = new Sheet423CoreCollector();
+            Sheet423CoreCollectorDB sheet423CoreCollector
+                    = new Sheet423CoreCollectorDB();
             sheet423CoreCollector.inspect();
 
-            Sheet423PersonalCollector sheet423PersonalCollector
-                    = new Sheet423PersonalCollector();
+            Sheet423PersonalCollectorDB sheet423PersonalCollector
+                    = new Sheet423PersonalCollectorDB();
             sheet423PersonalCollector.inspect();
 
             Sheet424PersonalCollector sheet424PersonalCollector

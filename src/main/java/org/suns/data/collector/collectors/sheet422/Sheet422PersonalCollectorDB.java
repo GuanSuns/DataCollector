@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /** 表空间使用率检查 **/
-public class Sheet422PersonalCollector extends AbstractSheet422Collector {
+public class Sheet422PersonalCollectorDB extends AbstractDBSheet422Collector {
 
     @Override
     protected String getSQLCmd() {

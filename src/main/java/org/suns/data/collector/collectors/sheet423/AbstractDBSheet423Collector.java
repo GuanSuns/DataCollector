@@ -1,11 +1,11 @@
 package org.suns.data.collector.collectors.sheet423;
 
-import org.suns.data.collector.collectors.AbstractUsageCollector;
+import org.suns.data.collector.collectors.AbstractDBUsageCollector;
 import org.suns.database.utils.model.AbstractUsageModel;
 import org.suns.database.utils.model.Sheet423CoreModel;
 import org.suns.database.utils.model.Sheet423PersonalModel;
 
-public abstract class AbstractSheet423Collector extends AbstractUsageCollector{
+public abstract class AbstractDBSheet423Collector extends AbstractDBUsageCollector {
     @Override
     protected AbstractUsageModel getNewModel(ModelType modelType) {
         switch (modelType){
