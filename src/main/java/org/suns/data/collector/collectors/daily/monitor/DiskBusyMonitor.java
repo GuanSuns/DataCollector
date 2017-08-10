@@ -4,25 +4,25 @@ import org.suns.host.config.AppHost;
 
 import java.util.ArrayList;
 
-public class UsageCPUMonitor {
-    public static Float monitorCPUUsage(ArrayList<AppHost> hosts) throws Exception{
-        Float totalCPUUsage = 0f;
+public class DiskBusyMonitor {
+    public static Float monitorDiskBusy(ArrayList<AppHost> hosts) throws Exception{
+        Float totalDiskBusy = 0f;
         int cntHosts = hosts.size();
 
         for(AppHost host: hosts){
             Float cpuUsage = ScriptExecutor.getFloatFromPercentageByScript(host.getUser()
                     , host.getPassword()
                     , host.getIp(), host.getPort()
-                    , ScriptExecutor.getScriptCmd(host.getScriptCPUPath()));
+                    , ScriptExecutor.getScriptCmd(host.getScriptDiskPath()));
 
             if(cpuUsage == null){
-                throw new Exception("Fail to get CPU Usage from host " + host.getIp()
+                throw new Exception("Fail to get Disk Busy from host " + host.getIp()
                         + ":" + host.getPort() + ", " + host.getUser()
                         + ", " + host.getPassword());
             }
 
-            totalCPUUsage = totalCPUUsage + cpuUsage;
+            totalDiskBusy = totalDiskBusy + cpuUsage;
         }
-        return totalCPUUsage/cntHosts;
+        return totalDiskBusy/cntHosts;
     }
 }

@@ -14,7 +14,7 @@ public class UsageMemoryMonitor {
             Float memoryUsage = ScriptExecutor.getFloatFromPercentageByScript(host.getUser()
                     , host.getPassword()
                     , host.getIp(), host.getPort()
-                    , AppInspectionConfig.getScriptCmd(host.getScriptMemoryPath()));
+                    , ScriptExecutor.getScriptCmd(host.getScriptMemoryPath()));
 
             if(memoryUsage == null){
                 throw new Exception("Fail to get Memory Usage from host " + host.getIp()

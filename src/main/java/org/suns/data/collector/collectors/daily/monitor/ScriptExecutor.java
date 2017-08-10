@@ -32,4 +32,10 @@ public class ScriptExecutor {
 
         return Float.valueOf(matcher.group())/100f;
     }
+
+
+
+    public static String getScriptCmd(String scriptPath){
+        return "cd /;." + scriptPath;
+    }
 }
