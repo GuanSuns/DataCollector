@@ -1,6 +1,7 @@
 package org.suns.data.collector.connector;
 
 import org.suns.data.collector.config.OracleConnectorConfig;
+import org.suns.inspection.logger.InspectionLogger;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -20,6 +21,10 @@ public class OracleConnector {
                 + host + ":"
                 + port + ":"
                 + sid;
+
+        InspectionLogger.debug("Connecting to DB Host " + host + ":"
+                + port + ", sid: " + sid + " , user: " + user
+                + " , password: " + password );
 
         try{
             Class.forName(OracleConnectorConfig.getDriver());

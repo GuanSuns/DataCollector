@@ -1,8 +1,6 @@
 package org.suns.data.collector.collectors.daily.database;
 
-import org.suns.data.collector.collectors.daily.monitor.DiskBusyMonitor;
-import org.suns.data.collector.collectors.daily.monitor.UsageCPUMonitor;
-import org.suns.data.collector.collectors.daily.monitor.UsageMemoryMonitor;
+import org.suns.data.collector.collectors.daily.monitor.*;
 import org.suns.database.utils.model.DailyDBInspectionModel;
 import org.suns.host.config.AppCluster;
 import org.suns.host.config.AppHost;
@@ -27,6 +25,8 @@ public abstract class AbstractDailyDBCollector {
             inspectUsageCPU(dailyDBModel, cluster);
             inspectUsageMemory(dailyDBModel, cluster);
             inspectDiskBusy(dailyDBModel, cluster);
+            inspectArchiveSpace(dailyDBModel, cluster);
+            inspectLongTermLock(dailyDBModel, cluster);
 
 
 
@@ -58,4 +58,23 @@ public abstract class AbstractDailyDBCollector {
         Float avgDiskBusy = DiskBusyMonitor.monitorDiskBusy(dbOSInspectionHosts);
         dailyDBModels.setDiskBusy(avgDiskBusy);
     }
+
+    protected void inspectArchiveSpace(DailyDBInspectionModel dailyDBModels
+            , AppCluster cluster) throws Exception{
+
+        ArrayList<AppHost> dbHosts = cluster.getHosts();
+        Float archiveSpaceUsage = ArchiveSpaceMonitor.monitorArchiveSpace(dbHosts.get(0));
+        dailyDBModels.setUsageArchiveSpace(archiveSpaceUsage);
+    }
+
+
+    protected void inspectLongTermLock(DailyDBInspectionModel dailyDBModels
+            , AppCluster cluster) throws Exception{
+
+        ArrayList<AppHost> dbHosts = cluster.getHosts();
+        int hasLongTermLock = DBLongTermLockMonitor.monitorLongTermLock(dbHosts.get(0));
+        dailyDBModels.setHasLongTermLock(hasLongTermLock);
+    }
+
+
 }

@@ -1,6 +1,8 @@
 import org.junit.Test;
+import org.suns.data.collector.collectors.daily.monitor.ArchiveSpaceMonitor;
 import org.suns.data.collector.collectors.daily.monitor.UsageSoftwareDirectoryMonitor;
 import org.suns.data.collector.collectors.daily.monitor.WebLogicMonitor;
+import org.suns.data.collector.collectors.sheet422.Sheet422PersonalCollectorDB;
 import org.suns.database.utils.config.DBConfig;
 import org.suns.database.utils.model.DailyAppInspectionModel;
 import org.suns.host.config.AppCluster;
@@ -19,6 +21,7 @@ public class CollectorsTest {
     @Test
     public void test_all_sheets(){
         try{
+
             InspectionLogger.turnOnDebug();
             DBConfig.setConfigToMySQL();
             ArrayList<DailyAppInspectionModel> dailyAppModels = new ArrayList<>();
@@ -51,10 +54,16 @@ public class CollectorsTest {
             webLogicServer.setPassword("123456789");
             webLogicServer.setUser("weblogic");
 
-            WebLogicMonitor.monitorWebLogicServer(webLogicServer, dailyAppModels);
-            System.out.println(UsageSoftwareDirectoryMonitor.monitorSoftwareDirectoryUsage(hosts));
+            //WebLogicMonitor.monitorWebLogicServer(webLogicServer, dailyAppModels);
+            //System.out.println(UsageSoftwareDirectoryMonitor.monitorSoftwareDirectoryUsage(hosts));
 
-
+            AppHost appHost = new AppHost();
+            appHost.setSid("ggjs");
+            appHost.setUser("dev_01");
+            appHost.setIp("192.168.14.82");
+            appHost.setPassword("a");
+            appHost.setPort(1521);
+            System.out.println(ArchiveSpaceMonitor.monitorArchiveSpace(appHost));
 /*
             Sheet411PersonalCollector sheet411PersonalCollector
                     = new Sheet411PersonalCollector();
