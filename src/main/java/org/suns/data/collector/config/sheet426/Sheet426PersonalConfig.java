@@ -54,12 +54,4 @@ public class Sheet426PersonalConfig {
     public static void setPasswords2(String[] passwords2) {
         Sheet426PersonalConfig.passwords2 = passwords2;
     }
-
-    public static String getORADetectionCmd(String logPath){
-        return "tail -300 " + logPath + " | grep ORA- | wc -l";
-    }
-
-    public static String getLogCmd(String logPath){
-        return "tail -300 " + logPath;
-    }
 }

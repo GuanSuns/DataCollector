@@ -28,9 +28,16 @@ public abstract class AbstractDailyAppCollector {
             initClusterHostsMap(webLogicServer);
             ArrayList<DailyAppInspectionModel> dailyAppModels = new ArrayList<>();
 
+            System.out.println("Weblogic Server 检查");
             inspectWebLogicServer(webLogicServer, dailyAppModels);
+
+            System.out.println("CPU 使用率检查");
             inspectCPU(dailyAppModels);
+
+            System.out.println("内存使用率检查");
             inspectMemory(dailyAppModels);
+
+            System.out.println("常用文件系统使用率检查");
             inspectSoftwareDirectoryUsage(dailyAppModels);
 
             for(DailyAppInspectionModel appModel : dailyAppModels){

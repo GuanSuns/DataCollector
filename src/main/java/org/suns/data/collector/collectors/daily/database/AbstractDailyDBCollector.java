@@ -22,13 +22,33 @@ public abstract class AbstractDailyDBCollector {
             DailyDBInspectionModel dailyDBModel = new DailyDBInspectionModel();
             dailyDBModel.setName(cluster.getName());
 
+            System.out.println(cluster.getPrintedName()
+                    + " CPU 使用率检查");
             inspectUsageCPU(dailyDBModel, cluster);
+
+            System.out.println(cluster.getPrintedName()
+                    + " 内存使用率检查");
             inspectUsageMemory(dailyDBModel, cluster);
+
+            System.out.println(cluster.getPrintedName()
+                    + " 磁盘繁忙程度检查");
             inspectDiskBusy(dailyDBModel, cluster);
+
+            System.out.println(cluster.getPrintedName()
+                    + " 归档空间使用率检查");
             inspectArchiveSpace(dailyDBModel, cluster);
+
+            System.out.println(cluster.getPrintedName()
+                    + " 数据库长时间锁检查");
             inspectLongTermLock(dailyDBModel, cluster);
 
+            System.out.println(cluster.getPrintedName()
+                    + " 表空间使用率检查");
+            inspectTableSpace(dailyDBModel, cluster);
 
+            System.out.println(cluster.getPrintedName()
+                    + " alert日志检查");
+            inspectLogErrorInfo(dailyDBModel, cluster);
 
             dailyDBModel.setInspectTime(new Timestamp(new Date().getTime()));
             saveToDB(dailyDBModel);
@@ -76,5 +96,18 @@ public abstract class AbstractDailyDBCollector {
         dailyDBModels.setHasLongTermLock(hasLongTermLock);
     }
 
+    protected void inspectTableSpace(DailyDBInspectionModel dailyDBModels
+            , AppCluster cluster) throws Exception{
 
+        ArrayList<AppHost> dbHosts = cluster.getHosts();
+        int hasOverloadedTableSpace = DBTableSpaceMonitor.monitorTableSpace(dbHosts.get(0));
+        dailyDBModels.setHasOverloadTableSpace(hasOverloadedTableSpace);
+    }
+
+    protected void inspectLogErrorInfo(DailyDBInspectionModel dailyDBModels
+            , AppCluster cluster) throws Exception{
+
+        int hasLogErrorInfo = LogErrorInfoMonitor.inspectLogErrorInfo(cluster);
+        dailyDBModels.setHasErrorInLog(hasLogErrorInfo);
+    }
 }

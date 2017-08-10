@@ -1,14 +1,21 @@
 package org.suns.data.collector.collectors.sheet426;
 
 import org.suns.data.collector.collectors.AbstractDataCollector;
+import org.suns.data.collector.config.sheet426.Sheet426Config;
 import org.suns.data.collector.connector.HostConnector;
 import org.suns.database.utils.model.Sheet426CoreModel;
 import org.suns.database.utils.model.Sheet426PersonalModel;
 
 public abstract class AbstractSheet426Collector extends AbstractDataCollector{
     protected abstract String[] getLogPaths(HostsId hostsId);
-    protected abstract String getORACmdByLogPath(String logPath);
-    protected abstract String getLogCmdByLogPath(String logPath);
+
+    protected String getORACmdByLogPath(String logPath) {
+        return Sheet426Config.getORADetectionCmd(logPath);
+    }
+
+    protected String getLogCmdByLogPath(String logPath) {
+        return Sheet426Config.getLogCmd(logPath);
+    }
 
     protected enum LogType{
         LOG20,
@@ -27,22 +34,29 @@ public abstract class AbstractSheet426Collector extends AbstractDataCollector{
         final String[] passwords = getPasswords(hostsId);
         final int[] ports = getPorts(hostsId);
 
-        int hostArrayIndex = logTypeEnumToIndex(logType);
-
-        HostConnector.connect(users[hostArrayIndex], passwords[hostArrayIndex]
-                , hosts[hostArrayIndex], ports[hostArrayIndex]);
-
-        String inspectCmd = getORACmdByLogPath(logPaths[hostArrayIndex]);
-        String strORA = HostConnector.executeCommand(inspectCmd);
-        int cntError = Integer.valueOf(strORA.trim());
-
+        int cntError = isHostsLogHasErrorInfo(hosts, ports
+                , users, passwords, logPaths);
         setErrorInfo(logType, sheet426Model, cntError);
+    }
 
-        String getLogCmd = getLogCmdByLogPath(logPaths[hostArrayIndex]);
-        String strLog = HostConnector.executeCommand(getLogCmd);
-        setLog(logType, sheet426Model, strLog);
+    public int isHostsLogHasErrorInfo(String[] hosts, int[] ports
+            , String[] users, String[] passwords
+            , String[] logPaths) throws Exception{
 
-        HostConnector.disconnect();
+        for(int i=0; i<hosts.length; i++){
+            HostConnector.connect(users[i], passwords[i]
+                    , hosts[i], ports[i]);
+
+            String inspectCmd = getORACmdByLogPath(logPaths[i]);
+            String strORA = HostConnector.executeCommand(inspectCmd);
+            HostConnector.disconnect();
+
+            int cntError = Integer.valueOf(strORA.trim());
+            if(cntError>0){
+                return 1;
+            }
+        }
+        return 0;
     }
 
     protected void setErrorInfo(LogType logType

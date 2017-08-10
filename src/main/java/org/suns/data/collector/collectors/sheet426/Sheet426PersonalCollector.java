@@ -5,7 +5,7 @@ import org.suns.data.collector.config.DFFormat;
 import org.suns.data.collector.config.sheet426.Sheet426PersonalConfig;
 import org.suns.data.collector.connector.HostConnector;
 import org.suns.data.collector.connector.OracleConnector;
-import org.suns.database.utils.config.Sheet426Config;
+import org.suns.data.collector.config.sheet426.Sheet426Config;
 import org.suns.database.utils.controller.Sheet426Controller;
 import org.suns.database.utils.model.Sheet426PersonalModel;
 
@@ -27,16 +27,6 @@ public class Sheet426PersonalCollector extends AbstractSheet426Collector{
         }
     }
 
-    @Override
-    protected String getORACmdByLogPath(String logPath) {
-        return Sheet426PersonalConfig.getORADetectionCmd(logPath);
-    }
-
-    @Override
-    protected String getLogCmdByLogPath(String logPath) {
-        return Sheet426PersonalConfig.getLogCmd(logPath);
-    }
-
     public void inspect() throws Exception{
         Sheet426PersonalModel sheet426Model = new Sheet426PersonalModel();
         inspect2(sheet426Model);
@@ -50,7 +40,6 @@ public class Sheet426PersonalCollector extends AbstractSheet426Collector{
 
     private void inspect2(Sheet426PersonalModel sheet426Model) throws Exception{
         inspectHostById(HostsId.HOST2, LogType.LOG20, sheet426Model);
-        inspectHostById(HostsId.HOST2, LogType.LOG21, sheet426Model);
     }
 
     @Override

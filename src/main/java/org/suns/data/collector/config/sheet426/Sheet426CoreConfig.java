@@ -84,14 +84,6 @@ public class Sheet426CoreConfig {
         Sheet426CoreConfig.logPath4 = logPath4;
     }
 
-    public static String getORADetectionCmd(String logPath){
-        return "tail -300 " + logPath + " | grep ORA- | wc -l";
-    }
-
-    public static String getLogCmd(String logPath){
-        return "tail -300 " + logPath;
-    }
-
     public static int[] getPorts2() {
         return ports2;
     }

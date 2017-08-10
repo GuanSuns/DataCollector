@@ -13,16 +13,16 @@ public class DBInspectionConfig {
                 "where file_type=\'ARCHIVED LOG\'";
     }
 
-    private static String hasLongTermLockState = "有";
-    private static String noLongTermLockState = "无";
+    private static String descriptionHasState = "有";
+    private static String descriptionNoState = "无";
     private static String[] dbLongTermLockFields = {"LOCK_CHECK"};
 
-    public static String getHasLongTermLockState() {
-        return hasLongTermLockState;
+    public static String getDescriptionHasState() {
+        return descriptionHasState;
     }
 
-    public static String getNoLongTermLockState() {
-        return noLongTermLockState;
+    public static String getDescriptionNoState() {
+        return descriptionNoState;
     }
 
     public static String getDbLongTermLockField() {
@@ -30,8 +30,8 @@ public class DBInspectionConfig {
     }
 
     private static String dbLongTermLockSQL = "select /*+rule*/ case when count(*)=0 " +
-            "then \'" + noLongTermLockState + "\' else \'"
-            + hasLongTermLockState + "\' end " + getDbLongTermLockField() +
+            "then \'" + descriptionNoState + "\' else \'"
+            + descriptionHasState + "\' end " + getDbLongTermLockField() +
             "  from gv$lock where type " +
             "in ('TM','TX') and ctime >600";
 
@@ -39,4 +39,18 @@ public class DBInspectionConfig {
         return dbLongTermLockSQL;
     }
 
+    private static String[] tableSpaceUsageFields = {"TBS_CHECK"};
+
+    public static String getTableSpaceUsageField(){
+        return tableSpaceUsageFields[0];
+    }
+
+    private static String tableSpaceUsageSQL = "SELECT case when count(*)=0 " +
+            "then \'" + descriptionNoState + "\' else \'"
+            + descriptionHasState + "\' end " + getTableSpaceUsageField() +
+            "  FROM dba_tablespace_usage_metrics where used_percent>90";
+
+    public static String getTableSpaceUsageSQL() {
+        return tableSpaceUsageSQL;
+    }
 }

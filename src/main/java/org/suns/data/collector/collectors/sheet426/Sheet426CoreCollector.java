@@ -1,8 +1,6 @@
 package org.suns.data.collector.collectors.sheet426;
 
-import org.suns.data.collector.collectors.AbstractDataCollector;
 import org.suns.data.collector.config.sheet426.Sheet426CoreConfig;
-import org.suns.data.collector.connector.HostConnector;
 import org.suns.database.utils.controller.Sheet426Controller;
 import org.suns.database.utils.model.Sheet426CoreModel;
 
@@ -27,16 +25,6 @@ public class Sheet426CoreCollector extends AbstractSheet426Collector{
         }
     }
 
-    @Override
-    protected String getORACmdByLogPath(String logPath) {
-        return Sheet426CoreConfig.getORADetectionCmd(logPath);
-    }
-
-    @Override
-    protected String getLogCmdByLogPath(String logPath) {
-        return Sheet426CoreConfig.getLogCmd(logPath);
-    }
-
     public void inspect() throws Exception{
         Sheet426CoreModel sheet426Model = new Sheet426CoreModel();
         inspect2(sheet426Model);
@@ -47,12 +35,10 @@ public class Sheet426CoreCollector extends AbstractSheet426Collector{
         if(!Sheet426Controller.addCore(sheet426Model)){
             throw new Exception("Fail to add Sheet 426 Core model to database");
         }
-
     }
 
     private void inspect2(Sheet426CoreModel sheet426Model) throws Exception{
         inspectHostById(HostsId.HOST2, LogType.LOG20, sheet426Model);
-        inspectHostById(HostsId.HOST2, LogType.LOG21, sheet426Model);
     }
 
     private void inspect3(Sheet426CoreModel sheet426Model) throws Exception{
@@ -61,7 +47,6 @@ public class Sheet426CoreCollector extends AbstractSheet426Collector{
 
     private void inspect4(Sheet426CoreModel sheet426Model) throws Exception{
         inspectHostById(HostsId.HOST4, LogType.LOG40, sheet426Model);
-        inspectHostById(HostsId.HOST4, LogType.LOG41, sheet426Model);
     }
 
     @Override

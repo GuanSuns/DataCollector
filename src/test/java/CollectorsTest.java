@@ -1,8 +1,10 @@
 import org.junit.Test;
 import org.suns.data.collector.collectors.daily.monitor.ArchiveSpaceMonitor;
+import org.suns.data.collector.collectors.daily.monitor.DBLongTermLockMonitor;
 import org.suns.data.collector.collectors.daily.monitor.UsageSoftwareDirectoryMonitor;
 import org.suns.data.collector.collectors.daily.monitor.WebLogicMonitor;
 import org.suns.data.collector.collectors.sheet422.Sheet422PersonalCollectorDB;
+import org.suns.data.collector.config.sheet426.Sheet426Config;
 import org.suns.database.utils.config.DBConfig;
 import org.suns.database.utils.model.DailyAppInspectionModel;
 import org.suns.host.config.AppCluster;
@@ -21,6 +23,8 @@ public class CollectorsTest {
     @Test
     public void test_all_sheets(){
         try{
+            String cmd = Sheet426Config.getORADetectionCmd("test.log");
+            System.out.println(cmd);
 
             InspectionLogger.turnOnDebug();
             DBConfig.setConfigToMySQL();
@@ -63,7 +67,7 @@ public class CollectorsTest {
             appHost.setIp("192.168.14.82");
             appHost.setPassword("a");
             appHost.setPort(1521);
-            System.out.println(ArchiveSpaceMonitor.monitorArchiveSpace(appHost));
+            System.out.println(DBLongTermLockMonitor.monitorLongTermLock(appHost));
 /*
             Sheet411PersonalCollector sheet411PersonalCollector
                     = new Sheet411PersonalCollector();
