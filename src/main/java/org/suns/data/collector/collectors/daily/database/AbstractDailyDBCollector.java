@@ -32,15 +32,15 @@ public abstract class AbstractDailyDBCollector {
 
             System.out.println(cluster.getPrintedName()
                     + " 磁盘繁忙程度检查");
-            inspectDiskBusy(dailyDBModel, cluster);
+            //inspectDiskBusy(dailyDBModel, cluster);
 
             System.out.println(cluster.getPrintedName()
                     + " 归档空间使用率检查");
-            inspectArchiveSpace(dailyDBModel, cluster);
+            //inspectArchiveSpace(dailyDBModel, cluster);
 
             System.out.println(cluster.getPrintedName()
                     + " 数据库长时间锁检查");
-            inspectLongTermLock(dailyDBModel, cluster);
+            //inspectLongTermLock(dailyDBModel, cluster);
 
             System.out.println(cluster.getPrintedName()
                     + " 表空间使用率检查");
