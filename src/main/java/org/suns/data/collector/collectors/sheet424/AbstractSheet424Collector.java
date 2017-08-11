@@ -1,6 +1,7 @@
 package org.suns.data.collector.collectors.sheet424;
 
 import org.suns.data.collector.collectors.AbstractDBCollector;
+import org.suns.data.collector.config.sheet424.Sheet424Config;
 import org.suns.data.collector.connector.OracleConnector;
 import org.suns.database.utils.model.Sheet424CoreModel;
 import org.suns.database.utils.model.Sheet424PersonalModel;
@@ -52,6 +53,19 @@ public abstract class AbstractSheet424Collector extends AbstractDBCollector {
         final String[] fieldNamesTemp = getFieldNamesStat();
         while (resultSetTemp.next()){
             String strStat = resultSetTemp.getString(fieldNamesTemp[0]);
+
+            if(strStat.equals("")){
+                throw new Exception("Unexpected result from " +
+                        "Sheet424 temp table inspection");
+            }else{
+                int cntTemp = Integer.valueOf(strStat);
+                if(cntTemp > 0){
+                    strStat = Sheet424Config.getHasTempTableDescription();
+                }else{
+                    strStat = Sheet424Config.getNoTempTableDescription();
+                }
+            }
+
             setStatusById(hostsId, strStat, sheet424Model);
         }
 

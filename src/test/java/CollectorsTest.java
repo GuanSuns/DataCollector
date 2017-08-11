@@ -1,8 +1,5 @@
 import org.junit.Test;
-import org.suns.data.collector.collectors.daily.monitor.ArchiveSpaceMonitor;
-import org.suns.data.collector.collectors.daily.monitor.DBLongTermLockMonitor;
-import org.suns.data.collector.collectors.daily.monitor.UsageSoftwareDirectoryMonitor;
-import org.suns.data.collector.collectors.daily.monitor.WebLogicMonitor;
+import org.suns.data.collector.collectors.daily.monitor.*;
 import org.suns.data.collector.collectors.sheet422.Sheet422PersonalCollectorDB;
 import org.suns.data.collector.config.sheet426.Sheet426Config;
 import org.suns.database.utils.config.DBConfig;
@@ -23,11 +20,9 @@ public class CollectorsTest {
     @Test
     public void test_all_sheets(){
         try{
-            String cmd = Sheet426Config.getORADetectionCmd("test.log");
-            System.out.println(cmd);
-
             InspectionLogger.turnOnDebug();
             DBConfig.setConfigToMySQL();
+
             ArrayList<DailyAppInspectionModel> dailyAppModels = new ArrayList<>();
             WebLogicServer webLogicServer = new WebLogicServer();
 
@@ -36,6 +31,7 @@ public class CollectorsTest {
             servers.add(server);
 
             ArrayList<AppHost> hosts = new ArrayList<>();
+            
             AppHost host = new AppHost();
             host.setServers(servers);
             host.setIp("119.29.201.188");
@@ -44,7 +40,42 @@ public class CollectorsTest {
             host.setPassword("whiteglcap25");
             host.setScriptCPUPath("/script/lc.sh");
             host.setScriptMemoryPath("/script/lm.sh");
+            host.setLogPath("/software/oracle/trace/test.log");
             hosts.add(host);
+
+            AppHost host2 = new AppHost();
+            host2.setServers(servers);
+            host2.setIp("119.29.201.188");
+            host2.setPort(22);
+            host2.setUser("root");
+            host2.setPassword("whiteglcap25");
+            host2.setScriptCPUPath("/script/lc.sh");
+            host2.setScriptMemoryPath("/script/lm.sh");
+            host2.setLogPath("/software/oracle/trace/test.log");
+            hosts.add(host2);
+
+            AppHost hostInspection = new AppHost();
+            hostInspection.setServers(servers);
+            hostInspection.setIp("119.29.201.188");
+            hostInspection.setPort(22);
+            hostInspection.setUser("root");
+            hostInspection.setPassword("whiteglcap25");
+            hostInspection.setScriptCPUPath("/script/lc.sh");
+            hostInspection.setScriptMemoryPath("/script/lm.sh");
+            hostInspection.setLogPath("/software/oracle/trace/test2.log");
+            host.setInspectionHost(hostInspection);
+
+            AppHost hostInspection2 = new AppHost();
+            hostInspection2.setServers(servers);
+            hostInspection2.setIp("119.29.201.188");
+            hostInspection2.setPort(22);
+            hostInspection2.setUser("root");
+            hostInspection2.setPassword("whiteglcap25");
+            hostInspection2.setScriptCPUPath("/script/lc.sh");
+            hostInspection2.setScriptMemoryPath("/script/lm.sh");
+            hostInspection2.setLogPath("/software/oracle/trace/test.log");
+            host2.setInspectionHost(hostInspection2);
+            
 
             AppCluster cluster = new AppCluster();
             cluster.setHosts(hosts);
@@ -67,7 +98,7 @@ public class CollectorsTest {
             appHost.setIp("192.168.14.82");
             appHost.setPassword("a");
             appHost.setPort(1521);
-            System.out.println(DBLongTermLockMonitor.monitorLongTermLock(appHost));
+            System.out.println(LogErrorInfoMonitor.inspectLogErrorInfo(cluster));
 /*
             Sheet411PersonalCollector sheet411PersonalCollector
                     = new Sheet411PersonalCollector();

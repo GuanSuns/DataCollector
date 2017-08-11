@@ -13,10 +13,10 @@ public class ArchiveSpaceMonitor {
                 , DBInspectionConfig.getArchiveSpaceSQL()
                 , DBInspectionConfig.getArchiveSpaceSQLField());
 
-        if(strResult.equals("")){
+        if(strResult.trim().equals("")){
             throw new Exception("Empty value from archive monitoring SQL");
         }
 
-        return Float.valueOf(strResult);
+        return Float.valueOf(strResult.trim());
     }
 }

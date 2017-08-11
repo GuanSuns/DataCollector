@@ -20,10 +20,10 @@ public class Sheet424PersonalConfig {
 
     private static String[] fieldNamesStat = {"temp Table Statistics"};
 
-    private static String tempStatSQL = "select '有 '||count(*)||'张表' \""
-            + fieldNamesStat[0] +"\"\n" +
-            "  from dba_tables\n" +
-            " where temporary='Y' AND  last_analyzed is not null\n";
+    private static String tempStatSQL = "select count(*) \""
+            + fieldNamesStat[0] +"\" " +
+            "  from dba_tables " +
+            " where temporary='Y' AND  last_analyzed is not null ";
 
     public static String[] getInspectedHosts() {
         return inspectedHosts;

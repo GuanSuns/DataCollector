@@ -1,20 +1,20 @@
 package org.suns.data.collector.collectors.sheet422;
 
-import org.suns.data.collector.collectors.AbstractDBUsageCollector;
-import org.suns.database.utils.model.AbstractUsageModel;
-import org.suns.database.utils.model.Sheet422CoreModel;
-import org.suns.database.utils.model.Sheet422PersonalModel;
 
-public abstract class AbstractDBSheet422Collector extends AbstractDBUsageCollector {
-    @Override
-    protected AbstractUsageModel getNewModel(ModelType modelType) {
-        switch (modelType){
-            case CORE:
-                return new Sheet422CoreModel();
-            case PERSONAL:
-                return new Sheet422PersonalModel();
-            default:
-                return null;
-        }
+import org.suns.data.collector.collectors.daily.monitor.DBTableSpaceMonitor;
+import org.suns.host.config.AppHost;
+
+public class AbstractDBSheet422Collector {
+    protected int hasOverloadedTableSpace(String host, int port
+            , String user, String password) throws Exception{
+
+        AppHost appHost = new AppHost();
+        appHost.setIp(host);
+        appHost.setPassword(password);
+        appHost.setUser(user);
+        appHost.setPort(port);
+
+        return DBTableSpaceMonitor.monitorTableSpace(appHost);
     }
+
 }

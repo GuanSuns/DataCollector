@@ -12,7 +12,7 @@ public class DBTableSpaceMonitor {
                 , DBInspectionConfig.getTableSpaceUsageSQL()
                 , DBInspectionConfig.getTableSpaceUsageField());
 
-        if(strResult.equals("")){
+        if(strResult.trim().equals("")){
             throw new Exception("Empty value from table " +
                     "space monitoring SQL");
         }

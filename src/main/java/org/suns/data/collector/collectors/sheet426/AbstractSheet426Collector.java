@@ -5,6 +5,7 @@ import org.suns.data.collector.config.sheet426.Sheet426Config;
 import org.suns.data.collector.connector.HostConnector;
 import org.suns.database.utils.model.Sheet426CoreModel;
 import org.suns.database.utils.model.Sheet426PersonalModel;
+import org.suns.inspection.logger.InspectionLogger;
 
 public abstract class AbstractSheet426Collector extends AbstractDataCollector{
     protected abstract String[] getLogPaths(HostsId hostsId);
@@ -49,6 +50,9 @@ public abstract class AbstractSheet426Collector extends AbstractDataCollector{
 
             String inspectCmd = getORACmdByLogPath(logPaths[i]);
             String strORA = HostConnector.executeCommand(inspectCmd);
+
+            InspectionLogger.debug("Cmd: " + inspectCmd + ", Result: " + strORA.trim());
+
             HostConnector.disconnect();
 
             int cntError = Integer.valueOf(strORA.trim());

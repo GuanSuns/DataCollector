@@ -12,7 +12,7 @@ public class DBLongTermLockMonitor {
                 , DBInspectionConfig.getDbLongTermLockSQL()
                 , DBInspectionConfig.getDbLongTermLockField());
 
-        if(strResult.equals("")){
+        if(strResult.trim().equals("")){
             throw new Exception("Empty value from long " +
                     "term lock monitoring SQL");
         }
