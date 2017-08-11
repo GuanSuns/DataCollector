@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /** 表空间使用率检查 **/
-public class Sheet422PersonalCollectorDB extends AbstractDBSheet422Collector {
+public class Sheet422PersonalCollector extends AbstractDBSheet422Collector {
 
 
     public void inspect() throws Exception{

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /** ASM共享磁盘检查 **/
-public class Sheet423PersonalCollectorDB extends AbstractDBSheet423Collector {
+public class Sheet423PersonalCollector extends AbstractDBSheet423Collector {
     @Override
     protected String getSQLCmd() {
         return Sheet423PersonalConfig.getInspectSQL();

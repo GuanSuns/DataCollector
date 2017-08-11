@@ -1,7 +1,5 @@
 import org.junit.Test;
 import org.suns.data.collector.collectors.daily.monitor.*;
-import org.suns.data.collector.collectors.sheet422.Sheet422PersonalCollectorDB;
-import org.suns.data.collector.config.sheet426.Sheet426Config;
 import org.suns.database.utils.config.DBConfig;
 import org.suns.database.utils.model.DailyAppInspectionModel;
 import org.suns.host.config.AppCluster;
@@ -116,20 +114,20 @@ public class CollectorsTest {
                     = new Sheet421PersonalCollector();
             sheet421PersonalCollector.inspect();
             
-            Sheet422PersonalCollectorDB sheet422PersonalCollector
-                    = new Sheet422PersonalCollectorDB();
+            Sheet422PersonalCollector sheet422PersonalCollector
+                    = new Sheet422PersonalCollector();
             sheet422PersonalCollector.inspect();
 
-            Sheet422CoreCollectorDB sheet422CoreCollector
-                    = new Sheet422CoreCollectorDB();
+            Sheet422CoreCollector sheet422CoreCollector
+                    = new Sheet422CoreCollector();
             sheet422CoreCollector.inspect();
 
-            Sheet423CoreCollectorDB sheet423CoreCollector
-                    = new Sheet423CoreCollectorDB();
+            Sheet423CoreCollector sheet423CoreCollector
+                    = new Sheet423CoreCollector();
             sheet423CoreCollector.inspect();
 
-            Sheet423PersonalCollectorDB sheet423PersonalCollector
-                    = new Sheet423PersonalCollectorDB();
+            Sheet423PersonalCollector sheet423PersonalCollector
+                    = new Sheet423PersonalCollector();
             sheet423PersonalCollector.inspect();
 
             Sheet424PersonalCollector sheet424PersonalCollector
