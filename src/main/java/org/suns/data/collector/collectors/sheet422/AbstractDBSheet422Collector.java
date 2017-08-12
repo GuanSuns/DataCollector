@@ -6,13 +6,14 @@ import org.suns.host.config.AppHost;
 
 public class AbstractDBSheet422Collector {
     protected int hasOverloadedTableSpace(String host, int port
-            , String user, String password) throws Exception{
+            , String user, String password, String sid) throws Exception{
 
         AppHost appHost = new AppHost();
         appHost.setIp(host);
         appHost.setPassword(password);
         appHost.setUser(user);
         appHost.setPort(port);
+        appHost.setSid(sid);
 
         return DBTableSpaceMonitor.monitorTableSpace(appHost);
     }

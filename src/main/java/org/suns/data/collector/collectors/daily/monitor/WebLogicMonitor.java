@@ -40,20 +40,20 @@ public class WebLogicMonitor {
 
             ArrayList<String> servers = cluster.getServers();
 
-            System.out.println("Monitoring Cluster \'"
-                    + cluster.getName() + "\' Svr State");
+            System.out.println("\n----集群 \'"
+                    + cluster.getName() + "\' Svr State 检查");
             inspectSvrState(servers, dailyAppModel);
 
-            System.out.println("Monitoring Cluster \'"
-                    + cluster.getName() + "\' Hogging Thread Count");
+            System.out.println("----集群 \'"
+                    + cluster.getName() + "\' Hogging线程平均计数检查");
             inspectHoggingThreadCnt(servers, dailyAppModel);
 
-            System.out.println("Monitoring Cluster \'"
-                    + cluster.getName() + "\' JDBC State");
+            System.out.println("----集群 \'"
+                    + cluster.getName() + "\' JDBC运行State检查");
             inspectClusterJDBCState(servers, dailyAppModel);
 
-            System.out.println("Monitoring Cluster \'"
-                    + cluster.getName() + "\' JDBC Current Connection Count");
+            System.out.println("----集群 \'"
+                    + cluster.getName() + "\' JDBC数据源活动连接计数检查");
             inspectClusterJDBCCnt(servers, dailyAppModel);
 
             InspectionLogger.debug(dailyAppModel.toString());

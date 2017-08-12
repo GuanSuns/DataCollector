@@ -32,9 +32,10 @@ public class Sheet422PersonalCollector extends AbstractDBSheet422Collector {
         String[] hosts = Sheet422PersonalConfig.getInspectedHosts();
         String[] passwords = Sheet422PersonalConfig.getPasswords();
         String[] users = Sheet422PersonalConfig.getUsers();
+        String[] sids = Sheet422PersonalConfig.getSid();
         int[] ports = Sheet422PersonalConfig.getPorts();
 
         sheet422Model.setUsage2((float)hasOverloadedTableSpace(hosts[0]
-                , ports[0], passwords[0], users[0]));
+                , ports[0], users[0], passwords[0], sids[0]));
     }
 }

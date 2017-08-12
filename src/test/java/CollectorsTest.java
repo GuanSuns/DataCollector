@@ -73,7 +73,6 @@ public class CollectorsTest {
             hostInspection2.setScriptMemoryPath("/script/lm.sh");
             hostInspection2.setLogPath("/software/oracle/trace/test.log");
             host2.setInspectionHost(hostInspection2);
-            
 
             AppCluster cluster = new AppCluster();
             cluster.setHosts(hosts);
@@ -87,8 +86,8 @@ public class CollectorsTest {
             webLogicServer.setPassword("123456789");
             webLogicServer.setUser("weblogic");
 
-            //WebLogicMonitor.monitorWebLogicServer(webLogicServer, dailyAppModels);
-            //System.out.println(UsageSoftwareDirectoryMonitor.monitorSoftwareDirectoryUsage(hosts));
+            WebLogicMonitor.monitorWebLogicServer(webLogicServer, dailyAppModels);
+            System.out.println(UsageSoftwareDirectoryMonitor.monitorSoftwareDirectoryUsage(hosts));
 
             AppHost appHost = new AppHost();
             appHost.setSid("ggjs");

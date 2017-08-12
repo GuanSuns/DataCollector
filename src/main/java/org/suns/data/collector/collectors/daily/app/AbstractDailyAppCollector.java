@@ -22,22 +22,28 @@ public abstract class AbstractDailyAppCollector {
     protected HashMap<String, ArrayList<AppHost>> clusterHostsMap;
 
     public void inspect() throws Exception{
+        System.out.println("\n日巡检: 应用检查");
+
         webLogicServers = getWebLogicServers();
 
         for(WebLogicServer webLogicServer: webLogicServers){
             initClusterHostsMap(webLogicServer);
             ArrayList<DailyAppInspectionModel> dailyAppModels = new ArrayList<>();
 
-            System.out.println("Weblogic Server 检查");
+            System.out.println("\n--WebLogicServer \'" + webLogicServer.getIp()
+                    + "\' WebLogic Server 检查");
             inspectWebLogicServer(webLogicServer, dailyAppModels);
 
-            System.out.println("CPU 使用率检查");
+            System.out.println("\n--WebLogicServer \'" + webLogicServer.getIp()
+                    + "\' CPU 使用率检查");
             inspectCPU(dailyAppModels);
 
-            System.out.println("内存使用率检查");
+            System.out.println("\n--WebLogicServer \'" + webLogicServer.getIp()
+                    + "\' 内存使用率检查");
             inspectMemory(dailyAppModels);
 
-            System.out.println("常用文件系统使用率检查");
+            System.out.println("\n--WebLogicServer \'" + webLogicServer.getIp()
+                    + "\' 常用文件系统使用率检查");
             inspectSoftwareDirectoryUsage(dailyAppModels);
 
             for(DailyAppInspectionModel appModel : dailyAppModels){
@@ -54,6 +60,9 @@ public abstract class AbstractDailyAppCollector {
 
     protected void inspectMemory(ArrayList<DailyAppInspectionModel> dailyAppModels) throws Exception{
         for(DailyAppInspectionModel dailyAppModel : dailyAppModels){
+            System.out.println("----集群 \'"
+                    + dailyAppModel.getName() + "\' 内存使用情况检查");
+
             String clusterName = dailyAppModel.getName();
 
             if(!clusterHostsMap.containsKey(clusterName)){
@@ -67,6 +76,9 @@ public abstract class AbstractDailyAppCollector {
 
     protected void inspectSoftwareDirectoryUsage(ArrayList<DailyAppInspectionModel> dailyAppModels) throws Exception{
         for(DailyAppInspectionModel dailyAppModel : dailyAppModels){
+            System.out.println("----集群 \'"
+                    + dailyAppModel.getName() + "\' Software目录使用率检查");
+
             String clusterName = dailyAppModel.getName();
 
             if(!clusterHostsMap.containsKey(clusterName)){
@@ -80,6 +92,9 @@ public abstract class AbstractDailyAppCollector {
 
     protected void inspectCPU(ArrayList<DailyAppInspectionModel> dailyAppModels) throws Exception{
         for(DailyAppInspectionModel dailyAppModel : dailyAppModels){
+            System.out.println("----集群 \'"
+                    + dailyAppModel.getName() + "\' CPU使用率检查");
+
             String clusterName = dailyAppModel.getName();
 
             if(!clusterHostsMap.containsKey(clusterName)){
@@ -92,13 +107,13 @@ public abstract class AbstractDailyAppCollector {
     }
 
     protected void initClusterHostsMap(WebLogicServer webLogicServer){
-        HashMap<String, ArrayList<AppHost>> mClusterHostsMap = new HashMap<>();
+        HashMap<String, ArrayList<AppHost>> mClusterOSInspectHostsMap = new HashMap<>();
 
         ArrayList<AppCluster> clusters = webLogicServer.getClusters();
         for(AppCluster cluster : clusters){
-            mClusterHostsMap.put(cluster.getName(), cluster.getHosts());
+            mClusterOSInspectHostsMap.put(cluster.getName(), cluster.getHosts());
         }
 
-        clusterHostsMap = mClusterHostsMap;
+        clusterHostsMap = mClusterOSInspectHostsMap;
     }
 }

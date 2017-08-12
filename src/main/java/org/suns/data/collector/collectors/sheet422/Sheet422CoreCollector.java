@@ -1,6 +1,7 @@
 package org.suns.data.collector.collectors.sheet422;
 
 import org.suns.data.collector.config.sheet422.Sheet422CoreConfig;
+import org.suns.data.collector.config.sheet422.Sheet422PersonalConfig;
 import org.suns.database.utils.controller.Sheet422Controller;
 import org.suns.database.utils.model.AbstractDataModel;
 import org.suns.database.utils.model.AbstractUsageModel;
@@ -31,30 +32,33 @@ public class Sheet422CoreCollector extends AbstractDBSheet422Collector {
     private void inspect2(Sheet422CoreModel dataModel) throws Exception{
         String[] hosts = Sheet422CoreConfig.getInspectedHosts2();
         String[] passwords = Sheet422CoreConfig.getPasswords2();
-        String[] users = Sheet422CoreConfig.getUsers2(); 
+        String[] users = Sheet422CoreConfig.getUsers2();
+        String[] sids = Sheet422CoreConfig.getSid2();
         int[] ports = Sheet422CoreConfig.getPorts2();
         
         dataModel.setUsage2((float)hasOverloadedTableSpace(hosts[0]
-                , ports[0], passwords[0], users[0]));
+                , ports[0], users[0], passwords[0], sids[0]));
     }
 
     private void inspect3(Sheet422CoreModel dataModel) throws Exception{
         String[] hosts = Sheet422CoreConfig.getInspectedHosts3();
         String[] passwords = Sheet422CoreConfig.getPasswords3();
         String[] users = Sheet422CoreConfig.getUsers3();
+        String[] sids = Sheet422CoreConfig.getSid3();
         int[] ports = Sheet422CoreConfig.getPorts3();
 
-        dataModel.setUsage3((float)hasOverloadedTableSpace(hosts[0]
-                , ports[0], passwords[0], users[0]));
+        dataModel.setUsage2((float)hasOverloadedTableSpace(hosts[0]
+                , ports[0], users[0], passwords[0], sids[0]));
     }
 
     private void inspect4(Sheet422CoreModel dataModel) throws Exception{
         String[] hosts = Sheet422CoreConfig.getInspectedHosts4();
         String[] passwords = Sheet422CoreConfig.getPasswords4();
         String[] users = Sheet422CoreConfig.getUsers4();
+        String[] sids = Sheet422CoreConfig.getSid4();
         int[] ports = Sheet422CoreConfig.getPorts4();
 
-        dataModel.setUsage4((float)hasOverloadedTableSpace(hosts[0]
-                , ports[0], passwords[0], users[0]));
+        dataModel.setUsage2((float)hasOverloadedTableSpace(hosts[0]
+                , ports[0], users[0], passwords[0], sids[0]));
     }
 }
