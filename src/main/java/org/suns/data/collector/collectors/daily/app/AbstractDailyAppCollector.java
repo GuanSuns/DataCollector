@@ -37,11 +37,11 @@ public abstract class AbstractDailyAppCollector {
 
             System.out.println("\n- - WebLogicServer \'" + webLogicServer.getIp()
                     + "\' CPU 使用率检查");
-            //inspectCPU(dailyAppModels);
+            inspectCPU(dailyAppModels);
 
             System.out.println("\n- - WebLogicServer \'" + webLogicServer.getIp()
                     + "\' 内存使用率检查");
-            //inspectMemory(dailyAppModels);
+            inspectMemory(dailyAppModels);
 
             System.out.println("\n- - WebLogicServer \'" + webLogicServer.getIp()
                     + "\' 常用文件系统使用率检查");

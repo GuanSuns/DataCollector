@@ -26,15 +26,15 @@ public abstract class AbstractDailyDBCollector {
 
             System.out.println("\n- - 集群 \'" + cluster.getPrintedName()
                     + "\' CPU 使用率检查");
-            //inspectUsageCPU(dailyDBModel, cluster);
+            inspectUsageCPU(dailyDBModel, cluster);
 
             System.out.println("- - 集群 \'" + cluster.getPrintedName()
                     + "\' 内存使用率检查");
-            //inspectUsageMemory(dailyDBModel, cluster);
+            inspectUsageMemory(dailyDBModel, cluster);
 
             System.out.println("- - 集群 \'" + cluster.getPrintedName()
                     + "\' 磁盘繁忙程度检查");
-            //inspectDiskBusy(dailyDBModel, cluster);
+            inspectDiskBusy(dailyDBModel, cluster);
 
             System.out.println("- - 集群 \'" + cluster.getPrintedName()
                     + "\' 归档空间使用率检查");

@@ -36,6 +36,6 @@ public class ScriptExecutor {
 
 
     public static String getScriptCmd(String scriptPath){
-        return "cd /;." + scriptPath;
+        return "export LANG=en_US; cd /; bash " + scriptPath;
     }
 }
