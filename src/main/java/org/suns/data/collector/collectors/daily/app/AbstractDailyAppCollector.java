@@ -27,22 +27,23 @@ public abstract class AbstractDailyAppCollector {
         webLogicServers = getWebLogicServers();
 
         for(WebLogicServer webLogicServer: webLogicServers){
+
             initClusterHostsMap(webLogicServer);
             ArrayList<DailyAppInspectionModel> dailyAppModels = new ArrayList<>();
 
-            System.out.println("\n--WebLogicServer \'" + webLogicServer.getIp()
+            System.out.println("\n- - WebLogicServer \'" + webLogicServer.getIp()
                     + "\' WebLogic Server 检查");
             inspectWebLogicServer(webLogicServer, dailyAppModels);
 
-            System.out.println("\n--WebLogicServer \'" + webLogicServer.getIp()
+            System.out.println("\n- - WebLogicServer \'" + webLogicServer.getIp()
                     + "\' CPU 使用率检查");
-            inspectCPU(dailyAppModels);
+            //inspectCPU(dailyAppModels);
 
-            System.out.println("\n--WebLogicServer \'" + webLogicServer.getIp()
+            System.out.println("\n- - WebLogicServer \'" + webLogicServer.getIp()
                     + "\' 内存使用率检查");
-            inspectMemory(dailyAppModels);
+            //inspectMemory(dailyAppModels);
 
-            System.out.println("\n--WebLogicServer \'" + webLogicServer.getIp()
+            System.out.println("\n- - WebLogicServer \'" + webLogicServer.getIp()
                     + "\' 常用文件系统使用率检查");
             inspectSoftwareDirectoryUsage(dailyAppModels);
 
@@ -60,7 +61,7 @@ public abstract class AbstractDailyAppCollector {
 
     protected void inspectMemory(ArrayList<DailyAppInspectionModel> dailyAppModels) throws Exception{
         for(DailyAppInspectionModel dailyAppModel : dailyAppModels){
-            System.out.println("----集群 \'"
+            System.out.println("- - - - 集群 \'"
                     + dailyAppModel.getName() + "\' 内存使用情况检查");
 
             String clusterName = dailyAppModel.getName();
@@ -76,7 +77,7 @@ public abstract class AbstractDailyAppCollector {
 
     protected void inspectSoftwareDirectoryUsage(ArrayList<DailyAppInspectionModel> dailyAppModels) throws Exception{
         for(DailyAppInspectionModel dailyAppModel : dailyAppModels){
-            System.out.println("----集群 \'"
+            System.out.println("- - - - 集群 \'"
                     + dailyAppModel.getName() + "\' Software目录使用率检查");
 
             String clusterName = dailyAppModel.getName();
@@ -92,7 +93,7 @@ public abstract class AbstractDailyAppCollector {
 
     protected void inspectCPU(ArrayList<DailyAppInspectionModel> dailyAppModels) throws Exception{
         for(DailyAppInspectionModel dailyAppModel : dailyAppModels){
-            System.out.println("----集群 \'"
+            System.out.println("- - - - 集群 \'"
                     + dailyAppModel.getName() + "\' CPU使用率检查");
 
             String clusterName = dailyAppModel.getName();

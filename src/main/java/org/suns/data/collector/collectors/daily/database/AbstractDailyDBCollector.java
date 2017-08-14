@@ -16,7 +16,7 @@ public abstract class AbstractDailyDBCollector {
     protected ArrayList<AppCluster> clusters = null;
 
     public void inspect() throws Exception{
-        System.out.println("日巡检: 数据库检查");
+        System.out.println("\n日巡检: 数据库检查");
 
         clusters = getClusters();
 
@@ -24,31 +24,31 @@ public abstract class AbstractDailyDBCollector {
             DailyDBInspectionModel dailyDBModel = new DailyDBInspectionModel();
             dailyDBModel.setName(cluster.getName());
 
-            System.out.println("\n--集群 \'" + cluster.getPrintedName()
+            System.out.println("\n- - 集群 \'" + cluster.getPrintedName()
                     + "\' CPU 使用率检查");
-            inspectUsageCPU(dailyDBModel, cluster);
+            //inspectUsageCPU(dailyDBModel, cluster);
 
-            System.out.println("--集群 \'" + cluster.getPrintedName()
+            System.out.println("- - 集群 \'" + cluster.getPrintedName()
                     + "\' 内存使用率检查");
-            inspectUsageMemory(dailyDBModel, cluster);
+            //inspectUsageMemory(dailyDBModel, cluster);
 
-            System.out.println("--集群 \'" + cluster.getPrintedName()
+            System.out.println("- - 集群 \'" + cluster.getPrintedName()
                     + "\' 磁盘繁忙程度检查");
             //inspectDiskBusy(dailyDBModel, cluster);
 
-            System.out.println("--集群 \'" + cluster.getPrintedName()
+            System.out.println("- - 集群 \'" + cluster.getPrintedName()
                     + "\' 归档空间使用率检查");
-            //inspectArchiveSpace(dailyDBModel, cluster);
+            inspectArchiveSpace(dailyDBModel, cluster);
 
-            System.out.println("--集群 \'" + cluster.getPrintedName()
+            System.out.println("- - 集群 \'" + cluster.getPrintedName()
                     + "\' 数据库长时间锁检查");
-            //inspectLongTermLock(dailyDBModel, cluster);
+            inspectLongTermLock(dailyDBModel, cluster);
 
-            System.out.println("--集群 \'" + cluster.getPrintedName()
+            System.out.println("- - 集群 \'" + cluster.getPrintedName()
                     + "\' 表空间使用率检查");
             inspectTableSpace(dailyDBModel, cluster);
 
-            System.out.println("--集群 \'" + cluster.getPrintedName()
+            System.out.println("- - 集群 \'" + cluster.getPrintedName()
                     + "\' alert日志检查");
             inspectLogErrorInfo(dailyDBModel, cluster);
 
