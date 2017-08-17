@@ -6,6 +6,8 @@ import org.suns.inspection.logger.InspectionLogger;
 
 import java.io.*;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by guanl on 6/28/2017.
@@ -97,7 +99,6 @@ public class HostConnector {
     public static String executeSuCommand(String command, String rootPassword) throws Exception{
         BufferedReader reader = null;
         ChannelShell  channel = null;
-        StringBuffer stringBuffer = new StringBuffer();
         String errorInfo = "";
         String result = "";
 
@@ -108,34 +109,42 @@ public class HostConnector {
             OutputStream out = channel.getOutputStream();
             InputStream in = channel.getInputStream();
 
-
             String suCMD = "su -u\n";
             out.write(suCMD.getBytes());
             out.flush();
 
             String suResult = getInputStreamResult(in);
-            while(!suResult.contains("Password")){
-                Thread.sleep(100);
+
+            int waitSuCnt = 0;
+            while(!suResult.contains("Password") && waitSuCnt < 90){
+                Thread.sleep(1000);
                 suResult = getInputStreamResult(in);
+                waitSuCnt++;
             }
 
             String password = rootPassword + "\n";
             out.write(password.getBytes());
             out.flush();
 
-            Thread.sleep(100);
-
-            String executedCmd = command + "\n";
+            String executedCmd = command + ";exit;\n";
             out.write(executedCmd.getBytes());
             out.flush();
 
-            Thread.sleep(100);
-
-            String strExit = "exit\n";
-            out.write(strExit.getBytes());
-            out.flush();
-
             result = getInputStreamResult(in);
+            String rex = "\\d+(\\.\\d+)?%";
+            Pattern pattern = Pattern.compile(rex);
+            Matcher matcher = pattern.matcher(result);
+            int cntSleep = 0;
+            while(!matcher.find() && cntSleep < 90){
+
+                InspectionLogger.debug("Waiting for script result: " + result);
+
+                Thread.sleep(1000);
+                result = getInputStreamResult(in);
+                matcher = pattern.matcher(result);
+                cntSleep++;
+            }
+
             InspectionLogger.debug(result);
             out.close();
 
@@ -159,7 +168,15 @@ public class HostConnector {
             throw new Exception(errorInfo);
         }
 
-        return result;
+        String rex = "\\d+(\\.\\d+)?%";
+        Pattern pattern = Pattern.compile(rex);
+        Matcher matcher = pattern.matcher(result);
+
+        if(!matcher.find()){
+            return "";
+        }else{
+            return matcher.group();
+        }
     }
 
     private static String getInputStreamResult(InputStream in) throws Exception{

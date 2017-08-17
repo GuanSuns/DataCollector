@@ -11,8 +11,8 @@ public class DiskBusyMonitor {
         int cntHosts = hosts.size();
 
         for(AppHost host: hosts){
-            Float cpuUsage = ScriptExecutor.getFloatFromPercentageByScript(host.getUser()
-                    , host.getPassword()
+            Float cpuUsage = ScriptExecutor.getFloatFromPercentageByAixScript(host.getUser()
+                    , host.getPassword(), host.getRootPassword()
                     , host.getIp(), host.getPort()
                     , ScriptExecutor.getScriptCmd(host.getScriptDiskPath()));
 
