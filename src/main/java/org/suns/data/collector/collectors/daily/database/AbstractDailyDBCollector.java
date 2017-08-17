@@ -61,7 +61,7 @@ public abstract class AbstractDailyDBCollector {
             , AppCluster cluster) throws Exception{
 
         ArrayList<AppHost> dbOSInspectionHosts = cluster.getOSInspectionHosts();
-        Float avgCPUUsage = UsageCPUMonitor.monitorCPUUsage(dbOSInspectionHosts);
+        Float avgCPUUsage = UsageCPUMonitor.monitorAixCPUUsage(dbOSInspectionHosts);
         dailyDBModels.setUsageCPU(avgCPUUsage);
     }
 

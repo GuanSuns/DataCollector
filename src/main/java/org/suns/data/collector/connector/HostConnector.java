@@ -4,9 +4,7 @@ import com.jcraft.jsch.*;
 import org.suns.data.collector.config.HostConnectorConfig;
 import org.suns.inspection.logger.InspectionLogger;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.Properties;
 
 /**
@@ -94,5 +92,89 @@ public class HostConnector {
         }
 
         return stringBuffer.toString();
+    }
+
+    public static String executeSuCommand(String command, String rootPassword) throws Exception{
+        BufferedReader reader = null;
+        ChannelShell  channel = null;
+        StringBuffer stringBuffer = new StringBuffer();
+        String errorInfo = "";
+        String result = "";
+
+        try {
+            channel = (ChannelShell) session.openChannel("shell");
+            channel.connect();
+
+            OutputStream out = channel.getOutputStream();
+            InputStream in = channel.getInputStream();
+
+
+            String suCMD = "su -u\n";
+            out.write(suCMD.getBytes());
+            out.flush();
+
+            String suResult = getInputStreamResult(in);
+            while(!suResult.contains("Password")){
+                Thread.sleep(100);
+                suResult = getInputStreamResult(in);
+            }
+
+            String password = rootPassword + "\n";
+            out.write(password.getBytes());
+            out.flush();
+
+            Thread.sleep(100);
+
+            String executedCmd = command + "\n";
+            out.write(executedCmd.getBytes());
+            out.flush();
+
+            Thread.sleep(100);
+
+            String strExit = "exit\n";
+            out.write(strExit.getBytes());
+            out.flush();
+
+            result = getInputStreamResult(in);
+            InspectionLogger.debug(result);
+            out.close();
+
+        }catch (Exception e){
+            errorInfo = "Host connector failing in executing " + command;
+        } finally {
+            try{
+                if(reader!=null){
+                    reader.close();
+                }
+            }catch (Exception eReader){
+                errorInfo = errorInfo + " - Host connector failing in closing reader";
+            }
+
+            if(channel != null){
+                channel.disconnect();
+            }
+        }
+
+        if(!errorInfo.equals("")){
+            throw new Exception(errorInfo);
+        }
+
+        return result;
+    }
+
+    private static String getInputStreamResult(InputStream in) throws Exception{
+        if (in.available() > 0) {
+            byte[] data = new byte[in.available()];
+            int nLen = in.read(data);
+
+            if (nLen < 0) {
+                throw new Exception("network error.");
+            }
+
+            String temp = new String(data, 0, nLen);
+            return temp;
+        }else {
+            return "";
+        }
     }
 }
